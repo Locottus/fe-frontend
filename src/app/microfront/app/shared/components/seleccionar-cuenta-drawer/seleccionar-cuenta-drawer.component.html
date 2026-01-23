@@ -1,60 +1,77 @@
 <kite-modal [isOpen]="isOpen" (onClose)="onClose()" type="drawer" [css]="{ gap: '$sm' }">
   <kite-modal-header title="Cuenta de acreditación y débito"></kite-modal-header>
-  <kite-modal-content [css]="{ gap: '$sm' }">
+  <kite-modal-content [css]="{ gap: '14px', padding: '0 16px', '@md': { gap: '16px', padding: '0 24px' } }">
     
     <!-- Lista de cuentas -->
-    <kite-stack direction="column" [css]="{ gap: '$sm', marginBottom: '$md' }">
+    <kite-stack direction="column" [css]="{ gap: '12px', marginBottom: '16px', '@md': { gap: '16px', marginBottom: '24px' } }">
       <ng-container *ngFor="let cuenta of cuentas">
-        <div (click)="seleccionarCuenta(cuenta)" [style.cursor]="'pointer'">
+        <div (click)="seleccionarCuenta(cuenta)" style="cursor:pointer; width:100%; display:block;">
           <kite-card 
             [css]="{ 
-              padding: '$sm',
+              position: 'relative',
+              padding: '10px 18px 10px 8px',
+              boxSizing: 'border-box',
               borderWidth: '1.5px',
               borderStyle: 'solid',
-              borderColor: esCuentaSeleccionada(cuenta) ? '#bb2d4f' : '$gray200',
-              borderRadius: '$md',
-              position: 'relative',
-              transition: 'border-color 0.2s ease',
-              backgroundColor: esCuentaSeleccionada(cuenta) ? 'rgba(187, 45, 79, 0.02)' : 'transparent',
-              cursor: 'pointer'
+              borderColor: esCuentaSeleccionada(cuenta) ? '#bb2d4f' : '#e6e6e7',
+              borderRadius: '14px',
+              minHeight: '40px',
+              pointerEvents: 'none',
+              '@md': { padding: '12px 22px 12px 12px', minHeight: '48px' }
             }">
-            <kite-stack direction="row" align="center" justify="space-between" [css]="{ width: '100%', gap: '$sm' }">
-              <kite-stack direction="column" [css]="{ gap: '$xs', flex: '1', minWidth: '0' }">
-                <!-- Tipo de cuenta -->
-                <kite-text 
-                  size="xs" 
-                  [css]="{ 
-                    fontWeight: '400', 
-                    color: '$gray700'
-                  }">
-                  {{ cuenta.tipo?.codigo }} {{ mapMonedaDescripcion(cuenta.moneda?.descripcion) }} {{ cuenta.cuenta }}
-                </kite-text>
-                <!-- Saldo -->
+            <kite-stack direction="row" align="center" justify="space-between" [css]="{ width: '100%' }">
+              <kite-stack direction="column" [css]="{ gap: '6px', '@md': { gap: '8px' }, flex: '1', minWidth: '0', alignItems: 'flex-start' }">
                 <kite-text 
                   size="sm" 
                   [css]="{ 
-                    fontWeight: '500', 
-                    color: '$gray900'
+                    fontWeight: '400', 
+                    color: '#6b6f7b', 
+                    letterSpacing: '0.6px',
+                    fontSize: '14px',
+                    lineHeight: '1.2',
+                    whiteSpace: 'normal',
+                    wordBreak: 'break-all',
+                    '@md': { fontSize: '15px' }
+                  }">
+                  {{ cuenta.tipo?.codigo }} {{ mapMonedaDescripcion(cuenta.moneda?.descripcion) }} {{ cuenta.cuenta }}
+                </kite-text>
+                <kite-text 
+                  size="sm" 
+                  [css]="{ 
+                    fontWeight: '600', 
+                    color: '#1f1f24',
+                    fontSize: '14px',
+                    lineHeight: '1.2',
+                    letterSpacing: '0.6px',
+                    '@md': { fontSize: '15px' }
                   }">
                   {{ cuenta.moneda?.simbolo }} {{ formatearSaldo(cuenta.saldo) }}
                 </kite-text>
               </kite-stack>
               
               <!-- Check icon solo visible cuando está seleccionada -->
-              <svg 
+              <kite-stack 
                 *ngIf="esCuentaSeleccionada(cuenta)"
-                width="22" 
-                height="22" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                aria-hidden="true"
-                [style.flexShrink]="0">
-                <path d="M20 6.5L9.2 17.3 4 12.1"
-                      stroke="#BB2D4F"
-                      stroke-width="2.6"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"/>
-              </svg>
+                [css]="{ 
+                  position: 'absolute',
+                  right: '4px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: '24px',
+                  height: '24px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  '@md': { right: '6px', width: '24px', height: '24px' }
+                }">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M20 6.5L9.2 17.3 4 12.1"
+                        stroke="#BB2D4F"
+                        stroke-width="2.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+                </svg>
+              </kite-stack>
             </kite-stack>
           </kite-card>
         </div>
@@ -63,15 +80,37 @@
 
   </kite-modal-content>
   
-  <kite-modal-footer [css]="{ flexDirection: 'column', gap: '$sm', padding: '0 $sm', '@md': { flexDirection: 'row-reverse', gap: '$md', padding: '0 $lg' } }">
+  <kite-modal-footer [css]="{ flexDirection: 'column', gap: '12px', padding: '0 $sm', '@md': { flexDirection: 'row-reverse', gap: '16px', padding: '0 $lg' } }">
     <kite-button 
       [variant]="puedeModificar() ? 'primary' : 'secondary'"
       [isDisabled]="!puedeModificar()"
+      [css]="{ 
+        width: '100%',
+        height: '52px',
+        borderRadius: '14px',
+        fontSize: '17px',
+        fontWeight: '600',
+        backgroundColor: puedeModificar() ? '#bb2d4f' : '#f8f8fa',
+        color: puedeModificar() ? '#ffffff' : '#2b2b33',
+        borderColor: puedeModificar() ? '#bb2d4f' : '#e6e6e7',
+        '@md': { width: 'auto', minWidth: '180px', height: '48px' }
+      }"
       (onClick)="confirmarModificacion()">
       Modificar
     </kite-button>
     <kite-button 
       variant="secondary" 
+      [css]="{ 
+        width: '100%',
+        height: '52px',
+        borderRadius: '14px',
+        fontSize: '17px',
+        fontWeight: '600',
+        backgroundColor: '#f8f8fa',
+        color: '#2b2b33',
+        borderColor: '#e6e6e7',
+        '@md': { width: 'auto', minWidth: '140px', height: '48px' }
+      }"
       (onClick)="onClose()">
       Cerrar
     </kite-button>

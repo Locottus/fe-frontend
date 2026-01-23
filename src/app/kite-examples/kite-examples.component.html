@@ -1,0 +1,192 @@
+<div class="kite-examples-container">
+  
+  <!-- BOTONES -->
+  <div class="section">
+    <h2>Botones</h2>
+    
+    <div class="subsection">
+      <h3>Variantes</h3>
+      <div class="button-group">
+        <kite-button variant="primary" (click)="onButtonClick('Primary')">Primary</kite-button>
+        <kite-button variant="secondary" (click)="onButtonClick('Secondary')">Secondary</kite-button>
+        <kite-button variant="tertiary" (click)="onButtonClick('Tertiary')">Tertiary</kite-button>
+        <kite-button variant="ghost" (click)="onButtonClick('Ghost')">Ghost</kite-button>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Tamaños</h3>
+      <div class="button-group">
+        <kite-button variant="primary" size="sm">Small</kite-button>
+        <kite-button variant="primary" size="md">Medium</kite-button>
+        <kite-button variant="primary" size="lg">Large</kite-button>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Estados</h3>
+      <div class="button-group">
+        <kite-button variant="primary">Enabled</kite-button>
+        <kite-button variant="primary" disabled>Disabled</kite-button>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Con Iconos</h3>
+      <div class="button-group">
+        <kite-button variant="primary" icon="check">Confirmar</kite-button>
+        <kite-button variant="secondary" icon="arrow-left">Atrás</kite-button>
+        <kite-button variant="tertiary" icon="download">Descargar</kite-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INPUTS Y CONTROLES -->
+  <div class="section">
+    <h2>Inputs y Controles</h2>
+
+    <div class="subsection">
+      <label class="form-label">Input Text</label>
+      <input type="text" [(ngModel)]="inputValue" placeholder="Ingresa un valor" class="form-input">
+      <small>Valor: {{ inputValue }}</small>
+    </div>
+
+    <div class="subsection">
+      <label class="form-label">Input Email</label>
+      <input type="email" [(ngModel)]="emailValue" placeholder="correo@ejemplo.com" class="form-input">
+    </div>
+
+    <div class="subsection">
+      <label class="form-label">Input Number</label>
+      <input type="number" [(ngModel)]="numberValue" class="form-input">
+    </div>
+
+    <div class="subsection">
+      <label class="form-label">Search Input</label>
+      <input type="search" [(ngModel)]="searchValue" placeholder="Buscar..." class="form-input">
+    </div>
+
+    <div class="subsection">
+      <label class="form-label">Select</label>
+      <select [(ngModel)]="selectValue" class="form-input">
+        <option value="option1">Opción 1</option>
+        <option value="option2">Opción 2</option>
+        <option value="option3">Opción 3</option>
+      </select>
+    </div>
+
+    <div class="subsection">
+      <label class="form-label">Textarea</label>
+      <textarea [(ngModel)]="textareaValue" placeholder="Ingresa tu texto..." class="form-input form-textarea" rows="3"></textarea>
+    </div>
+  </div>
+
+  <!-- CHECKBOXES Y RADIO BUTTONS -->
+  <div class="section">
+    <h2>Checkboxes y Radio Buttons</h2>
+
+    <div class="subsection">
+      <h3>Checkboxes</h3>
+      <div class="checkbox-group">
+        <div class="checkbox-item">
+          <input type="checkbox" [(ngModel)]="checkboxValue" id="cb1">
+          <label for="cb1">Aceptar términos</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="cb2" checked>
+          <label for="cb2">Opción marcada</label>
+        </div>
+        <div class="checkbox-item">
+          <input type="checkbox" id="cb3" disabled>
+          <label for="cb3">Deshabilitado</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Radio Buttons</h3>
+      <div class="radio-group">
+        <div class="radio-item">
+          <input type="radio" name="radioGroup" value="radio1" [(ngModel)]="radioValue" id="r1">
+          <label for="r1">Opción 1</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="radioGroup" value="radio2" [(ngModel)]="radioValue" id="r2">
+          <label for="r2">Opción 2</label>
+        </div>
+        <div class="radio-item">
+          <input type="radio" name="radioGroup" value="radio3" [(ngModel)]="radioValue" id="r3">
+          <label for="r3">Opción 3</label>
+        </div>
+      </div>
+      <small>Seleccionado: {{ radioValue }}</small>
+    </div>
+  </div>
+
+  <!-- BADGES -->
+  <div class="section">
+    <h2>Badges</h2>
+
+    <div class="subsection">
+      <h3>Variantes</h3>
+      <div class="badge-group">
+        <kite-badge *ngFor="let badge of badges" [variant]="badge.variant" [label]="badge.label"></kite-badge>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Tamaños</h3>
+      <div class="badge-group">
+        <kite-badge size="sm" variant="success" label="Small"></kite-badge>
+        <kite-badge size="md" variant="success" label="Medium"></kite-badge>
+        <kite-badge size="lg" variant="success" label="Large"></kite-badge>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPOGRAFÍA -->
+  <div class="section">
+    <h2>Tipografía</h2>
+
+    <div class="subsection">
+      <h3>Headings</h3>
+      <h1>Heading 1 - Large (font-weight: bold)</h1>
+      <h2>Heading 2 - Medium (font-weight: bold)</h2>
+      <h3>Heading 3 - Small (font-weight: medium)</h3>
+      <h4>Heading 4 - Extra Small (font-weight: regular)</h4>
+    </div>
+
+    <div class="subsection">
+      <h3>Tamaños de Fuente</h3>
+      <div class="typography-group">
+        <div *ngFor="let fontSize of fontSizes" class="typography-item">
+          <span [attr.class]="'text-' + fontSize.size">{{ fontSize.label }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Pesos de Fuente</h3>
+      <div class="typography-group">
+        <div *ngFor="let weight of fontWeights" [style.fontWeight]="weight.weight" class="typography-item">
+          {{ weight.label }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLORES DEL PROYECTO -->
+  <div class="section">
+    <h2>Paleta de Colores</h2>
+    <div class="color-palette">
+      <div *ngFor="let color of colors" class="color-item">
+        <div class="color-box" [style.backgroundColor]="color.hex"></div>
+        <div class="color-info">
+          <strong>{{ color.name }}</strong>
+          <small>{{ color.hex }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -2,10 +2,29 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 export interface CuotaDetalleMock {
   nro_cuota: number;
+  numero?: number;
   fecha_vencimiento: string;
   estado_descripcion: string;
   fecha_pago?: string;
-  importe: number;
+  importe?: number;
+  moneda?: {
+    capital: number;
+    interes: number;
+    impuestos: number;
+    seguro: number;
+    comisiones: number;
+    recargo: number;
+    total: number;
+  };
+  uva?: {
+    capital: number;
+    interes: number;
+    impuestos: number;
+    seguro: number;
+    comisiones: number;
+    recargo: number;
+    total: number;
+  };
   [key: string]: any;
 }
 
@@ -86,9 +105,34 @@ export class DetalleCuotaDrawerComponent implements OnInit {
     }
     if (this.cuota?.fecha_vencimiento) {
       const dias = this.getDiasHastaVencimiento(this.cuota.fecha_vencimiento);
-      return dias <= 7 && dias > 0;
+      return dias <= 7 && dias >= 0;
     }
     return false;
+  }
+
+  // Verifica si la cuota está pendiente (más de 7 días para vencer)
+  isPendiente(): boolean {
+    if (this.cuota?.estado_descripcion === 'Pagada' || this.cuota?.estado_descripcion === 'Vencida') {
+      return false;
+    }
+    if (this.cuota?.fecha_vencimiento) {
+      const dias = this.getDiasHastaVencimiento(this.cuota.fecha_vencimiento);
+      return dias > 7;
+    }
+    return false;
+  }
+
+  // Verifica si el préstamo es en UVA
+  isUVA(): boolean {
+    return !!(this.cuota?.uva?.total && this.cuota.uva.total > 0);
+  }
+
+  // Obtiene el mensaje de alerta según si es UVA o pesos
+  getMensajePendiente(): string {
+    if (this.isUVA()) {
+      return 'Se debitará el día del vencimiento. El importe en pesos puede variar según la cotización UVA de ese día y la actualización del valor del seguro.';
+    }
+    return 'Se debitará el día del vencimiento. El importe en pesos puede variar según la actualización del valor del seguro.';
   }
 
   formatearFecha(fecha: string): string {

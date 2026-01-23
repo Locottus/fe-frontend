@@ -18,6 +18,10 @@ const routes: Routes = [
     component: DesignShowcaseComponent
   },
   {
+    path: 'kite-examples',
+    loadChildren: () => import('./kite-examples/kite-examples.module').then(m => m.KiteExamplesModule)
+  },
+  {
     path: 'rodados',
     loadChildren: () => import('./rodados/rodados.module').then(m => m.RodadosModule)
   }

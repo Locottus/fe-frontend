@@ -67,6 +67,13 @@ export class DesignShowcaseComponent implements OnInit {
   solicitud: SolicitudResumenFinanciero;
   proximoCuota: Cuota | null = null;
 
+  // Form controls
+  inputValue: string = 'Valor de ejemplo';
+  selectValue: string = 'option1';
+  checkboxValue: boolean = false;
+  radioValue: string = 'radio1';
+  textareaValue: string = 'Área de texto de ejemplo';
+
   constructor() {
     this.solicitud = this.generateDummySolicitud();
   }
@@ -234,5 +241,36 @@ export class DesignShowcaseComponent implements OnInit {
     const diffTime = vencimiento.getTime() - hoy.getTime();
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     return diffDays;
+  }
+
+  // Control handlers
+  onInputChange(value: string): void {
+    console.log('Input changed:', value);
+    this.inputValue = value;
+  }
+
+  onSelectChange(value: string): void {
+    console.log('Select changed:', value);
+    this.selectValue = value;
+  }
+
+  onCheckboxChange(checked: boolean): void {
+    console.log('Checkbox changed:', checked);
+    this.checkboxValue = checked;
+  }
+
+  onRadioChange(value: string): void {
+    console.log('Radio changed:', value);
+    this.radioValue = value;
+  }
+
+  onTextareaChange(value: string): void {
+    console.log('Textarea changed:', value);
+    this.textareaValue = value;
+  }
+
+  onButtonClick(buttonName: string): void {
+    console.log('Button clicked:', buttonName);
+    alert(`Botón "${buttonName}" presionado`);
   }
 }
