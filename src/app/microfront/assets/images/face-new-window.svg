@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="131" height="110" viewBox="0 0 131 110">
+    <defs>
+        <filter id="prefix__a" width="106.3%" height="106.3%" x="-1.6%" y="-1.6%" filterUnits="objectBoundingBox">
+            <feOffset dx="2" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feColorMatrix in="shadowOffsetOuter1" values="0 0 0 0 1 0 0 0 0 0.960784314 0 0 0 0 0.898039216 0 0 0 1 0"/>
+        </filter>
+        <circle id="prefix__b" cx="31.5" cy="31.5" r="31.5"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(.5) translate(33 32)">
+            <use fill="#000" filter="url(#prefix__a)" xlink:href="#prefix__b"/>
+            <circle cx="31.5" cy="31.5" r="31.5" fill="#FFA100"/>
+            <circle cx="30.5" cy="29.5" r="28.5" fill="#FFF"/>
+        </g>
+        <path fill="#FFA100" d="M57.249 61.508c-.58.082-.987.616-.904 1.2.41 2.933 2.53 5.377 5.442 6.157 2.912.78 5.97-.276 7.792-2.612.363-.463.278-1.13-.184-1.49-.461-.363-1.13-.278-1.49.184-1.303 1.67-3.487 2.423-5.568 1.865-2.081-.557-3.596-2.302-3.89-4.4-.08-.58-.617-.987-1.198-.904zm15.038-3.094c-1.1 4.105 5.058 5.755 6.158 1.65 1.1-4.105-5.058-5.755-6.158-1.65zm-16.99-6.753c-1.382-.37-2.833-.179-4.096.509-.515.28-.704.925-.424 1.44.283.516.927.707 1.443.425.788-.43 1.68-.548 2.528-.321 1.38.37 2.384 1.595 2.572 3.105l.017.163c.05.585.563 1.017 1.149.968.585-.05 1.017-.564.967-1.149-.207-2.45-1.836-4.518-4.155-5.14z" transform="translate(.5)"/>
+    </g>
+</svg>

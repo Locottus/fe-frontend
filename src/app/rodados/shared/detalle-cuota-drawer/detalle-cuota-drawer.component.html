@@ -1,0 +1,72 @@
+<kite-modal [isOpen]="isOpen" (onClose)="onClose()" type="drawer" [css]="{ gap: '$sm' }">
+  <kite-modal-header [title]="'Detalle de cuota ' + cuota?.nro_cuota"></kite-modal-header>
+  
+  <kite-modal-content [css]="{ gap: '$sm' }">
+    
+    <!-- Estado y Fecha de vencimiento en layout de dos columnas -->
+    <kite-stack [direction]="{ '@initial': 'column', '@md': 'row' }" justify="space-between" [css]="{ gap: '$md' }">
+      <!-- Estado -->
+      <kite-list-content [css]="{ gap: '$xs' }">
+        <h5 listSubtitle>
+          <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">Estado</kite-text>
+        </h5>
+        <div>
+          <kite-badge 
+            size="md"
+            [variant]="getBadgeVariant()"
+            [label]="getBadgeLabel()">
+          </kite-badge>
+        </div>
+      </kite-list-content>
+
+      <!-- Fecha de vencimiento -->
+      <kite-list-content [css]="{ gap: '$xs' }">
+        <h5 listSubtitle>
+          <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">Fecha de vencimiento</kite-text>
+        </h5>
+        <h2 listTitle>
+          <kite-text as="span" size="xs" [css]="{ fontWeight: '500', color: '$gray900' }">{{ formatearFecha(cuota?.fecha_vencimiento) }}</kite-text>
+        </h2>
+      </kite-list-content>
+    </kite-stack>
+
+    <kite-divider [css]="{ marginY: '$sm' }"></kite-divider>
+
+    <!-- Importe de cuota -->
+    <kite-list-content [css]="{ gap: '$xs', marginBottom: '$sm' }">
+      <h5 listSubtitle>
+        <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">Importe de cuota</kite-text>
+      </h5>
+      <h2 listTitle>
+        <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">
+          ${{ cuota?.importe | number:'1.0-0' }}
+        </kite-text>
+      </h2>
+    </kite-list-content>
+
+    <!-- Información adicional -->
+    <kite-list-content [css]="{ gap: '$xs' }">
+      <h5 listSubtitle>
+        <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">N° de cuota</kite-text>
+      </h5>
+      <h2 listTitle>
+        <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">{{ cuota?.nro_cuota }}</kite-text>
+      </h2>
+    </kite-list-content>
+
+    <!-- Fecha de pago si existe -->
+    <kite-list-content *ngIf="cuota?.fecha_pago" [css]="{ gap: '$xs' }">
+      <h5 listSubtitle>
+        <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">Fecha de pago</kite-text>
+      </h5>
+      <h2 listTitle>
+        <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">{{ formatearFecha(cuota?.fecha_pago) }}</kite-text>
+      </h2>
+    </kite-list-content>
+
+  </kite-modal-content>
+  
+  <kite-modal-footer>
+    <kite-button variant="secondary" (onClick)="onClose()" [css]="{ width: '100%' }">Cerrar</kite-button>
+  </kite-modal-footer>
+</kite-modal>

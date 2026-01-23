@@ -1,0 +1,14 @@
+[
+  {
+    "titulo": "Seguro de Hogar",
+    "tipo": "casa"
+  },
+  {
+    "titulo": "Seguro de Extracción en Cajeros",
+    "tipo": "extraccion"
+  },
+  {
+    "titulo": "Seguro de Bolso Protegido",
+    "tipo": "bolso"
+  }
+]

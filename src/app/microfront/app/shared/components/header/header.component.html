@@ -1,0 +1,56 @@
+<header class="header d-flex justify-content-between align-items-center">
+  <button
+    class="btn-menu-open"
+    aria-label="Abrir Menu"
+    mat-flat-button
+    disableRipple="true"
+    (click)="openMenu()"
+  >
+    <span class="icon icon-menu-open"></span>Menú
+  </button>
+
+  <ng-container *ngIf="breadcrumbItems?.length">
+    <div class="header-breadcrumbs">
+      <span *ngFor="let breadcrumbItem of breadcrumbItems" class="header-breadcrumbs__item">
+        {{ breadcrumbItem }}
+      </span>
+    </div>
+  </ng-container>
+
+  <a class="brand-logo d-none d-lg-block" routerLink="/">
+    <img src="assets/images/isologotipo.svg" alt="Logo Supervielle">
+  </a>
+
+  <h3 class="saludo">
+    <a href="/DefaultObi.aspx?mostrar=misDatos" class="link-mis-datos btn--arrow">
+      Hola {{ nombre || 'usuario' | titlecase }}
+      <mat-icon svgIcon="flecha-derecha"></mat-icon>
+    </a>
+  </h3>
+
+  <div class="acciones-usuario">
+    <button
+      class="boton-accion-usuario boton-notificacion"
+      [class.notificaciones-pendientes]="mostrarAvisoNotificacion"
+      mat-icon-button
+      [disableRipple]="true"
+      aria-label="Notificaciones"
+      (click)="toggleNotificationDrawer();$event.stopPropagation();"
+    >
+      <mat-icon svgIcon="notificaciones"></mat-icon>
+    </button>
+
+    <button
+      class="boton-accion-usuario boton-salir"
+      mat-icon-button
+      [disableRipple]="true"
+      aria-label="Salir"
+      (click)="salir()"
+    >
+      <mat-icon svgIcon="icon-logout-grey"></mat-icon>
+    </button>
+  </div>
+
+</header>
+
+<shared-notification-drawer *ngIf="isNotificationDrawerOpen" ($changeNotificationDrawerState)="isNotificationDrawerOpen = $event"></shared-notification-drawer>

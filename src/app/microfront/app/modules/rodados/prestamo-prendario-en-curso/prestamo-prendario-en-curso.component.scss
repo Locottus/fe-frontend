@@ -1,0 +1,53 @@
+.textTitle{
+    font-weight: 500;
+    line-height: 24px;
+    color: #3B3A45; //gray900
+}
+
+.number{
+    font-weight: 500;
+    line-height: 24px;
+    color: #575768; //gray800
+}
+
+// Fix para que los dropdowns de kite-menu sean visibles sin scroll
+:host {
+  ::ng-deep {
+    // Asegurar que el layout principal no corte los dropdowns
+    kite-layout-main {
+      overflow: visible !important;
+      
+      // Mantener scroll en el contenido interno si es necesario
+      > * {
+        overflow-y: auto;
+      }
+    }
+
+    // El dropdown del menú debe usar position fixed para salir del flujo normal
+    kite-menu {
+      position: relative;
+      
+      // Contenedor del dropdown
+      .kite-menu__content,
+      .kite-menu__dropdown,
+      [class*="menu-content"],
+      [class*="dropdown-content"],
+      [class*="popover"] {
+        position: fixed !important;
+        z-index: 9999 !important;
+        max-height: 70vh !important;
+        overflow-y: auto !important;
+      }
+    }
+
+    // Asegurar que los contenedores padres no corten el dropdown
+    kite-skeleton,
+    kite-stack,
+    kite-card-group,
+    kite-container,
+    kite-row,
+    kite-column {
+      overflow: visible !important;
+    }
+  }
+}

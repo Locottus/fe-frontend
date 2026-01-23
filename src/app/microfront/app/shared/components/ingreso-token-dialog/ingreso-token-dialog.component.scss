@@ -1,0 +1,369 @@
+@import "../../../../assets/variables";
+@import '../../../../environments/globalVars';
+
+
+.ingreso-token {
+    width: 488px;
+    //max-height: 491px;
+    //height: 471px;
+    text-align: center;
+    border-radius: 7px;
+    background-color: #ffffff;
+    display: flex;
+    flex-wrap: nowrap;
+
+    &__container {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+        max-height: 110vh;
+    }
+
+    &__close {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        &.mat-button {
+            display: block;
+            float: right;
+            top: 12px;
+            right: 2px;
+
+            &:hover,
+            &:focus {
+                transition: color 300ms ease-in;
+                outline: none;
+                background-color: #ffffff !important;
+                background-color: transparent;
+            }
+        }
+    }
+
+    &__spinner {
+        margin-left: 16px;
+        display: flex;
+        align-self: center;
+        border: 4px solid #fdcdd2;
+        border-top: 4px solid #ee2025;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        animation: spin 2s linear infinite;
+    }
+
+    &__spinnerTransferencia{
+        margin-top: 15px;
+        display: inline-block;
+        align-self: center;
+        border: 4px solid #fdcdd2;
+        border-top: 4px solid #b10f36;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        animation: spin 2s linear infinite;
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__icon-cohete {
+        margin-top: 20px;
+        width: 42px;
+        height: 42px;
+    }
+
+    &__titulo {
+        h3 {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+        margin-top: 10px;
+        font-family: Whitney, sans-serif;
+        font-size: 22px;
+        font-weight: 600;
+        line-height: 1.36;
+        letter-spacing: -0.4px;
+        color: #333333;
+    }
+
+    &__body {
+        margin-top: 40px;
+
+        &--valido {
+            input {
+                border: solid 1px green;
+                color: green;
+            }
+        }
+
+        &--invalido {
+            input {
+                border: solid 1px #b10f36;
+                color: #b10f36;
+            }
+        }
+
+        &--predeterminado {
+            input {
+                border: solid 1px #c7c7c7;
+                background-color: #ffffff;
+                color: #333333;
+            }
+        }
+    }
+
+    &__digito {
+        margin-right: 6px;
+        text-align: center;
+        width: 59px;
+        height: 70px;
+        border-radius: 5px;
+
+        font-family: Heebo, sans-serif;
+        font-size: 32px;
+        font-weight: 300;
+
+        caret-color: #979797;
+        transition: all 0.5s;
+        &:focus {
+            outline: none;
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        &:last-child {
+            margin-right: 0px;
+        }
+    }
+
+    &__footer {
+        font-family: Heebo, sans-serif;
+        font-size: 14px;
+        line-height: 1.43;
+        letter-spacing: normal;
+        text-align: center;
+        color: #707070;
+    }
+
+    &__predeterminado {
+        margin-top: 30px;
+        &--error {
+            margin-top: 24px;
+        }
+    }
+
+    &__nuevo-sms {
+        padding: 15px 25px 17px 26px;
+        height: 50px;
+        border-radius: 8px;
+        background-color: #b10f36;
+    }
+
+    &__container-button {
+        margin-top: 44px;
+        margin-bottom: 71px;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__container-codigo-expirado {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+    }
+    &__telefono {
+        margin-bottom: 40px;
+
+        &.confirmar {
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+    }
+
+    &__acciones {
+        & a {
+            font-weight: 500;
+            line-height: 1.29;
+            color: #b10f36;
+        }
+    }
+
+    &__accion1 {
+        margin-top: 30px;
+        margin-bottom: 15px;
+    }
+
+    &__accion2 {
+        margin-bottom: 50px;
+    }
+
+    &__error {
+        font-size: 12px;
+        line-height: 1.67;
+        color: #b10f36;
+        margin-top: 16px;
+    }
+
+    .btn-text {
+        font-family: Whitney, sans-serif;
+        font-size: 16px;
+        font-weight: 600;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.13;
+        letter-spacing: 0.1px;
+        color: #ffffff;
+    }
+
+    & span {
+        display: inline;
+        &:before {
+            content: "\a ";
+            white-space: pre;
+        }
+    }
+
+    & strong {
+        font-weight: bold;
+        color: #333333;
+    }
+
+    & a {
+        &:hover {
+            text-decoration: none;
+        }
+
+        cursor: pointer;
+    }
+
+    &__error-servidor {
+        margin-top: 24px;
+        width: 410px;
+        height: 68px;
+        border-radius: 5px;
+        display: flex;
+        flex-wrap: nowrap;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: rgba(213, 43, 30, 0.2);
+
+        .icono {
+            width: 30px;
+            height: 100%;
+            object-fit: contain;
+            display: contents;
+            .icon-img {
+                width: 30px;
+                height: 30px;
+                object-fit: contain;
+            }
+            mat-icon {
+                display: inline !important;
+            }
+        }
+        & .mensaje-error-servidor {
+            padding: 14px 14px 14px 14px;
+            text-align: left;
+            font-family: Whitney, sans-serif;
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 1.33;
+            letter-spacing: normal;
+            color: #3e3d41;
+        }
+
+        & .background-red {
+            width: 100px;
+            background-color: #b10f36;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+    }
+}
+
+.tooltip-title {
+    background-color: #CFE4FE;
+    display: inline-flex;
+    font-weight: 400;
+}
+.base-tooltip{
+    max-width: min-content;
+    margin: auto;
+}
+.base-tooltip .tooltip-text {
+    visibility: hidden;
+    width: 240px;
+    background-color: #FFFFFF;
+    border-radius: 6px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+    display: inline-flex;
+    padding-top: 1rem;
+    opacity: 0;
+}
+
+.base-tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+@media (max-width: map_get($grid-breakpoints, "sm")) {
+    .ingreso-token {
+        width: 84vw;
+        margin-left: -19px;
+        min-width: 84vw;
+        &__digito {
+            width: 50px;
+        }
+    }
+}
+
+:host {
+    .icon {
+        display: inline-block;
+        position: relative;
+        width: 21px;
+        height: 21px;
+    
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+
+
+        &.icon-supervielle {
+            background-image: url($publicPath + 'assets/icons/icon-supervielle.svg');
+            height: 2rem;
+            width: 2rem;
+        }
+
+        &.icon-padlock-fill {
+            background-image: url($publicPath + 'assets/icons/icon-padlock-fill.svg');
+            height: 2rem;
+            width: 2rem;
+        }
+        
+        &.icon-info {
+            background-image: url($publicPath + 'assets/icons/icon-info.svg');
+            height: 1.5rem;
+            width: 1.5rem;
+            margin-right: 3px;
+        }
+
+        &.icon-warning-white {
+            background-image: url($publicPath + 'assets/icons/icon-warning-white.svg');
+            height: 2rem;
+            width: 2rem;
+        }
+    }
+
+    h3 {
+        font-size: revert !important;
+    }
+
+  
+}

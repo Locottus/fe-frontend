@@ -1,0 +1,72 @@
+[
+  {
+    "id_compania": 1,
+    "compania": "allianz",
+    "porcentaje_descuento": 50,
+    "descripcion":{
+      "primaria": "Reintegro",
+      "secundaria": "durante los 2 primeros meses",
+      "referencia": "(1)"
+    },
+    "vigencia": {
+      "desde": "23/09/20",
+      "hasta": "31/12/20"
+    }
+  },
+  {
+    "id_compania": 9,
+    "compania": "sancor",
+    "porcentaje_descuento": 50,
+    "descripcion":{
+      "primaria": "Reintegro",
+      "secundaria": "durante los 2 primeros meses",
+      "referencia": "(1)"
+    },
+    "vigencia": {
+      "desde": "23/09/20",
+      "hasta": "31/12/20"
+    }
+  },
+  {
+    "id_compania": 6,
+    "compania": "orbis",
+    "porcentaje_descuento": 50,
+    "descripcion":{
+      "primaria": "Reintegro",
+      "secundaria": "durante los 2 primeros meses",
+      "referencia": "(1)"
+    },
+    "vigencia": {
+      "desde": "23/09/20",
+      "hasta": "31/12/20"
+    }
+  },
+  {
+    "id_compania": 84,
+    "compania": "sancristobal",
+    "porcentaje_descuento": 50,
+    "descripcion":{
+      "primaria": "Reintegro",
+      "secundaria": "durante los 2 primeros meses",
+      "referencia": "(1)"
+    },
+    "vigencia": {
+      "desde": "23/09/20",
+      "hasta": "31/12/20"
+    }
+  },
+  {
+    "id_compania": 14,
+    "compania": "sura",
+    "porcentaje_descuento": 33,
+    "descripcion":{
+      "primaria": "Descuento",
+      "secundaria": "aplicado durante los 3 primeros meses",
+      "referencia": "(2)"
+    },
+    "vigencia": {
+      "desde": "23/09/20",
+      "hasta": "31/12/20"
+    }
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "backendUrl": "${BACKENDURL}",
+  "backendRodadosUrl": "${BACKENDRODADOSURL}",
+  "jwtProviderUrl": "${JWTPROVIDERURL}"
+}

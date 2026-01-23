@@ -1,0 +1,276 @@
+@import './environments/globalVars';
+
+@font-face {
+  font-family: 'Heebo';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: local(Heebo-Light), url(assets/fonts/heebo/Heebo-Light.woff2) format('woff2'), url(assets/fonts/heebo/Heebo-Light.woff) format('woff'),
+    url(assets/fonts/heebo/Heebo-Light.ttf) format('truetype');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Heebo';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local(Heebo-Regular), url(assets/fonts/heebo/Heebo-Regular.woff2) format('woff2'), url(assets/fonts/heebo/Heebo-Regular.woff) format('woff'),
+    url(assets/fonts/heebo/Heebo-Regular.ttf) format('truetype');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Heebo';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: local(Heebo-Medium), url(assets/fonts/heebo/Heebo-Medium.woff2) format('woff2'), url(assets/fonts/heebo/Heebo-Medium.woff) format('woff'),
+    url(assets/fonts/heebo/Heebo-Medium.ttf) format('truetype');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Heebo';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local(Heebo-Bold), url(assets/fonts/heebo/Heebo-Bold.woff2) format('woff2'), url(assets/fonts/heebo/Heebo-Bold.woff) format('woff'),
+    url(assets/fonts/heebo/Heebo-Bold.ttf) format('truetype');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'whitneymedium';
+  src: url('assets/fonts/whitney/whitney-medium-webfont.eot');
+  src: url('assets/fonts/whitney/whitney-medium-webfont.eot?#iefix') format('embedded-opentype'),
+    url('assets/fonts/whitney/whitney-medium-webfont.woff2') format('woff2'), url('assets/fonts/whitney/whitney-medium-webfont.woff') format('woff'),
+    url('assets/fonts/whitney/whitney-medium-webfont.ttf') format('truetype'),
+    url('assets/fonts/whitney/whitney-medium-webfont.svg#whitneymedium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'whitneysemibold';
+  src: url('assets/fonts/whitney/whitney-semibold-webfont.eot');
+  src: url('assets/fonts/whitney/whitney-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('assets/fonts/whitney/whitney-semibold-webfont.woff2') format('woff2'), url('assets/fonts/whitney/whitney-semibold-webfont.woff') format('woff'),
+    url('assets/fonts/whitney/whitney-semibold-webfont.ttf') format('truetype'),
+    url('assets/fonts/whitney/whitney-semibold-webfont.svg#whitneysemibold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Heebo', sans-serif;
+  background-color: #f5f5f5;
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+strong {
+  font-weight: 500;
+}
+
+.progress-bar {
+  overflow: hidden;
+  width: 100%;
+}
+
+@keyframes loader {
+  0% {
+    left: -75px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.tarjeta-cargando {
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .tarjeta-cargando__icono {
+    width: 50px;
+    height: 47px;
+    margin-bottom: 28px;
+    background-image: url(assets/icons/logo.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .tarjeta-cargando__description {
+    margin: 0 0 18px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.4;
+    text-align: center;
+  }
+
+  & > .progress-bar {
+    width: 159px;
+
+    .bar {
+      overflow: hidden;
+      position: relative;
+      display: block;
+      height: 4px;
+      background: #ffcdd2;
+    }
+
+    .bar:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 75px;
+      background: #b10f36;
+      color: #ffffff;
+      animation: loader 2s ease-in-out infinite;
+    }
+  }
+}
+
+@import 'imports';
+
+/** Hack temporal **/
+.mat-button.button--arrow {
+  .mat-button-wrapper {
+    display: flex;
+    align-items: center;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      background: no-repeat center url($publicPath + 'assets/icons/icon-flecha-derecha.svg');
+      background-size: cover;
+      width: 15px;
+      height: 15px;
+    }
+  }
+}
+
+.btn-link {
+  padding: 0;
+  -webkit-appearance: button;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &:hover {
+    border-color: transparent;
+    box-shadow: none;
+  }
+}
+
+.link {
+  &:focus {
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    outline: none;
+  }
+}
+
+hr.separador {
+  margin: 0;
+  padding: 0;
+  height: 1px;
+  width: 100%;
+  border: none;
+  background-color: #c7c7c7;
+}
+
+@import 'styles/partials/icons';
+@import 'seguros';
+
+.lista-title {
+  color: $gris-tibio-dos;
+  font-size: 12px;
+  line-height: 16px;
+  font-family: 'Heebo', sans-serif;
+  font-weight: 400;
+  display: block;
+}
+
+.progress-bar-container {
+  width: 320px;
+  margin: 70px auto 0;
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $gris-rosado;
+  border-radius: 16px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: $gris-rosado;
+}
+
+::-webkit-scrollbar-button {
+  display: none
+}
+
+@media (max-width: 768px) {
+  :host {
+    .progress-bar-container {
+      margin: 60px auto 0;
+    }
+  }
+}
+
+@import "styles/partials/icons";
+
+@import "styles/partials/alert";
+
+.mat-datepicker-content .mat-calendar {
+  width: 315px !important;
+}
+
+.mat-calendar-body-label {
+  display: none;
+}
+
+.alert-dismissible .close {
+  color: #CDCBCD;
+}
+
+h2,
+p {
+  margin-bottom: 0px !important;
+}

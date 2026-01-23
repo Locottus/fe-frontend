@@ -1,0 +1,28 @@
+@import '../../../../assets/colors';
+
+.stepper {
+  padding: 9px 0;
+
+  ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    height: 24px;
+    margin: 0;
+    padding: 0;
+
+    li {
+      width: 58px;
+      height: 2px;
+      margin: 0 6px;
+      padding: 0;
+      list-style: none;
+      background: $gris-rosado;
+
+      &.active {
+        background: $rojo-claro;
+      }
+    }
+  }
+}

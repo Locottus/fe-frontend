@@ -1,0 +1,332 @@
+<div class="playground-container">
+
+  <!-- Kite Buttons Section -->
+  <section class="section">
+    <h2 class="section-title">Kite Components</h2>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Kite Buttons</h5>
+        <p class="card-text">Kite UI library buttons - Web Components</p>
+        <div class="components-grid">
+          <kite-button>Kite Button Default</kite-button>
+          <kite-button variant="secondary">Kite Button Secondary</kite-button>
+          <kite-button disabled>Kite Button Disabled</kite-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kite Inputs -->
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5 class="card-title">Kite Inputs</h5>
+        <p class="card-text">Kite input components - Web Components</p>
+        <div class="components-grid">
+          <div class="input-group">
+            <label>Kite Input</label>
+            <kite-input placeholder="Enter text here..."></kite-input>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Material Section -->
+  <section class="section">
+    <h2 class="section-title">Angular Material Components</h2>
+
+    <!-- Material Buttons -->
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Material Buttons</h5>
+        <p class="card-text">Various Material Button styles</p>
+        <div class="components-grid">
+          <button mat-button color="primary">Basic</button>
+          <button mat-raised-button color="accent">Raised</button>
+          <button mat-stroked-button color="warn">Stroked</button>
+          <button mat-flat-button color="primary">Flat</button>
+          <button mat-icon-button color="primary" matTooltip="Icon button">
+            <mat-icon>favorite</mat-icon>
+          </button>
+          <button mat-fab color="accent" matTooltip="Floating Action Button">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Material Form Fields -->
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5 class="card-title">Material Form Fields</h5>
+        <p class="card-text">Text input with Material styling</p>
+        <div class="components-grid">
+          <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Enter username">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" placeholder="user@example.com">
+          </mat-form-field>
+
+          <mat-form-field appearance="legacy">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" placeholder="Enter password">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <!-- Material Select -->
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5 class="card-title">Material Select</h5>
+        <p class="card-text">Material dropdown selection</p>
+        <div class="components-grid">
+          <mat-form-field appearance="fill">
+            <mat-label>Choose an option</mat-label>
+            <mat-select>
+              <mat-option *ngFor="let option of selectOptions" [value]="option.value">
+                {{ option.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <!-- Material Checkboxes -->
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5 class="card-title">Material Checkboxes</h5>
+        <p class="card-text">Material checkbox component</p>
+        <div class="components-grid">
+          <mat-checkbox color="primary">Checkbox Checked</mat-checkbox>
+          <mat-checkbox color="accent" [disabled]="true">Checkbox Disabled</mat-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <!-- Material Radio Buttons -->
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5 class="card-title">Material Radio Buttons</h5>
+        <p class="card-text">Material radio button component</p>
+        <div class="components-grid">
+          <mat-radio-group>
+            <mat-radio-button value="option1" color="primary">Option 1</mat-radio-button>
+            <mat-radio-button value="option2" color="accent">Option 2</mat-radio-button>
+            <mat-radio-button value="option3" color="warn">Option 3</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bootstrap Section -->
+  <section class="section">
+    <h2 class="section-title">Bootstrap Components</h2>
+
+    <!-- Bootstrap Buttons -->
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Bootstrap Buttons</h5>
+        <p class="card-text">Various Bootstrap button styles and colors</p>
+        <div class="components-grid bs-grid">
+          <button *ngFor="let color of bootstrapColors" class="btn" [ngClass]="'btn-' + color">
+            {{ color | uppercase }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Alerts -->
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5 class="card-title">Bootstrap Alerts</h5>
+        <p class="card-text">Alert components with different severity levels</p>
+        <div class="alert alert-primary" role="alert">
+          A simple primary alert—check it out!
+        </div>
+        <div class="alert alert-success" role="alert">
+          A simple success alert—check it out!
+        </div>
+        <div class="alert alert-warning" role="alert">
+          A simple warning alert—check it out!
+        </div>
+        <div class="alert alert-danger" role="alert">
+          A simple danger alert—check it out!
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Cards -->
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5 class="card-title">Bootstrap Card Grid</h5>
+        <p class="card-text">Responsive card layout</p>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Card 1</h5>
+                <p class="card-text">Some quick example text to build on the card title.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Card 2</h5>
+                <p class="card-text">Some quick example text to build on the card title.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Card 3</h5>
+                <p class="card-text">Some quick example text to build on the card title.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reactive Form Section -->
+  <section class="section">
+    <h2 class="section-title">Reactive Form Example</h2>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Complete Form with Validation</h5>
+        <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()" class="form-container">
+
+          <!-- First Name -->
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" placeholder="John">
+                <mat-error *ngIf="firstName?.hasError('required')">
+                  First name is required
+                </mat-error>
+                <mat-error *ngIf="firstName?.hasError('minlength')">
+                  Minimum 2 characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- Last Name -->
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName" placeholder="Doe">
+                <mat-error *ngIf="lastName?.hasError('required')">
+                  Last name is required
+                </mat-error>
+                <mat-error *ngIf="lastName?.hasError('minlength')">
+                  Minimum 2 characters
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Email Address</mat-label>
+                <input matInput type="email" formControlName="email" placeholder="john.doe@example.com">
+                <mat-error *ngIf="email?.hasError('required')">
+                  Email is required
+                </mat-error>
+                <mat-error *ngIf="email?.hasError('email')">
+                  Please enter a valid email
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Country Select -->
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Country</mat-label>
+                <mat-select formControlName="country">
+                  <mat-option value="usa">USA</mat-option>
+                  <mat-option value="canada">Canada</mat-option>
+                  <mat-option value="mexico">Mexico</mat-option>
+                  <mat-option value="spain">Spain</mat-option>
+                  <mat-option value="uk">United Kingdom</mat-option>
+                </mat-select>
+                <mat-error *ngIf="country?.hasError('required')">
+                  Country is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <!-- Checkboxes -->
+          <div class="row mb-3">
+            <div class="col-md-12">
+              <mat-checkbox formControlName="acceptTerms" color="primary">
+                I accept the terms and conditions
+              </mat-checkbox>
+              <div *ngIf="acceptTerms?.hasError('required') && acceptTerms?.touched" class="text-danger small mt-2">
+                You must accept the terms
+              </div>
+
+              <mat-checkbox formControlName="subscribe" color="accent" class="ms-3">
+                Subscribe to newsletter
+              </mat-checkbox>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="row">
+            <div class="col-md-12">
+              <button mat-raised-button color="primary" type="submit" [disabled]="!reactiveForm.valid">
+                Submit Form
+              </button>
+              <button mat-stroked-button type="button" (click)="resetForm()" class="ms-2">
+                Reset
+              </button>
+            </div>
+          </div>
+
+          <!-- Form Status -->
+          <div class="row mt-4">
+            <div class="col-md-12">
+              <div class="alert alert-info">
+                <strong>Form Status:</strong> {{ reactiveForm.valid ? 'Valid ✓' : 'Invalid ✗' }} |
+                <strong>Dirty:</strong> {{ reactiveForm.dirty ? 'Yes' : 'No' }}
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Component Extension Guide -->
+  <section class="section">
+    <h2 class="section-title">How to Extend</h2>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Adding New Components</h5>
+        <p class="card-text">To add new components to the playground:</p>
+        <ol>
+          <li>Generate a new component: <code>ng generate component components/my-component</code></li>
+          <li>Add the component to <code>app.module.ts</code> declarations</li>
+          <li>Create an example section in this playground template</li>
+          <li>Import any required Material or Kite modules</li>
+          <li>View changes with <code>ng serve</code></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</div>

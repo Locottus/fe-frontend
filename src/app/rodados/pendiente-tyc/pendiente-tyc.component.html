@@ -1,0 +1,197 @@
+<kite-layout [css]="{ backgroundColor: '$gray100' }">
+  <kite-layout-header *ngIf="!isMobile">
+    <kite-header type="internal" [title]="'Prestamos prendarios'" [hasOptions]="false"
+      (backAction)="backAction()"></kite-header>
+  </kite-layout-header>
+  <kite-layout-main>
+    <kite-container [css]="{ gap: '$sm', width: '100%', boxSizing: 'border-box', '@md': { padding: '$lg $md', gap: '$lg' } }">
+      <kite-row>
+        <kite-column>
+          <!-- Aviso estado -->
+          <kite-skeleton [isLoading]="isLoadingDetalle" [css]="{ height: '5rem', mb: '$sm' }">
+            <kite-callout *ngIf="mostrarCallout" [variant]="isVencida ? 'error' : 'warning'" [title]="titleCallout"
+              [isRemovable]="true" [customDescription]="template" [css]="{ mb: '$lg', mt: '$xxs', '@md': { mt: 0 } }"
+              (onClose)="ocultarCallout()">
+              <ng-template #template>
+                <kite-text>{{ descriptionCallout }}</kite-text>
+              </ng-template>
+            </kite-callout>
+          </kite-skeleton>
+
+          <!-- Titulo prendario y subtitulo -->
+          <kite-stack direction="column" spacing="xxs" [css]="!mostrarCallout && isMobile ? { mt: '$xxs' } : {}">
+            <kite-skeleton [isLoading]="isLoadingDetalle" [css]="{ width: '30%', mb: '$xs' }">
+              <kite-title as="h2" size="lg">Confirmación de datos</kite-title>
+            </kite-skeleton>
+            <kite-skeleton [isLoading]="isLoadingDetalle" [css]="{ width: '40%', mb: '$sm' }">
+              <kite-text as="p" size="sm" variant="description" align="left"> Se inició esta solicitud el <b>{{
+                  solicitud?.solicitud?.fechaAlta}}</b>. Tené en cuenta que tiene <b>vigencia por 30 días.</b>
+              </kite-text>
+            </kite-skeleton>
+          </kite-stack>
+
+          <!-- Detalle del prendario -->
+          <kite-card-group [css]="{ mt: '$ssm', '@md': { mt: '$lg' } }">
+            <kite-card-header align="center" [css]="{ mb: '$xs' }">
+              <kite-skeleton [isLoading]="isLoadingDetalle">
+                <kite-text size="sm" [css]="{ fontWeight: '700', color: '$gray700' }"> Solicitud N° {{ solicitud?.solicitud?.idSolicitudSinOrigen }}</kite-text>
+              </kite-skeleton>
+              <kite-skeleton [isLoading]="isLoadingDetalle" [css]="{ width: '40%', ml: '5rem', justifySelf: 'end' }">
+                <kite-button variant="secondary" size="sm" icon="chevron-right" (onClick)="modalOpen('detalle', true)">Más información</kite-button>
+              </kite-skeleton>
+            </kite-card-header>
+            <kite-skeleton [isLoading]="isLoadingDetalle" [css]="{ height: '8rem', mb: '$sm' }">
+              <app-solicitud-resumen-vehiculo [solicitud]="solicitud"></app-solicitud-resumen-vehiculo>
+            </kite-skeleton>
+          </kite-card-group>
+
+          <!-- Detalle de la solicitud -->
+          <kite-card-group [css]="{ mt: '$ssm', '@md': { mt: '$lg' } }">
+            <kite-skeleton [isLoading]="isLoadingDetalle" [css]="{ height: '8rem', mb: '$sm' }">
+              <app-solicitud-resumen-financiero [solicitud]="solicitud"></app-solicitud-resumen-financiero>
+            </kite-skeleton>
+          </kite-card-group>
+
+          <!-- Modal detalle -->
+          <kite-modal [isOpen]="openDetalle" (onClose)="modalOpen('detalle', false)" type="drawer" [css]="{ gap: '$xxs' }">
+            <kite-modal-header title="Más información"></kite-modal-header>
+            <kite-modal-content [css]="{ gap: '$xxs', padding: '$xxs' }">
+              <kite-card>
+                <kite-card-content>
+                  <kite-list [css]="{ padding: '0' }">
+                    <kite-list-content [css]="{ gap: '$sm' }">
+                      <h5 listSubtitle><kite-text as="span" size="xs">Vehículo</kite-text></h5>
+                      <h2 listTitle><kite-text as="span" size="sm">{{ solicitud?.vehiculo?.marca }} {{ solicitud?.vehiculo?.modelo }} ({{ solicitud?.vehiculo?.anio }})</kite-text></h2>
+                    </kite-list-content>
+                  </kite-list>
+                  <kite-list [css]="{ padding: '0' }">
+                    <kite-list-content [css]="{ gap: '$sm' }">
+                      <h5 listSubtitle><kite-text as="span" size="xs">Tipo</kite-text></h5>
+                      <h2 listTitle><kite-text as="span" size="sm">{{ solicitud?.vehiculo?.ceroKm ? '0km' : 'Usado' }}</kite-text></h2>
+                    </kite-list-content>
+                  </kite-list>
+                  <kite-list [css]="{ padding: '0' }">
+                    <kite-list-content [css]="{ gap: '$sm' }">
+                      <h5 listSubtitle><kite-text as="span" size="xs">Monto</kite-text></h5>
+                      <h2 listTitle><kite-text as="span" size="sm">\${{ solicitud?.solicitud?.capital | number:'1.0-0' }}</kite-text></h2>
+                    </kite-list-content>
+                  </kite-list>
+                </kite-card-content>
+              </kite-card>
+            </kite-modal-content>
+          </kite-modal>
+
+          <!-- Terminos y condiciones -->
+          <kite-container *ngIf="!isVencida" [css]="solicitud?.solicitud?.esUva ? {} : { mt: '$lg' }">
+            <kite-list *ngIf="solicitud?.solicitud?.esUva">
+              <kite-list-content>
+                <h2 listTitle>
+                  <kite-text as="span" size="xs" [css]="{fontWeight: '400', color: '$gray800'}">*Sujeto al valor UVA del día de la liquidación del préstamo</kite-text>
+                </h2>
+              </kite-list-content>
+            </kite-list>
+            <kite-skeleton [isLoading]="isLoadingDocumentos" [css]="{ p: '$md' }">
+              <kite-checkbox (onChange)="cambiarEstado()" name="blockearConfirmacion" [css]="solicitud?.solicitud?.esUva ? {p: '$sm'} : { mt: '$lg' }">
+                <kite-text label as="span" size="sm" [css]="solicitud?.solicitud?.esUva ? {} : { mt: '$lg' }">
+                  He leído y acepto el
+                  <a href="javascript:void(0)" (click)="abrirDocumento('Resumen Productos Y Servicios')" style="font-weight: 500;">
+                    <kite-checkbox-link> resumen de contratación,</kite-checkbox-link>
+                  </a>
+                  &nbsp;la
+                  <a href="javascript:void(0)" (click)="abrirDocumento('Solicitud de Credito Prendario')" style="font-weight: 500;">
+                    <kite-checkbox-link> solicitud de crédito</kite-checkbox-link>
+                  </a>
+                  &nbsp;los
+                  <a href="javascript:void(0)" (click)="abrirDocumento('terminos y condiciones')" style="font-weight: 500;">
+                    <kite-checkbox-link> términos y condiciones</kite-checkbox-link>
+                  </a>
+                  &nbsp;del préstamo y la
+                  <a href="javascript:void(0)" (click)="abrirDocumento('Anexo seguros')" style="font-weight: 500;">
+                    <kite-checkbox-link> constancia de información sobre el seguro.</kite-checkbox-link>
+                  </a>
+                </kite-text>
+              </kite-checkbox>
+            </kite-skeleton>
+            <kite-stack direction="column" align="center" [css]="{marginTop:'$lg'}">
+              <kite-button variant="primary" [css]="{width: '$huge', '@md':{width:'$md'}}" [isDisabled]="blockearConfirmacion" (onClick)="confirmar(blockearConfirmacion)">
+                <kite-container *ngIf="isloadingConfirmar" align="center" style="padding: 4rem">
+                  <kite-spinner size="xs"></kite-spinner>
+                </kite-container>
+                <kite-container *ngIf="!isloadingConfirmar" align="center" style="padding: 4rem">
+                  Confirmar
+                </kite-container>
+              </kite-button>
+              <kite-button variant="tertiary" [css]="{width: '$huge', '@md':{width:'$md'}}" (onClick)="modalOpen('ayuda',true)">
+                Necesito ayuda
+              </kite-button>
+            </kite-stack>
+          </kite-container>
+
+          <!-- Modal ayuda -->
+          <kite-modal [isOpen]="openAyuda" (onClose)="modalOpen('ayuda', false)" type="modal">
+            <kite-modal-header title="Necesito ayuda" decription="Seleccioná una opción"></kite-modal-header>
+            <kite-modal-content>
+              <kite-option-list-group variant="card" type="radio">
+                <kite-option-list (onToggle)="setModal('datosIncorrectos'); modalOpen('datosIncorrectos', true)">
+                  <kite-list-content>
+                    <h2 listTitle>Los datos de la solicitud son incorrectos</h2>
+                  </kite-list-content>
+                </kite-option-list>
+                <kite-option-list (onToggle)="setModal('cancelarSolicitud'); modalOpen('cancelarSolicitud', true)">
+                  <kite-list-content>
+                    <h2 listTitle>Ya no me interesa continuar con la solicitud</h2>
+                  </kite-list-content>
+                </kite-option-list>
+              </kite-option-list-group>
+            </kite-modal-content>
+            <kite-modal-footer>
+              <kite-button (onClick)="modalOpen(modal, true)"> Continuar </kite-button>
+            </kite-modal-footer>
+          </kite-modal>
+
+          <!-- Modal ayuda cancelar solicitud-->
+          <kite-modal [isOpen]="openCancelarSolicitud" (onClose)="modalOpen('cancelarSolicitud',false)" type="modal">
+            <kite-modal-header title="Si no querés continuar con la solicitud:"></kite-modal-header>
+            <kite-modal-content>
+              <kite-list>
+                <kite-list-avatar [css]="{display:'none', '@md':{display: 'block'}}">
+                  <kite-avatar type="icon" icon="phone" variant="neutral"></kite-avatar>
+                </kite-list-avatar>
+                <kite-list-content [css]="{ gap: '$sm' }">
+                  <h5 listSubtitle>
+                    <kite-text as="span" size="sm" [css]="{fontWeight: '400', color: '$gray900'}">Coordiná con la
+                      concesionaria para que la cancelen.</kite-text>
+                  </h5>
+                </kite-list-content>
+              </kite-list>
+            </kite-modal-content>
+            <kite-modal-footer>
+              <kite-button (onClick)="modalOpen('cancelarSolicitud',false)"> Entendido </kite-button>
+            </kite-modal-footer>
+          </kite-modal>
+
+          <!-- Modal ayuda datos incorrectos-->
+          <kite-modal [isOpen]="openDatosIncorrectos" (onClose)="modalOpen('datosIncorrectos', false)" type="modal">
+            <kite-modal-header title="Si los datos de tu solicitud son incorrectos:"></kite-modal-header>
+            <kite-modal-content>
+              <kite-list>
+                <kite-list-avatar [css]="{ display: 'none', '@md': { display: 'block' } }">
+                  <kite-avatar type="icon" icon="phone" variant="neutral"></kite-avatar>
+                </kite-list-avatar>
+                <kite-list-content [css]="{ gap: '$sm' }">
+                  <h5 listSubtitle>
+                    <kite-text as="span" size="sm" [css]="{ fontWeight: '400', color: '$gray900' }">Comunicate con la
+                      concesionaria para que modifiquen la información correspondiente.</kite-text>
+                  </h5>
+                </kite-list-content>
+              </kite-list>
+            </kite-modal-content>
+            <kite-modal-footer>
+              <kite-button (onClick)="modalOpen('datosIncorrectos', false)"> Entendido </kite-button>
+            </kite-modal-footer>
+          </kite-modal>
+        </kite-column>
+      </kite-row>
+    </kite-container>
+  </kite-layout-main>
+</kite-layout>

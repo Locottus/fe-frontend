@@ -1,0 +1,353 @@
+@import "../../../environments/globalVars";
+
+.icon {
+  display: inline-block;
+  position: relative;
+  width: 21px;
+  height: 21px;
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.icon.icon-menu {
+  background-image: url($publicPath + 'assets/icons/icon-help.svg');
+}
+
+.icon.icon-summary {
+  background-image: url($publicPath + 'assets/icons/icon-summary.svg');
+}
+
+.icon.icon-accounts {
+  background-image: url($publicPath + 'assets/icons/icon-accounts.svg');
+}
+
+.icon.icon-creditcards {
+  background-image: url($publicPath + 'assets/icons/icon-credit-cards.svg');
+}
+
+.icon.icon-investments {
+  background-image: url($publicPath + 'assets/icons/icon-investments.svg');
+}
+
+.icon.icon-loans-no-color {
+  background-image: url($publicPath + 'assets/icons/icon-loans.svg');
+}
+
+.icon.icon-insurances {
+  background-image: url($publicPath + 'assets/icons/icon-insurances.svg');
+}
+
+.icon.icon-servicepayments {
+  background-image: url($publicPath + 'assets/icons/icon-service-payments.svg');
+}
+
+.icon.icon-transfers {
+  background-image: url($publicPath + 'assets/icons/icon-transfers.svg');
+}
+
+.icon.icon-supervielleclub {
+  background-image: url($publicPath + 'assets/icons/icon-supervielle-club-full.svg');
+}
+
+.icon.icon-123-chances {
+  background-image: url($publicPath + 'assets/icons/icon-123-chances-full.svg');
+}
+
+.icon.icon-previtionalclub {
+  background-image: url($publicPath + 'assets/icons/icon-supervielle-club.svg');
+}
+
+.icon.icon-storesupervielle {
+  background-image: url($publicPath + 'assets/icons/icon-store-supervielle.svg');
+}
+
+.icon.icon-minegocio {
+  background-image: url($publicPath + 'assets/icons/icon-mi-negocio.svg');
+}
+
+.icon.icon-help {
+  background-image: url($publicPath + 'assets/icons/icon-help.svg');
+}
+
+.icon.icon-contact {
+  background-image: url($publicPath + 'assets/icons/icon-contact.svg');
+}
+
+.icon.icon-logout {
+  background-image: url($publicPath + 'assets/icons/icon-logout.svg');
+}
+
+.icon.icon-star {
+  background-image: url($publicPath + 'assets/icons/icon-star.svg');
+}
+
+.icon.icon-down {
+  background-image: url($publicPath + 'assets/icons/icon-down.svg');
+}
+
+.icon.icon-up {
+  background-image: url($publicPath + 'assets/icons/icon-up.svg');
+}
+
+.icon.icon-close {
+  background-image: url($publicPath + 'assets/icons/icon-close.svg');
+}
+
+.icon.icon-close-red {
+  background-image: url($publicPath + 'assets/icons/icon-close-red.svg');
+}
+
+.icon.icon-lampara-prendida {
+  background-image: url($publicPath + 'assets/icons/icon-lampara-prendida.svg');
+}
+
+.icon.icon-eye-grey {
+  background-image: url($publicPath + 'assets/icons/icon-eye-grey.svg');
+}
+
+.icon.icon-extraction {
+  background-image: url($publicPath + 'assets/icons/icon-extraction.svg');
+}
+
+.icon.icon-flecha-izquierda {
+  background-image: url($publicPath + 'assets/icons/icon-flecha-izquierda.svg');
+}
+
+.icon.icon-warning-circle {
+  background-image: url($publicPath + 'assets/icons/icon-warning-circle.svg');
+}
+
+.icon.icon-auto {
+  background-image: url($publicPath + 'assets/icons/icon-auto.svg');
+}
+
+.icon.icon-search {
+  background-image: url($publicPath + 'assets/icons/icon-search.svg');
+}
+
+.icon.icon-not-found {
+  background-image: url($publicPath + 'assets/icons/icon-not-found.svg');
+}
+
+.icon.icon-car-empty-1 {
+  background-image: url($publicPath + 'assets/icons/car-empty-1.svg');
+}
+
+.icon.icon-car-empty-2 {
+  background-image: url($publicPath + 'assets/icons/car-empty-2.svg');
+}
+
+.icon.icon-car-empty-3 {
+  background-image: url($publicPath + 'assets/icons/car-empty-3.svg');
+}
+
+.icon.icon-car-empty-4 {
+  background-image: url($publicPath + 'assets/icons/car-empty-4.svg');
+}
+
+.icon.icon-car-empty-5 {
+  background-image: url($publicPath + 'assets/icons/car-empty-5.svg');
+}
+
+.icon.icon-edit {
+  background-image: url($publicPath + 'assets/icons/edit.svg');
+}
+
+.icon.icon-lamp {
+  background-image: url($publicPath + 'assets/icons/icon-lamp.svg');
+}
+
+.icon.icon-arrow-up {
+  background-image: url($publicPath + 'assets/icons/icon-arrow-up.svg');
+}
+
+.icon.icon-arrow-down {
+  background-image: url($publicPath + 'assets/icons/icon-arrow-down.svg');
+}
+
+.icon.icon-arrow-down-red {
+  background-image: url($publicPath + 'assets/icons/icon-arrow-down-red.svg');
+}
+
+.icon.icon-arrow-up-red {
+  background-image: url($publicPath + 'assets/icons/icon-arrow-up-red.svg');
+}
+
+.icon.icon-arrow-right {
+  background-image: url($publicPath + 'assets/icons/icon-arrow-right.svg');
+}
+
+.icon.icon-arrow-left {
+  background-image: url($publicPath + 'assets/icons/icon-arrow-left.svg');
+}
+
+.icon.icon-arrow-right-dark {
+  background-image: url($publicPath + 'assets/icons/icon-arrow-right-dark.svg');
+}
+
+.icon.icon-checked {
+  background-image: url($publicPath + 'assets/icons/icon-checked.svg');
+}
+
+.icon.icon-padlock {
+  background-image: url($publicPath + 'assets/icons/icon-padlock.svg');
+}
+
+.icon.icon-spinner {
+  background-image: url($publicPath + 'assets/icons/icon-spinner.svg');
+}
+
+.icon.icon-guaranteed {
+  background-image: url($publicPath + 'assets/icons/icon-guaranteed.svg');
+}
+
+.icon.icon-car-2 {
+  background-image: url($publicPath + 'assets/icons/icon-car-2.svg');
+}
+
+.icon.icon-insurance {
+  background-image: url($publicPath + 'assets/icons/icon-insurance.svg');
+}
+
+.icon.icon-autos {
+  background-image: url($publicPath + 'assets/icons/icon-autos.svg');
+}
+
+.icon.icon-confirmacion {
+  background-image: url($publicPath + 'assets/icons/icon-confirmacion.svg');
+}
+
+.icon.icon-success {
+  background-image: url($publicPath + 'assets/icons/icon-success.svg');
+}
+
+.icon.icon-error {
+  background-image: url($publicPath + 'assets/icons/icon-error.svg');
+}
+
+.icon.icon-pc {
+  background-image: url($publicPath + 'assets/icons/icon-pc.svg');
+}
+
+.icon.icon-ahorros {
+  background-image: url($publicPath + 'assets/icons/icon-ahorros.svg');
+}
+
+.icon.icon-cohete {
+  background-image: url($publicPath + 'assets/icons/icon-cohete.svg');
+}
+
+.icon.icon-casa {
+  background-image: url($publicPath + 'assets/icons/icon-casa.svg');
+}
+
+.icon.icon-bolso {
+  background-image: url($publicPath + 'assets/icons/icon-bolso.svg');
+}
+
+.icon.icon-contenido-auto {
+  background-image: url($publicPath + 'assets/icons/icon-contenido-auto.svg');
+}
+
+.icon.icon-extraccion {
+  background-image: url($publicPath + 'assets/icons/icon-extraccion.svg');
+}
+
+.icon.icon-warning-white {
+  background-image: url($publicPath + 'assets/icons/icon-warning-white.svg');
+}
+
+.icon.icon-seguro-automotor {
+  background-image: url($publicPath + 'assets/icons/icon-seguro-automotor.svg');
+}
+
+.icon.icon-seguro-sepelio {
+  background-image: url($publicPath + 'assets/icons/icon-seguro-sepelio.svg');
+}
+
+.icon.icon-seguro-vida {
+  background-image: url($publicPath + 'assets/icons/icon-seguro-vida.svg');
+}
+
+.icon.icon-seguro-robo-en-cajeros {
+  background-image: url($publicPath + 'assets/icons/icon-seguro-robo-en-cajeros.svg');
+}
+
+.icon.icon-seguro-hogar {
+  background-image: url($publicPath + 'assets/icons/icon-seguro-hogar.svg');
+}
+
+.icon.icon-seguro-granizo {
+  background-image: url($publicPath + 'assets/icons/icon-seguro-granizo.svg');
+}
+
+.icon.icon-info {
+  background-image: url($publicPath + 'assets/icons/icon-info.svg');
+}
+
+.icon.icon-contenido-protegido {
+  background-image: url($publicPath + 'assets/icons/icon-contenido-protegido.svg');
+}
+
+.icon.icon-robo-bolso {
+  background-image: url($publicPath + 'assets/icons/icon-robo-bolso.svg');
+}
+
+.icon.icon-robo-atm {
+  background-image: url($publicPath + 'assets/icons/icon-robo-atm.svg');
+}
+
+.icon.icon-tecnologia {
+  background-image: url($publicPath + 'assets/icons/icon-tecnologia.svg');
+}
+
+.icon.icon-down {
+  background-image: url($publicPath + 'assets/icons/icon-down.svg');
+}
+
+.icon.icon-padlock-fill {
+  background-image: url($publicPath + 'assets/icons/icon-padlock-fill.svg');
+  height: 3rem;
+}
+
+.icon.icon-loans {
+  background-image: url($publicPath + 'assets/icons/icon-loans-color.svg');
+  height: 35px;
+  width: 40px;
+}
+
+.icon.icon-mis-datos {
+  background-image: url($publicPath + 'assets/icons/icon-mis-datos.svg');
+  height: 2rem;
+  width: 3rem;
+}
+
+.icon.icon-contacto {
+  background-image: url($publicPath + 'assets/icons/icon-contacto.svg');
+}
+
+.icon.icon-calendar-full {
+  background-image: url($publicPath + 'assets/icons/icon-calendar-full.svg');
+}
+
+.icon.icon-message-full {
+  background-image: url($publicPath + 'assets/icons/icon-message-full.svg');
+}
+
+.icon.icon-info-2 {
+  background-image: url($publicPath + 'assets/icons/icon-info-2.svg');
+  height: 2rem;
+  width: 2rem;
+}
+
+.icon.info-yellow-dark {
+  background-image: url($publicPath + 'assets/icons/info-yellow-dark.svg');
+  height: 2rem;
+  width: 2rem;
+}
+
+.icon.icon.icon-checked-green {
+  background-image: url($publicPath + 'assets/icons/icon-checked-green.svg');
+}

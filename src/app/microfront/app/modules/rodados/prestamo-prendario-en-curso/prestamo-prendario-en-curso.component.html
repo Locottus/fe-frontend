@@ -1,0 +1,343 @@
+<kite-layout-header *ngIf="!isMobile">
+  <kite-header type="internal" [title]="'Prestamos prendarios'" [hasOptions]="false"
+    (backAction)="backAction()"></kite-header>
+</kite-layout-header>
+<kite-layout secondary="left" [css]="{ backgroundColor: '$gray100' }">
+  <kite-layout-secondary [css]="{
+            height: '100%',
+            backgroundColor: '$gray_transparent_lighter',
+            display: 'none',
+            '@lg': { display: 'block' }
+        }">
+    <kite-container>
+      <app-side-bar-prestamos></app-side-bar-prestamos>
+    </kite-container>
+  </kite-layout-secondary>
+
+  <kite-layout-main [css]="{ minHeight: '400px', overflowY: 'auto' }">
+    <kite-container [css]="{ '@md': { padding: '$lg $md', gap: '$lg' } }">
+      <kite-row *ngIf="!isLoading">
+        <kite-column>
+          <!-- Titulo prendario y subtitulo -->
+          <kite-skeleton [isLoading]="isLoading">
+            <kite-stack direction="column" spacing="xxs">
+              <kite-title as="h2" size="lg"> Prendario N° {{ prestamo.detallePrestamo.prestamo.operacion.codigo }}
+              </kite-title>
+              <kite-text as="p" size="sm" variant="description" align="left" *ngIf="prestamo.vehiculo !== null">
+                {{ prestamo.vehiculo.modelo }} | {{ prestamo.vehiculo.ceroKm ? 'Nuevo' : 'Usado' }} | {{
+                prestamo.vehiculo.anio }}
+              </kite-text>
+            </kite-stack>
+          </kite-skeleton>
+          <!-- Detalle del prestamo -->
+          <kite-skeleton [isLoading]="isLoading" [css]="{ mt: '$ssm', '@md': { mt: '$lg' } }">
+            <kite-card-group [css]="{ mt: '$ssm', '@md': { mt: '$lg' } }">
+              <kite-card-group-heading title="Detalle"
+                [css]="{ display: 'none', '@md': { display: 'block' } }"></kite-card-group-heading>
+              <kite-card>
+                <kite-card-content>
+                  <kite-stack [direction]="{ '@initial': 'column', '@md': 'row' }" justify="space-between">
+                    <kite-list-content [css]="{ gap: '$sm' }">
+                      <h5 listSubtitle>
+                        <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">
+                          Monto original en pesos
+                        </kite-text>
+                      </h5>
+                      <h2 listTitle>
+                        <kite-text as="span" size="xs" [css]="{ fontWeight: '500', color: '$gray900' }">
+                          {{ prestamo?.detallePrestamo?.prestamo?.capital | currency : 'ARS' }}
+                        </kite-text>
+                      </h2>
+                    </kite-list-content>
+
+                    <kite-list-content [css]="{ gap: '$sm' }">
+                      <h5 listSubtitle>
+                        <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">
+                          Vencimiento del préstamo
+                        </kite-text>
+                      </h5>
+                      <h2 listTitle>
+                        <kite-text as="span" size="xs" [css]="{ fontWeight: '500', color: '$gray900' }">
+                          {{ prestamo.detallePrestamo.prestamo.fecha_vencimiento | date : 'dd/MM/yy' }}
+                        </kite-text>
+                      </h2>
+                    </kite-list-content>
+
+                    <kite-list-content [css]="{ gap: '$sm' }">
+                      <h5 listSubtitle>
+                        <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }"> Cuotas a
+                          pagar </kite-text>
+                      </h5>
+                      <h2 listTitle>
+                        <kite-text as="span" size="xs" [css]="{ fontWeight: '500', color: '$gray900' }">
+                          {{ prestamo.detallePrestamo.prestamo.cantidad_cuotas_impagas }} de
+                          {{ prestamo.detallePrestamo.prestamo.cantidad_de_cuotas }}
+                        </kite-text>
+                      </h2>
+                    </kite-list-content>
+                  </kite-stack>
+                </kite-card-content>
+              </kite-card>
+            </kite-card-group>
+          </kite-skeleton>
+
+          <!-- Botones de accion -->
+          <kite-skeleton [isLoading]="isLoading" [css]="{ justifyContent: 'right', mt: '$lg' }">
+            <kite-stack direction="row" [css]="{ justifyContent: 'right', mt: '$lg' }">
+              <!-- Desktop -->
+              <kite-stack direction="row" [css]="{ gap: '0', display: 'none', '@md': { display: 'block' } }">
+                <kite-menu #menuEstado type="dropdown" label="Estado" (onClose)="onMenuEstadoClose()" [css]="kiteButtonStyles">
+                  <kite-menu-content>
+                    <kite-menu-item>
+                      <kite-radio-group name="estados">
+                        <kite-radio label="Pagado" [isChecked]="isSameFilter('Pagada', 'estado')"
+                          (onClick)="setFiltroEstado('Pagada')"></kite-radio>
+
+                        <kite-radio label="Vencido" [isChecked]="isSameFilter('Vencida', 'estado')"
+                          (onClick)="setFiltroEstado('Vencida')"></kite-radio>
+
+                        <kite-radio label="Pendiente" [isChecked]="isSameFilter('Pendiente', 'estado')"
+                          (onClick)="setFiltroEstado('Pendiente')"></kite-radio>
+                      </kite-radio-group>
+                    </kite-menu-item>
+                  </kite-menu-content>
+                  <kite-menu-footer>
+                    <kite-button variant="tertiary" size="sm" (onClick)="borrarFiltrosYCerrar('estado')">Borrar</kite-button>
+                    <kite-button variant="primary" size="sm" (onClick)="aplicarFiltrosYCerrar('estado')">Aplicar</kite-button>
+                  </kite-menu-footer>
+                </kite-menu>
+                <kite-menu #menuPeriodo type="dropdown" label="Período" (onClose)="onMenuPeriodoClose()" [css]="kiteButtonStyles">
+                  <kite-menu-content>
+                    <kite-menu-item *ngIf="!calendar">
+                      <kite-radio-group name="rango">
+                        <kite-radio label="Últimos 30 días" [isChecked]="isSameFilter(30, 'periodo')"
+                          (onClick)="setFiltroPeriodo(30)">
+                        </kite-radio>
+
+                        <kite-radio label="Últimos 90 días" [isChecked]="isSameFilter(90, 'periodo')"
+                          (onClick)="setFiltroPeriodo(90)">
+                        </kite-radio>
+
+                        <kite-radio label="Últimos 180 días" [isChecked]="isSameFilter(180, 'periodo')"
+                          (onClick)="setFiltroPeriodo(180)">
+                        </kite-radio>
+                      </kite-radio-group>
+                    </kite-menu-item>
+
+                    <kite-menu-item *ngIf="!calendar">
+                      <kite-list size="sm" [css]="{ backgroundColor: 'white', borderRadius: '$md' }">
+                        <kite-list-content>
+                          <h2 listTitle>
+                            <kite-text [css]="{ fontWeight: '400' }">Seleccionar fecha</kite-text>
+                          </h2>
+                          <h5 listDescription>
+                            <kite-text as="span" size="xxs" variant="body" [css]="{ fontWeight: '400' }">Seleccioná un
+                              rango</kite-text>
+                          </h5>
+                        </kite-list-content>
+                        <kite-list-actions>
+                          <kite-button size="sm" variant="tertiary" icon="chevron-right"
+                            (onClick)="openCalendar()"></kite-button>
+                        </kite-list-actions>
+                      </kite-list>
+                    </kite-menu-item>
+
+                    <kite-menu-item *ngIf="calendar">
+                      <kite-calendar-range [value]="selectedRange" [minDate]="fechaMin" [maxDate]="fechaMax"
+                        [hasYearSelection]="true" (onChange)="onChange($event)"></kite-calendar-range>
+                    </kite-menu-item>
+                  </kite-menu-content>
+                  <kite-menu-footer>
+                    <kite-button variant="tertiary" size="sm" (onClick)="borrarFiltrosYCerrar('periodo')">Borrar</kite-button>
+                    <kite-button variant="primary" size="sm" (onClick)="aplicarFiltrosYCerrar('periodo')">Aplicar</kite-button>
+                  </kite-menu-footer>
+                </kite-menu>
+                <kite-button variant="tertiary" size="sm" [css]="{ background: '$gray_transparent', ml: '$xs' }"
+                  (onClick)="borrarFiltros()">
+                  Borrar filtros
+                </kite-button>
+              </kite-stack>
+
+              <!-- mobile -->
+              <kite-stack direction="row" [css]="{ gap: '0', display: 'block', '@md': { display: 'none' } }">
+                <kite-menu #menuMobile type="filterGroup" label="Filtros" (onClose)="onMenuMobileClose()" [badgeNumber]="getFilterCount()">
+                  <kite-menu-content>
+                    <kite-menu-section label="Estado" [isAccordion]="true">
+                      <kite-menu-item>
+                        <kite-radio-group name="estados-mobile">
+                          <kite-radio label="Pagado" [isChecked]="isSameFilter('Pagada', 'estado')"
+                            (onClick)="setFiltroEstado('Pagada')"></kite-radio>
+
+                          <kite-radio label="Vencido" [isChecked]="isSameFilter('Vencida', 'estado')"
+                            (onClick)="setFiltroEstado('Vencida')"></kite-radio>
+
+                          <kite-radio label="Pendiente" [isChecked]="isSameFilter('Pendiente', 'estado')"
+                            (onClick)="setFiltroEstado('Pendiente')"></kite-radio>
+                        </kite-radio-group>
+                      </kite-menu-item>
+                    </kite-menu-section>
+                    <kite-menu-section label="Período" [isAccordion]="true">
+                      <kite-menu-item>
+                        <kite-radio-group name="periodo-mobile">
+                          <kite-radio label="Últimos 30 días" [isChecked]="isSameFilter(30, 'periodo')"
+                            (onClick)="setFiltroPeriodo(30)"></kite-radio>
+
+                          <kite-radio label="Últimos 90 días" [isChecked]="isSameFilter(90, 'periodo')"
+                            (onClick)="setFiltroPeriodo(90)"></kite-radio>
+
+                          <kite-radio label="Últimos 180 días" [isChecked]="isSameFilter(180, 'periodo')"
+                            (onClick)="setFiltroPeriodo(180)"></kite-radio>
+                        </kite-radio-group>
+                      </kite-menu-item>
+                    </kite-menu-section>
+                  </kite-menu-content>
+                  <kite-menu-footer>
+                    <kite-button variant="tertiary" size="sm" (onClick)="borrarFiltrosYCerrarMobile()">Borrar</kite-button>
+                    <kite-button variant="primary" size="sm" (onClick)="aplicarFiltrosYCerrarMobile()">Aplicar</kite-button>
+                  </kite-menu-footer>
+                </kite-menu>
+              </kite-stack>
+            </kite-stack>
+          </kite-skeleton>
+
+          <!-- Tabs Pendientes / Pagadas -->
+          <kite-skeleton [isLoading]="isLoading" [css]="{ mt: '$md' }">
+            <kite-stack direction="row" [css]="{ gap: '$lg', paddingX: '$xs', paddingTop: '$sm', paddingBottom: '$xs' }">
+              <kite-text 
+                size="sm" 
+                [css]="{ 
+                  fontWeight: '900', 
+                  color: tabActivo === 'pendientes' ? '$gray900' : '$gray500',
+                  cursor: 'pointer',
+                  paddingBottom: '$xs',
+                  borderBottom: tabActivo === 'pendientes' ? '2px solid #ff3b7a' : '2px solid transparent',
+                  transition: 'all 0.2s ease'
+                }"
+                (click)="setTabActivo('pendientes')">
+                Pendientes
+              </kite-text>
+              <kite-text 
+                size="sm" 
+                [css]="{ 
+                  fontWeight: '900', 
+                  color: tabActivo === 'pagadas' ? '$gray900' : '$gray500',
+                  cursor: 'pointer',
+                  paddingBottom: '$xs',
+                  borderBottom: tabActivo === 'pagadas' ? '2px solid #ff3b7a' : '2px solid transparent',
+                  transition: 'all 0.2s ease'
+                }"
+                (click)="setTabActivo('pagadas')">
+                Pagadas
+              </kite-text>
+            </kite-stack>
+          </kite-skeleton>
+
+          <!-- Lista de cuotas -->
+          <kite-skeleton [isLoading]="isLoading" [css]="{ mt: '$xs' }">
+            <kite-card-group [css]="{ mt: '$xs' }">
+              <kite-card>
+                <kite-card-content [css]="{ padding: '$none' }">
+                  <div *ngFor="let cuota of cuotasPrestamoFiltradas; let i = index">
+                    <kite-stack 
+                      direction="row" 
+                      align="center" 
+                      [css]="{ 
+                        justifyContent: 'space-between',
+                        padding: '$md',
+                        borderTop: i > 0 ? '1px solid $gray200' : 'none',
+                        cursor: 'pointer',
+                        '&:hover': { backgroundColor: '$gray50' }
+                      }"
+                      (click)="verDetalleCuota(cuota)">
+                      
+                      <!-- Izquierda: Cuota y Fecha -->
+                      <kite-stack direction="column" [css]="{ gap: '$xxs', minWidth: '0' }">
+                        <kite-text size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">
+                          Cuota {{ cuota.numero }}
+                        </kite-text>
+                        <kite-text size="xs" [css]="{ fontWeight: '400', color: '$gray400' }">
+                          {{ cuota.fecha_vencimiento | date:'dd/MM/yy' }}
+                        </kite-text>
+                      </kite-stack>
+
+                      <!-- Derecha: Badge, Monto y Chevron -->
+                      <kite-stack direction="row" align="center" [css]="{ gap: '$sm', flexShrink: '0' }">
+                        
+                        <!-- Pill de estado: Vencida (rojo) -->
+                        <span 
+                          *ngIf="cuota.estado_descripcion === 'Vencida'"
+                          [style]="{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            padding: '3px 9px',
+                            borderRadius: '999px',
+                            fontSize: '10px',
+                            fontWeight: '900',
+                            whiteSpace: 'nowrap',
+                            backgroundColor: '#fde7e7',
+                            color: '#b42318',
+                            border: '1px solid rgba(180, 35, 24, 0.12)'
+                          }">
+                          Vencida
+                        </span>
+
+                        <!-- Pill de estado: Próxima a vencer (ámbar) -->
+                        <span 
+                          *ngIf="cuota.estado_descripcion !== 'Vencida' && cuota.estado_descripcion !== 'Pagada' && getDiasHastaVencimiento(cuota.fecha_vencimiento) <= 7 && getDiasHastaVencimiento(cuota.fecha_vencimiento) >= 0"
+                          [style]="{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            padding: '3px 9px',
+                            borderRadius: '999px',
+                            fontSize: '10px',
+                            fontWeight: '900',
+                            whiteSpace: 'nowrap',
+                            backgroundColor: '#fff7ed',
+                            color: '#9a3412',
+                            border: '1px solid rgba(154, 52, 18, 0.14)'
+                          }">
+                          {{ getDiasHastaVencimiento(cuota.fecha_vencimiento) === 0 ? 'Vence hoy' : 
+                             getDiasHastaVencimiento(cuota.fecha_vencimiento) === 1 ? 'Vence mañana' : 
+                             'Vence en ' + getDiasHastaVencimiento(cuota.fecha_vencimiento) + ' días' }}
+                        </span>
+                        
+                        <!-- Espacio vacío si no hay badge (para mantener alineación) -->
+                        <div *ngIf="!getBadgeLabel(cuota)" [style.width]="'86px'"></div>
+
+                        <!-- Monto con UVA -->
+                        <kite-stack direction="column" align="end" [css]="{ gap: '$xxs', minWidth: '110px' }">
+                          <kite-text size="sm" [css]="{ fontWeight: '900', color: '$gray900' }">
+                            {{ cuota.moneda.total | currency:'ARS':'symbol':'1.2-2':'es-AR' }}
+                          </kite-text>
+                          <kite-text *ngIf="cuota.uva?.total" size="xs" [css]="{ fontWeight: '900', color: '$gray400', letterSpacing: '0.1px' }">
+                            UVA {{ cuota.uva.total | number:'1.2-2' }}
+                          </kite-text>
+                        </kite-stack>
+
+                        <!-- Chevron -->
+                        <kite-icon 
+                          name="chevron-right" 
+                          size="sm" 
+                          [css]="{ color: '$gray400', opacity: '0.7', cursor: 'pointer' }">
+                        </kite-icon>
+
+                      </kite-stack>
+                    </kite-stack>
+                  </div>
+                </kite-card-content>
+              </kite-card>
+            </kite-card-group>
+          </kite-skeleton>
+
+        </kite-column>
+      </kite-row>
+    </kite-container>
+  </kite-layout-main>
+</kite-layout>
+
+<!-- Drawer fuera del layout principal para posicionamiento fijo correcto -->
+<app-detalle-cuota-drawer
+  [isOpen]="mostrarDetalleCuota"
+  [cuota]="cuotaSeleccionada"
+  (close)="cerrarDetalleCuota()">
+</app-detalle-cuota-drawer>

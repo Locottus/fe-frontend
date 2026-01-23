@@ -1,0 +1,17 @@
+<div class="custom-modal" tabindex="-1" aria-modal="true" role="dialog" *ngIf="isOpenDialog">
+    <div class="custom-modal__backdrop" aria-label="Cerrar" (keydown.enter)="toggleDialog()" (click)="toggleDialog()"></div>
+    <div class="custom-modal__body" [ngStyle]="styleList"  [ngClass]="{'custom-modal-opened':showBody, 'custom-modal__body--comment': isComment, 'custom-modal__body--form': isForm, 'custom-modal__body--list': list}" aria-modal="true">
+        <div class="custom-modal__body__header">
+            <h4 class="custom-modal__body__header__title">{{title}}</h4>
+            <div *ngIf="haveIconclose" class="custom-modal__body__close" [ngClass]="{'rounded': roundedClose}" (keydown.enter)="toggleDialog()" (click)="toggleDialog()" role="button"></div>
+        </div>
+
+        <ng-content></ng-content>
+        <div *ngIf="!isGeneric" class="container" style="align-content: center  !important; justify-content: center !important;">
+            <button type="button" mat-flat-button color="primary" class="btn-pf" type="button" (click)="cerrar()">
+                {{title}}
+            </button>
+        </div>
+    </div>
+
+</div>

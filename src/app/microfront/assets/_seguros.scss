@@ -1,0 +1,59 @@
+@import 'colors';
+
+.title-seguros {
+  color: $gris-oscuro;
+  font-family: 'whitneysemibold', serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 30px;
+  margin-bottom: 35px;
+  text-align: center;
+}
+
+.boton {
+  border: 1px solid $gris-rosado;
+  border-radius: 7px;
+  color: $gris-oscuro;
+  font-family: 'whitneysemibold', serif;
+  font-size: 16px;
+  height: 40px;
+  background: $blanco;
+  margin: auto;
+  text-decoration: none;
+  outline: none !important;
+
+  &:focus, &:hover {
+    box-shadow: 0 1px 0px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.1),
+    0px 5px 5px -1px rgba(0, 0, 0, 0.10);
+  }
+
+  &.secundario:focus,
+  &.secundario:hover {
+    box-shadow: none;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  &.link {
+    border: 1px solid $rojo-claro;
+    color: $rojo-claro;
+    text-shadow: none;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .title-seguros {
+    font-size: 22px;
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+}
+
+@media (max-width: 360px) {
+  .title-seguros {
+    font-size: 21px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

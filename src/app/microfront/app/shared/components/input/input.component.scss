@@ -1,0 +1,145 @@
+@import "../../../../assets/colors";
+@import "../../../../assets/variables";
+
+.input-container {
+  position: relative;
+  margin: 0;
+  text-align: center;
+
+  .mat-form-field {
+    width: 100%;
+    line-height: 60px;
+
+    .mat-form-field-wrapper {
+      padding: 0;
+
+      .mat-form-field-infix {
+        position: relative;
+        border: none;
+
+        input {
+          width: 100%;
+          height: 60px;
+          padding: 10px 16px;
+          border-radius: 6px;
+          border: 1px solid $gris-rosado;
+          color: $gris-oscuro;
+          font-size: 16px;
+          font-weight: 500;
+          text-transform: capitalize;
+          text-align: end;
+          padding-right: 17px;
+
+          &.disabled {
+            color: $gris-rosado;
+            border: 1px solid $gris-blanco;
+          }
+
+          &::placeholder {
+            font-family: 'Heebo', sans-serif;
+            font-size: 16px;
+            color: $gris-nordic;
+            text-transform: none;
+          }
+
+          &:focus {
+            outline: none !important;
+          }
+        }
+
+        .icon {
+          position: absolute;
+          top: 0;
+          right: 17px;
+          bottom: 0;
+          width: 16px;
+          margin: auto;
+          height: auto;
+          background-size: auto;
+
+          &.disabled {
+            filter: invert(50%) saturate(0%) brightness(150%) contrast(100%)
+          }
+        }
+
+        .mensaje-error {
+          position: absolute;
+          right: 0;
+          bottom: -10px;
+          font-size: 10px;
+          font-family: 'Heebo', sans-serif;
+          line-height: 18px;
+          color: #ee2527;
+        }
+        
+      }
+    }
+
+    .mat-form-field-label {
+      padding: 0 16px;
+      line-height: 60px;
+
+      span {
+        font-family: 'Heebo', sans-serif;
+        font-size: 16px;
+        color: $gris-nordic;
+        text-transform: none;
+      }
+    }
+
+    &.has-value,
+    &.mat-focused {
+      .mat-form-field-label {
+        line-height: 55px;
+
+        span {
+          padding: 0 4px;
+          font-weight: normal;
+          color: $gris-nordic;
+          background: $blanco;
+        }
+      }
+    }
+
+    &.has-error {
+
+      .mat-form-field-wrapper {
+  
+        .mat-form-field-infix {
+
+          input {
+            border: 1px solid $rojo-claro;
+            color: $rojo-claro;
+          }
+        }
+      }
+      
+      .mat-form-field-label {
+  
+        span {
+          color: $rojo-claro;
+        }
+      }
+
+    }
+
+    .mat-form-field-underline {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: map_get($grid-breakpoints, 'md')) {
+  .input-container {
+    .mat-form-field {
+      .mat-form-field-wrapper {
+        .mat-form-field-infix {
+          .mensaje-error {
+            font-size: 9px;
+          }
+        }
+      }
+    }
+  }
+}
+

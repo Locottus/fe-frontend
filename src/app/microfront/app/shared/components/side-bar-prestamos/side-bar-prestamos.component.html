@@ -1,0 +1,63 @@
+<!-- Sidebar -->
+<kite-row>
+  <kite-column [css]="{ pt: '$md', pb: '$md', pr: '$sm', pl: '$sm' }">
+    <kite-skeleton [isLoading]="isLoading" [css]="{ mb: '$md' }">
+      <kite-card-group [css]="{ gap: '0px' }">
+        <kite-card-group-heading *ngIf="solicitudes?.length > 0" title="Tus solicitudes"></kite-card-group-heading>
+        <kite-option-list-group variant="card" type="radio">
+          <!-- Solicitudes -->
+          <kite-option-list *ngFor="let solicitud of solicitudes; let i = index"
+            [css]="getKiteListStyle(solicitud?.idSolicitud.toString(), 'solicitud')" (isChecked)="false"
+            (onToggle)="navegar(solicitud)">
+            <kite-list-content>
+              <h2 listTitle class="textTitle">
+                {{ (solicitudesDetalladas?.length > i && solicitudesDetalladas[i]?.vehiculo) ?
+                solicitudesDetalladas[i]?.vehiculo?.marca : '' }}
+              </h2>
+              <h5 listDescription class="textSubtitle">
+                <kite-text as="span">
+                  {{ (solicitudesDetalladas?.length > i && solicitudesDetalladas[i]?.vehiculo) ?
+                  solicitudesDetalladas[i]?.vehiculo?.modelo : '' }}
+                  {{ (solicitudesDetalladas?.length > i && solicitudesDetalladas[i]?.vehiculo) ?
+                  solicitudesDetalladas[i]?.vehiculo?.anio : '' }}
+                </kite-text>
+              </h5>
+            </kite-list-content>
+
+            <kite-list-side>
+              <kite-badge size="md" [variant]="getVariant(solicitud?.estado)" [label]="solicitud?.estado"> </kite-badge>
+            </kite-list-side>
+          </kite-option-list>
+        </kite-option-list-group>
+      </kite-card-group>
+    </kite-skeleton>
+
+    <!-- Sección de Préstamos -->
+    <kite-skeleton [isLoading]="isLoading" [css]="{ mt: '$sm' }">
+      <kite-card-group [css]="{ gap: '0px' }">
+        <kite-card-group-heading *ngIf="prestamos?.length" title="Tus préstamos" [css]="{ mt: '$sm' }">
+        </kite-card-group-heading>
+        <kite-option-list-group variant="card" type="radio">
+          <!-- Préstamos -->
+          <kite-option-list *ngFor="let prestamo of prestamos; let i = index"
+            [css]="getKiteListStyle(prestamo?.nroOrden.toString(), 'prestamo')" (isChecked)="false"
+            (onToggle)="navegar(prestamo)">
+            <kite-list-content>
+              <h2 listTitle class="textTitle">N° {{ prestamo?.nroOrden }}</h2>
+              <h5 listDescription class="textSubtitle">
+                <kite-text as="span">{{ prestamo?.cantCuotas }} cuotas totales</kite-text>
+              </h5>
+            </kite-list-content>
+
+            <kite-list-side>
+              <kite-badge size="md" [variant]="getVariant(prestamo.estado)" [label]="prestamo.estado"> </kite-badge>
+            </kite-list-side>
+          </kite-option-list>
+        </kite-option-list-group>
+      </kite-card-group>
+    </kite-skeleton>
+
+    <!-- Preguntas Frecuentes (refactor) -->
+    <app-preguntas-frecuentes-link (select)="navegar()"></app-preguntas-frecuentes-link>
+  </kite-column>
+</kite-row>

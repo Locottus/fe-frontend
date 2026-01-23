@@ -1,0 +1,26 @@
+{
+  "baseUrl": "https://personastst.supervielle.com.ar",
+  "backendUrl": "/obi/api/",
+  "backendRodadosUrl": "/obi/rodados/api/v1.0/Rodados/",
+  "jwtProviderUrl": "/Pages/Token/Token.aspx",
+  "idleSeconds": 180,
+  "idleTimeoutSeconds": 20,
+  "mostrarAccesosDirectos": true,
+  "logoffUrl": "https://www.supervielle.com.ar/log-off",
+  "cmsUrl": "https://content-us-7.content-cms.com/api/8ba19f21-9a97-4525-8886-f54d823a5cea/delivery/v1/rendering/context/62ebb16e-d503-42e0-baf8-03263fbf3bd2",
+  "qualtricsScriptId" : "SI_3mcN0WNY3bsFOrc",
+  "qualtricsContainerId" : "QSI_S_SI_3mcN0WNY3bsFOrc",
+  "qualtricsUrl": "https://si3mcn0wny3bsforc-superviellecx.siteintercept.qualtrics.com/SIE/?Q_ZID=SI_3mcN0WNY3bsFOrc",
+  "qualtricsScriptIdAbandono" : "SI_b9PR19iUsvhBro2",
+  "qualtricsContainerIdAbandono" : "QSI_S_SI_b9PR19iUsvhBro2",
+  "qualtricsUrlAbandono": "https://sib9pr19iusvhbro2-superviellecx.siteintercept.qualtrics.com/SIE/?Q_ZID=SI_b9PR19iUsvhBro2",
+  "firebaseConfig": {
+    "apiKey": "",
+    "authDomain": "ga-onboarding-pymes-dev.firebaseapp.com",
+    "projectId": "ga-onboarding-pymes-dev",
+    "storageBucket": "ga-onboarding-pymes-dev.appspot.com",
+    "messagingSenderId": "584283265419",
+    "appId": "1:584283265419:web:9f714d9c976990c5a8b78e",
+    "measurementId": "G-HM7CZCVK2W"
+  }
+}

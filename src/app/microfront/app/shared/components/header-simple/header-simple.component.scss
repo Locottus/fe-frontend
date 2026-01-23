@@ -1,0 +1,21 @@
+@import url("../../../shared//styles/shared-styles.scss");
+
+//66px por el tamaño de la flecha, cuando se pasa a una pantalla internta del flujo (ej.:eleccion-consumo)
+//por el tamaño del div, el primer elemento del flex header-pagina-cuotificacion cuando está en mobile
+.div-invisible-cuotificacion {
+    width: 26px;
+}
+
+@media screen and (min-width: 60rem) {
+    //192px por el tamaño del div, el primer elemento del flex header-pagina-cuotificacion cuando está en desktop
+    .div-invisible-cuotificacion {
+        width: 192px;
+    }
+}
+.titulo-home {
+    margin-left: 6rem;
+}
+
+h3 {
+    margin: 0;
+}

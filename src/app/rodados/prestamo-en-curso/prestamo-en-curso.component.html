@@ -1,0 +1,127 @@
+<kite-layout [css]="{ backgroundColor: '$gray100' }">
+  <kite-layout-header *ngIf="!isMobile">
+    <kite-header type="internal" [title]="'Préstamos prendarios'" [hasOptions]="false" (backAction)="backAction()"></kite-header>
+  </kite-layout-header>
+
+  <kite-layout-main>
+    <kite-container [css]="{ gap: '$md', width: '100%', boxSizing: 'border-box', '@md': { padding: '$lg $md', gap: '$lg' } }">
+      <kite-stack direction="column" spacing="sm">
+        <kite-button *ngIf="isMobile" variant="tertiary" size="sm" icon="arrow-left" (onClick)="backAction()" [css]="{ alignSelf: 'flex-start' }">
+          Volver
+        </kite-button>
+
+        <kite-stack direction="column" spacing="xxs">
+          <kite-title as="h2" size="lg">Prendario N° {{ prestamo.detallePrestamo.prestamo.operacion.codigo }}</kite-title>
+          <kite-text *ngIf="prestamo.vehiculo" as="p" size="sm" variant="description">
+            {{ prestamo.vehiculo.modelo }} | {{ prestamo.vehiculo.ceroKm ? 'Nuevo' : 'Usado' }} | {{ prestamo.vehiculo.anio }}
+          </kite-text>
+        </kite-stack>
+
+        <!-- Detalle del préstamo -->
+        <kite-card>
+          <kite-card-header>
+            <kite-text size="sm" [css]="{ fontWeight: '700', color: '$gray800' }">Detalle</kite-text>
+          </kite-card-header>
+          <kite-card-content>
+            <kite-stack direction="row" wrap [css]="{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '$lg' }">
+              <kite-stack direction="column" spacing="xxs">
+                <kite-text size="xs" variant="description">Monto original en pesos</kite-text>
+                <kite-text size="md" [css]="{ fontWeight: '600', color: '$gray900' }">${{ prestamo?.detallePrestamo?.prestamo?.capital | number:'1.0-0' }}</kite-text>
+              </kite-stack>
+              <kite-stack direction="column" spacing="xxs">
+                <kite-text size="xs" variant="description">Vencimiento del préstamo</kite-text>
+                <kite-text size="md" [css]="{ fontWeight: '600', color: '$gray900' }">{{ formatearFecha(prestamo.detallePrestamo.prestamo.fecha_vencimiento) }}</kite-text>
+              </kite-stack>
+              <kite-stack direction="column" spacing="xxs">
+                <kite-text size="xs" variant="description">Cuotas a pagar</kite-text>
+                <kite-text size="md" [css]="{ fontWeight: '600', color: '$gray900' }">
+                  {{ prestamo.detallePrestamo.prestamo.cantidad_cuotas_impagas }} de {{ prestamo.detallePrestamo.prestamo.cantidad_cuotas }}
+                </kite-text>
+              </kite-stack>
+            </kite-stack>
+          </kite-card-content>
+        </kite-card>
+
+        <!-- Filtros -->
+        <kite-card>
+          <kite-card-header>
+            <kite-text size="sm" [css]="{ fontWeight: '700', color: '$gray800' }">Filtros</kite-text>
+          </kite-card-header>
+          <kite-card-content [css]="{ gap: '$sm' }">
+            <kite-stack direction="row" wrap spacing="xs" align="center">
+              <kite-button variant="ghost" size="sm" (onClick)="setFiltroEstado('Pagada'); aplicarFiltros()"
+                [css]="filtroEstado === 'Pagada' ? { backgroundColor: '$green100', color: '$green800', borderColor: '$green500' } : {}">
+                Pagado
+              </kite-button>
+              <kite-button variant="ghost" size="sm" (onClick)="setFiltroEstado('Vencida'); aplicarFiltros()"
+                [css]="filtroEstado === 'Vencida' ? { backgroundColor: '$error100', color: '$error700', borderColor: '$error500' } : {}">
+                Vencido
+              </kite-button>
+              <kite-button variant="ghost" size="sm" (onClick)="setFiltroEstado('Pendiente'); aplicarFiltros()"
+                [css]="filtroEstado === 'Pendiente' ? { backgroundColor: '$warning100', color: '$warning800', borderColor: '$warning500' } : {}">
+                Pendiente
+              </kite-button>
+            </kite-stack>
+
+            <kite-stack direction="row" wrap spacing="xs" align="center">
+              <kite-button variant="ghost" size="sm" (onClick)="setFiltroPeriodo(30); aplicarFiltros()"
+                [css]="filtroPeriodo === 30 ? { backgroundColor: '$primary100', color: '$primary800', borderColor: '$primary500' } : {}">
+                Últimos 30 días
+              </kite-button>
+              <kite-button variant="ghost" size="sm" (onClick)="setFiltroPeriodo(90); aplicarFiltros()"
+                [css]="filtroPeriodo === 90 ? { backgroundColor: '$primary100', color: '$primary800', borderColor: '$primary500' } : {}">
+                Últimos 90 días
+              </kite-button>
+              <kite-button variant="ghost" size="sm" (onClick)="setFiltroPeriodo(180); aplicarFiltros()"
+                [css]="filtroPeriodo === 180 ? { backgroundColor: '$primary100', color: '$primary800', borderColor: '$primary500' } : {}">
+                Últimos 180 días
+              </kite-button>
+
+              <kite-button *ngIf="getFilterCount() > 0" variant="tertiary" size="sm" icon="close" (onClick)="borrarFiltros()">
+                Borrar filtros ({{ getFilterCount() }})
+              </kite-button>
+            </kite-stack>
+          </kite-card-content>
+        </kite-card>
+
+        <!-- Lista de cuotas -->
+        <kite-stack direction="column" spacing="sm">
+          <kite-title as="h3" size="md">Cuotas</kite-title>
+
+          <ng-container *ngIf="cuotasPrestamoFiltradas.length > 0; else emptyCuotas">
+            <kite-card-group>
+              <kite-card *ngFor="let cuota of cuotasPrestamoFiltradas" [css]="{ cursor: 'pointer' }">
+                <kite-card-content [css]="{ gap: '$sm' }" (click)="verDetalleCuota(cuota)">
+                  <kite-stack direction="row" justify="space-between" align="center" wrap>
+                    <kite-stack direction="column" spacing="xxs">
+                      <kite-text size="sm" [css]="{ fontWeight: '700', color: '$gray900' }">Cuota {{ cuota.nro_cuota }}</kite-text>
+                      <kite-text size="xs" variant="description">Vencimiento: {{ formatearFecha(cuota.fecha_vencimiento) }}</kite-text>
+                    </kite-stack>
+                    <kite-stack direction="row" spacing="xs" align="center">
+                      <kite-badge [variant]="cuota.estado_descripcion === 'Pagada' ? 'success' : cuota.estado_descripcion === 'Vencida' ? 'error' : 'warning'">
+                        {{ cuota.estado_descripcion }}
+                      </kite-badge>
+                      <kite-badge *ngIf="getBadgeLabel(cuota)" variant="info">{{ getBadgeLabel(cuota) }}</kite-badge>
+                    </kite-stack>
+                    <kite-text size="md" [css]="{ fontWeight: '700', color: '$gray900' }">${{ cuota.importe | number:'1.0-0' }}</kite-text>
+                  </kite-stack>
+                </kite-card-content>
+              </kite-card>
+            </kite-card-group>
+          </ng-container>
+
+          <ng-template #emptyCuotas>
+            <kite-empty-state title="No hay cuotas" description="No se encontraron cuotas con los filtros aplicados" image="search"></kite-empty-state>
+          </ng-template>
+        </kite-stack>
+      </kite-stack>
+    </kite-container>
+  </kite-layout-main>
+</kite-layout>
+
+<!-- Drawer fuera del layout principal para posicionamiento fijo correcto -->
+<app-detalle-cuota-drawer
+  [isOpen]="mostrarDetalleCuota"
+  [cuota]="cuotaSeleccionada"
+  (close)="cerrarDetalleCuota()">
+</app-detalle-cuota-drawer>

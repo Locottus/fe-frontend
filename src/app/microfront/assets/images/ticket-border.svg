@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="416px" height="21px" viewBox="0 0 416 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Path</title>
+    <defs>
+        <polygon id="path-1" points="413 393 413 409.045 403.808825 402 394.009464 409.511325 393.627645 409.511325 384.318052 402 375.00846 409.511325 374.626641 409.511325 364.82728 402 355.027919 409.511325 354.6461 409.511325 345.336507 402 336.026915 409.511325 335.645096 409.511325 325.845735 402 316.046374 409.511325 315.65456 409.511325 305.855199 402 296.055838 409.511325 295.664024 409.511325 285.864663 402 276.065302 409.511325 275.683483 409.511325 266.373891 402 257.064298 409.511325 256.682479 409.511325 246.883118 402 237.083757 409.511325 236.691943 409.511325 226.892582 402 217.093222 409.511325 216.701407 409.511325 206.902046 402 197.102686 409.511325 196.720866 409.511325 187.411274 402 178.101681 409.511325 177.719862 409.511325 167.920501 402 158.121141 409.511325 157.729326 409.511325 147.929966 402 138.130605 409.511325 137.73879 409.511325 127.93943 402 118.140069 409.511325 117.75825 409.511325 108.448657 402 99.1390646 409.511325 98.7572454 409.511325 88.9578847 402 79.158524 409.511325 78.7667095 409.511325 68.9673488 402 59.1679881 409.511325 58.7761736 409.511325 48.9768129 402 39.1774522 409.511325 38.795633 409.511325 29.4860404 402 20.1764479 409.511325 19.7946286 409.511325 9.99526794 402 1 408.895 1 393"></polygon>
+        <filter x="-0.8%" y="-15.1%" width="101.7%" height="142.4%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.14 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Seguros---Cotización---Autos" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Seguros---Cotiz-Auto---Paso-8---Confirmación---TyC-checked" transform="translate(-632.000000, -729.000000)">
+            <g id="Background" transform="translate(633.000000, 337.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Path">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-3)" xlink:href="#path-1"></use>
+                    <use fill="#F5F5F5" fill-rule="evenodd" xlink:href="#path-1"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

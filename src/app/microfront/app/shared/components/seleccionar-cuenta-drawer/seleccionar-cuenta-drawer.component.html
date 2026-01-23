@@ -1,0 +1,79 @@
+<kite-modal [isOpen]="isOpen" (onClose)="onClose()" type="drawer" [css]="{ gap: '$sm' }">
+  <kite-modal-header title="Cuenta de acreditación y débito"></kite-modal-header>
+  <kite-modal-content [css]="{ gap: '$sm' }">
+    
+    <!-- Lista de cuentas -->
+    <kite-stack direction="column" [css]="{ gap: '$sm', marginBottom: '$md' }">
+      <ng-container *ngFor="let cuenta of cuentas">
+        <div (click)="seleccionarCuenta(cuenta)" [style.cursor]="'pointer'">
+          <kite-card 
+            [css]="{ 
+              padding: '$sm',
+              borderWidth: '1.5px',
+              borderStyle: 'solid',
+              borderColor: esCuentaSeleccionada(cuenta) ? '#bb2d4f' : '$gray200',
+              borderRadius: '$md',
+              position: 'relative',
+              transition: 'border-color 0.2s ease',
+              backgroundColor: esCuentaSeleccionada(cuenta) ? 'rgba(187, 45, 79, 0.02)' : 'transparent',
+              cursor: 'pointer'
+            }">
+            <kite-stack direction="row" align="center" justify="space-between" [css]="{ width: '100%', gap: '$sm' }">
+              <kite-stack direction="column" [css]="{ gap: '$xs', flex: '1', minWidth: '0' }">
+                <!-- Tipo de cuenta -->
+                <kite-text 
+                  size="xs" 
+                  [css]="{ 
+                    fontWeight: '400', 
+                    color: '$gray700'
+                  }">
+                  {{ cuenta.tipo?.codigo }} {{ mapMonedaDescripcion(cuenta.moneda?.descripcion) }} {{ cuenta.cuenta }}
+                </kite-text>
+                <!-- Saldo -->
+                <kite-text 
+                  size="sm" 
+                  [css]="{ 
+                    fontWeight: '500', 
+                    color: '$gray900'
+                  }">
+                  {{ cuenta.moneda?.simbolo }} {{ formatearSaldo(cuenta.saldo) }}
+                </kite-text>
+              </kite-stack>
+              
+              <!-- Check icon solo visible cuando está seleccionada -->
+              <svg 
+                *ngIf="esCuentaSeleccionada(cuenta)"
+                width="22" 
+                height="22" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                aria-hidden="true"
+                [style.flexShrink]="0">
+                <path d="M20 6.5L9.2 17.3 4 12.1"
+                      stroke="#BB2D4F"
+                      stroke-width="2.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"/>
+              </svg>
+            </kite-stack>
+          </kite-card>
+        </div>
+      </ng-container>
+    </kite-stack>
+
+  </kite-modal-content>
+  
+  <kite-modal-footer [css]="{ flexDirection: 'column', gap: '$sm', padding: '0 $sm', '@md': { flexDirection: 'row-reverse', gap: '$md', padding: '0 $lg' } }">
+    <kite-button 
+      [variant]="puedeModificar() ? 'primary' : 'secondary'"
+      [isDisabled]="!puedeModificar()"
+      (onClick)="confirmarModificacion()">
+      Modificar
+    </kite-button>
+    <kite-button 
+      variant="secondary" 
+      (onClick)="onClose()">
+      Cerrar
+    </kite-button>
+  </kite-modal-footer>
+</kite-modal>

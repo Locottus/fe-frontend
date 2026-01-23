@@ -1,0 +1,38 @@
+@import "variables";
+
+$theme-colors: (
+  "primary": #ee2527,
+);
+
+$spacer: 20px;
+
+$gray-600: #939393;
+
+$font-family-base: 'Heebo', sans-serif;
+
+// Required
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+// Optionals
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/media";
+@import "~bootstrap/scss/utilities";
+
+// NgBootstrap Imports
+@import "~bootstrap/scss/dropdown";
+
+// Se modifican estilos que agrega el reboot de bootstrap
+svg {
+  vertical-align: initial;
+}
+
+a {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+@import "angular-material-theme";

@@ -1,0 +1,31 @@
+<kite-layout secondary="left" [css]="layoutCss">
+  <kite-layout-header *ngIf="!isMobile">
+    <kite-header
+      type="internal"
+      [title]="title"
+      [hasOptions]="false"
+      (backAction)="onBack()"
+    ></kite-header>
+  </kite-layout-header>
+  <kite-layout-secondary
+    [css]="{
+      height: '100%',
+      backgroundColor: '$gray_transparent_lighter',
+      display: 'none',
+      '@lg': { display: 'block' }
+    }"
+  >
+    <kite-container>
+      <app-side-bar-prestamos></app-side-bar-prestamos>
+    </kite-container>
+  </kite-layout-secondary>
+  <kite-layout-main>
+    <kite-container [css]="containerCss">
+      <kite-row>
+        <kite-column>
+          <ng-content></ng-content>
+        </kite-column>
+      </kite-row>
+    </kite-container>
+  </kite-layout-main>
+</kite-layout>

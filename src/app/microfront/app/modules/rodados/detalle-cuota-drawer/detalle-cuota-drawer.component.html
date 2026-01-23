@@ -1,0 +1,146 @@
+<kite-modal [isOpen]="isOpen" (onClose)="onClose()" type="drawer" [css]="{ gap: '$sm' }">
+  <kite-modal-header [title]="'Detalle de cuota ' + cuota?.numero"></kite-modal-header>
+  
+  <kite-modal-content [css]="{ gap: '$sm' }">
+    
+    <!-- Estado y Fecha de vencimiento en layout de dos columnas -->
+    <kite-stack [direction]="{ '@initial': 'column', '@md': 'row' }" justify="space-between" [css]="{ gap: '$md' }">
+      <!-- Estado -->
+      <kite-list-content [css]="{ gap: '$xs' }">
+        <h5 listSubtitle>
+          <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">Estado</kite-text>
+        </h5>
+        <div>
+          <kite-badge 
+            size="md"
+            [variant]="getBadgeVariant()"
+            [label]="getBadgeLabel()">
+          </kite-badge>
+        </div>
+      </kite-list-content>
+
+      <!-- Fecha de vencimiento -->
+      <kite-list-content [css]="{ gap: '$xs' }">
+        <h5 listSubtitle>
+          <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">Fecha de vencimiento</kite-text>
+        </h5>
+        <h2 listTitle>
+          <kite-text as="span" size="xs" [css]="{ fontWeight: '500', color: '$gray900' }">{{ cuota?.fecha_vencimiento | date:'dd/MM/yy' }}</kite-text>
+        </h2>
+      </kite-list-content>
+    </kite-stack>
+
+    <kite-divider [css]="{ marginY: '$sm' }"></kite-divider>
+
+    <!-- Importe de cuota -->
+    <kite-list-content [css]="{ gap: '$xs', marginBottom: '$sm' }">
+      <h5 listSubtitle>
+        <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">Importe de cuota</kite-text>
+      </h5>
+      <h2 listTitle>
+        <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">
+          {{ cuota?.moneda?.total | currency:'ARS':'symbol':'1.2-2':'es-AR' }}
+        </kite-text>
+        <kite-text *ngIf="cuota?.uva?.total" as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray700', marginLeft: '$xs' }">
+          ({{ cuota?.uva?.total | number:'1.2-2' }} UVA)
+        </kite-text>
+      </h2>
+    </kite-list-content>
+
+    <!-- Detalle de conceptos -->
+    <kite-stack direction="column" [css]="{ gap: '$xxs' }">
+      <kite-list [css]="{ padding: '0' }">
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">Capital</kite-text>
+          </h5>
+        </kite-list-content>
+        <kite-list-side>
+          <kite-text as="span" size="xxs" [css]="{ fontWeight: '500', color: '$gray900' }">{{ cuota?.moneda?.capital | currency:'ARS':'symbol':'1.2-2':'es-AR' }}</kite-text>
+        </kite-list-side>
+      </kite-list>
+
+      <kite-list [css]="{ padding: '0' }">
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">Interés</kite-text>
+          </h5>
+        </kite-list-content>
+        <kite-list-side>
+          <kite-text as="span" size="xxs" [css]="{ fontWeight: '500', color: '$gray900' }">{{ cuota?.moneda?.interes | currency:'ARS':'symbol':'1.2-2':'es-AR' }}</kite-text>
+        </kite-list-side>
+      </kite-list>
+
+      <kite-list [css]="{ padding: '0' }">
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">Impuestos</kite-text>
+          </h5>
+        </kite-list-content>
+        <kite-list-side>
+          <kite-text as="span" size="xxs" [css]="{ fontWeight: '500', color: '$gray900' }">{{ cuota?.moneda?.impuestos | currency:'ARS':'symbol':'1.2-2':'es-AR' }}</kite-text>
+        </kite-list-side>
+      </kite-list>
+
+      <kite-list *ngIf="cuota?.moneda?.recargo" [css]="{ padding: '0' }">
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">Interés punitorio</kite-text>
+          </h5>
+        </kite-list-content>
+        <kite-list-side>
+          <kite-text as="span" size="xxs" [css]="{ fontWeight: '500', color: '$gray900' }">{{ cuota?.moneda?.recargo | currency:'ARS':'symbol':'1.2-2':'es-AR' }}</kite-text>
+        </kite-list-side>
+      </kite-list>
+
+      <kite-list [css]="{ padding: '0' }">
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xxs" [css]="{ fontWeight: '400', color: '$gray800' }">Seguro</kite-text>
+          </h5>
+        </kite-list-content>
+        <kite-list-side>
+          <kite-text as="span" size="xxs" [css]="{ fontWeight: '500', color: '$gray900' }">{{ cuota?.moneda?.seguro | currency:'ARS':'symbol':'1.2-2':'es-AR' }}</kite-text>
+        </kite-list-side>
+      </kite-list>
+    </kite-stack>
+
+    <kite-divider [css]="{ marginY: '$sm' }"></kite-divider>
+
+    <!-- Nota/Alerta - Cuota Vencida -->
+    <kite-feedback 
+      *ngIf="cuota?.estado_descripcion === 'Vencida'" 
+      image='warning'
+      title='Cuota vencida'
+      description='La cuota se debitará automáticamente cuando ingrese dinero en la cuenta.'
+      [css]="{ marginTop: '$md' }">
+    </kite-feedback>
+
+    <!-- Nota/Alerta - Cuota Próxima a Vencer -->
+    <kite-feedback 
+      *ngIf="isProximaAVencer()" 
+      image='info'
+      title='Próximo vencimiento'
+      [description]="getMensajePendiente()"
+      [css]="{ marginTop: '$md' }">
+    </kite-feedback>
+
+    <!-- Nota/Alerta - Cuota Pendiente (más de 7 días) -->
+    <kite-feedback 
+      *ngIf="isPendiente()" 
+      image='info'
+      title='Cuota pendiente'
+      [description]="getMensajePendiente()"
+      [css]="{ marginTop: '$md' }">
+    </kite-feedback>
+
+  </kite-modal-content>
+  
+  <kite-divider [css]="{ marginY: '$sm' }"></kite-divider>
+  
+  <kite-modal-footer>
+    <kite-button variant="secondary" size="md" [css]="{ width: '100%' }" (onClick)="onClose()">
+      Cerrar
+    </kite-button>
+  </kite-modal-footer>
+</kite-modal>

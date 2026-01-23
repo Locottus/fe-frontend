@@ -1,0 +1,140 @@
+<kite-modal
+  [isOpen]="isOpen"
+  (onClose)="onClose()"
+  type="drawer"
+  [css]="{ gap: '$sm' }"
+>
+  <kite-modal-header title="Ingresá el código de verificación"></kite-modal-header>
+
+  <!-- Contenido: una sola instancia de modal-content para evitar ExpressionChanged -->
+  <kite-modal-content
+    [css]="{ gap: '16px', padding: '0 16px', '@md': { gap: '18px', padding: '0 24px' } }"
+  >
+    <ng-container *ngIf="!isBlocked; else blockedContent">
+      <kite-stack direction="column" [css]="{ gap: '14px' }">
+        <!-- Inputs de código -->
+        <kite-stack
+          direction="row"
+          justify="center"
+          align="center"
+          [css]="{ gap: '12px', width: '100%', flexWrap: 'nowrap' }"
+        >
+          <input
+            *ngFor="let digit of digits; let i = index"
+            #codeInput
+            class="soft-token-input"
+            inputmode="numeric"
+            maxlength="1"
+            pattern="[0-9]*"
+            autocomplete="one-time-code"
+            [value]="digit"
+            (input)="onInput($event, i)"
+            (keydown)="onKeydown($event, i)"
+            [ngStyle]="{
+              'width': '48px',
+              'height': '60px',
+              'border': 'none',
+              'border-bottom': '2px solid #cfd2df',
+              'background': 'transparent',
+              'text-align': 'center',
+              'font-size': '30px',
+              'font-weight': '600',
+              'color': '#2b2f3a',
+              'outline': 'none'
+            }"
+          />
+        </kite-stack>
+
+        <kite-text
+          size="sm"
+          [css]="{ color: '#7b8094', lineHeight: '1.5' }"
+        >
+          Si ingresás el código de manera incorrecta varias veces, se bloqueará y no podrás realizar la operación.
+        </kite-text>
+
+        <kite-text
+          *ngIf="errorMessage"
+          size="sm"
+          [css]="{ color: '#b10a2e', fontWeight: 600 }"
+        >
+          {{ errorMessage }}
+        </kite-text>
+      </kite-stack>
+    </ng-container>
+
+    <ng-template #blockedContent>
+      <kite-stack direction="column" align="center" [css]="{ gap: '18px' }">
+        <!-- Icono de escudo con candado -->
+        <div [ngStyle]="{ 'width': '96px', 'height': '96px', 'margin': '6px auto' }">
+          <svg viewBox="0 0 128 128" width="100%" height="100%">
+            <defs>
+              <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ff8a3d"/>
+                <stop offset="100%" stop-color="#c14a16"/>
+              </linearGradient>
+            </defs>
+            <path d="M64 8 C64 8 26 16 26 32 v28 c0 28 20 44 38 52 c18-8 38-24 38-52 V32 C102 16 64 8 64 8z" fill="url(#shieldGrad)"/>
+            <rect x="44" y="56" width="40" height="34" rx="6" fill="#ffffff"/>
+            <path d="M52 56v-6a12 12 0 0 1 24 0v6" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="64" cy="73" r="4" fill="#c14a16"/>
+          </svg>
+        </div>
+        <kite-text [css]="{ fontSize: '17px', fontWeight: '750', color: '#1f2330' }">Token Bloqueado</kite-text>
+        <kite-text size="sm" [css]="{ color: '#8a8fa3', lineHeight: '1.45', textAlign: 'center' }">
+          Ingresaste de forma incorrecta el token en 3 oportunidades.
+          <br /><br />
+          Para desbloquearlo ingresá a la App, Token Supervielle y seguí los pasos.
+        </kite-text>
+      </kite-stack>
+    </ng-template>
+  </kite-modal-content>
+
+  <!-- Footer único: muestra Verificar solo cuando no está bloqueado -->
+  <kite-modal-footer
+    [css]="{
+      flexDirection: 'column',
+      gap: '12px',
+      padding: '0 $sm',
+      '@md': { flexDirection: 'row-reverse', gap: '16px', padding: '0 $lg' }
+    }"
+  >
+    <kite-button
+      *ngIf="!isBlocked"
+      [variant]="isComplete ? 'primary' : 'secondary'"
+      [isDisabled]="!isComplete || loading"
+      (onClick)="onVerify()"
+      [css]="{
+        width: '100%',
+        height: '52px',
+        borderRadius: '14px',
+        fontSize: '17px',
+        fontWeight: '700',
+        backgroundColor: isComplete ? '#b10a2e' : '#f2f3f7',
+        color: isComplete ? '#ffffff' : '#7b8094',
+        borderColor: isComplete ? '#b10a2e' : '#e6e7ee',
+        boxShadow: isComplete && !loading ? '0 10px 18px rgba(177, 10, 46, 0.25)' : 'none',
+        '@md': { width: 'auto', minWidth: '180px', height: '48px' }
+      }"
+    >
+      {{ loading ? 'Verificando...' : 'Verificar' }}
+    </kite-button>
+
+    <kite-button
+      variant="secondary"
+      (onClick)="onClose()"
+      [css]="{
+        width: '100%',
+        height: '52px',
+        borderRadius: '14px',
+        fontSize: '17px',
+        fontWeight: '650',
+        backgroundColor: '#f8f8fa',
+        color: '#2b2f3a',
+        borderColor: '#e6e6e7',
+        '@md': { width: 'auto', minWidth: '140px', height: '48px' }
+      }"
+    >
+      Cerrar
+    </kite-button>
+  </kite-modal-footer>
+</kite-modal>

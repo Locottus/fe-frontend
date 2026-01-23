@@ -1,0 +1,32 @@
+<kite-layout-header *ngIf="!isMobile">
+  <kite-header type="internal" [title]="'Prestamos prendarios'" [hasOptions]="false"
+    (backAction)="backAction()"></kite-header>
+</kite-layout-header>
+<kite-layout-main [css]="{ minHeight: '1100px', overflowY: 'auto' }">
+  <kite-container type="fixed" [css]="{ '@md': { padding: '$lg $md', gap: '$lg' } }">
+    <kite-row>
+      <kite-column>
+        <kite-card-group-heading title="Preguntas frecuentes" [css]="{ gap: '$sm' }"></kite-card-group-heading>
+        <kite-card-group [css]="{ background: '$gray100', mt: '$ssm', '@md': { mt: '$lg' } }">
+          <kite-card [isLoading]="isLoading">
+            <kite-card-content>
+              <kite-card>
+                <kite-card-content>
+                  <div *ngFor="let pregunta of pregFrecuentes?.preguntas; let i = index">
+                    <kite-accordion [hasBorder]="false" [css]="{ fontSize: '$xs', gap: '$lg' }">
+                      <kite-accordion-item [isDisabled]="false" [title]="pregunta.pregunta"
+                        [css]="{ fontSize: '$xs', gap: '$lg' }">
+                        <div style="margin-top: 1rem; margin-bottom: 1rem" [innerHTML]="pregunta.respuesta"></div>
+                      </kite-accordion-item>
+                    </kite-accordion>
+                    <kite-divider *ngIf="i < pregFrecuentes?.preguntas?.length - 1"></kite-divider>
+                  </div>
+                </kite-card-content>
+              </kite-card>
+            </kite-card-content>
+          </kite-card>
+        </kite-card-group>
+      </kite-column>
+    </kite-row>
+  </kite-container>
+</kite-layout-main>

@@ -1,0 +1,21 @@
+<mat-sidenav-container [hasBackdrop]="true" class="example-container">
+    <mat-sidenav
+      #sidenav
+      role="navigation"
+      mode="over"
+      [fixedInViewport]="true"
+    >
+      <shared-side-menu ($sideMenuState)="sidenav.toggle($event)"></shared-side-menu>
+    </mat-sidenav>
+  
+    <mat-sidenav-content class="contenedor" [ngStyle]="{ 'min-height': ocultarComponente ? '100vh' : '79vh' }">
+        <shared-header *ngIf="ocultarComponente" class="header" ($sideMenuState)="sidenav.toggle($event)"></shared-header>
+  
+      <main role="main">
+        <router-outlet></router-outlet>
+      </main>
+      
+        <shared-footer *ngIf="ocultarComponente" class="footer"></shared-footer>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

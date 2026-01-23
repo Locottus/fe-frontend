@@ -1,0 +1,111 @@
+<app-prestamo-page-layout
+  [title]="'Solicitud de Préstamo'"
+  [isMobile]="isMobile"
+  [containerCss]="{ '@md': { padding: '$lg $md', gap: '$lg' } }"
+  (backAction)="backAction()"
+>
+          <kite-skeleton [isLoading]="!solicitud" [css]="{ height: '3rem', mb: '$md' }">
+            <kite-stack direction="column" spacing="xxs">
+              <kite-title as="h2" size="lg"> Solicitud Nº {{ solicitud?.id ? solicitud.id : '' }} </kite-title>
+            </kite-stack>
+          </kite-skeleton>
+
+          <kite-skeleton [isLoading]="!solicitud" [css]="{ height: '18rem', mb: '$md' }">
+            <kite-card-group [css]="{ mt: '$ssm', '@md': { mt: '$lg' } }">
+              <kite-card>
+                <kite-stack direction="column" [css]="{ gap: '0px' }">
+                  <kite-card-content spacing="xs">
+                    <kite-stack direction="row">
+                      <kite-badge size="sm" variant="success" icon="check"> </kite-badge>
+                      <kite-list-content>
+                        <h2 listTitle>
+                          <kite-text as="span" size="sm"
+                            [css]="{fontWeight: '500', color: '$gray900' }">Pendiente</kite-text>
+                        </h2>
+                      </kite-list-content>
+                    </kite-stack>
+                    <kite-stack direction="row">
+                      <kite-divider orientation="vertical"
+                        [css]="{marginLeft:'$xs', background:'$green500'}"></kite-divider>
+                      <kite-list [css]="{paddingLeft:'$xs'}">
+                        <kite-list-content>
+                          <h5 listSubtitle>
+                            <kite-text as="span" size="xs"
+                              [css]="{fontWeight: '500', color: '$gray700'}">{{solicitud.solicitud.fechaAlta}}</kite-text>
+                          </h5>
+                          <h2 listTitle>
+                            <kite-text as="span" variant="description" size="xs"
+                              [css]="{fontWeight: '400', color: '$gray900'}">Aceptacion de los
+                              términos y condiciones.</kite-text>
+                          </h2>
+                        </kite-list-content>
+                      </kite-list>
+                    </kite-stack>
+
+                    <!-- step 2 -->
+                    <kite-stack direction="row">
+                      <kite-badge size="sm" variant="default" icon="check"
+                        [css]="{background:'$white', border:'1px solid $green500 '}">
+                      </kite-badge>
+                      <kite-list-content>
+                        <h2 listTitle>
+                          <kite-text as="span" size="sm" [css]="{fontWeight: '500', color: '$gray900'}">En
+                            proceso</kite-text>
+                        </h2>
+                      </kite-list-content>
+                    </kite-stack>
+                    <kite-stack direction="row">
+                      <kite-divider orientation="vertical"
+                        [css]="{marginLeft:'$xs', background:'$gray200'}"></kite-divider>
+                      <kite-list [css]="{paddingLeft:'$xs'}">
+                        <kite-list-content>
+                          <h2 listTitle>
+                            <kite-text as="span" variant="description" size="xs"
+                              [css]="{fontWeight: '400', color: '$gray900'}">Firmá de documentación en la
+                              concesionaria
+                              y esperá la confrimación de tu préstamo</kite-text>
+                          </h2>
+                        </kite-list-content>
+                      </kite-list>
+                    </kite-stack>
+
+                    <!-- step 3 -->
+                    <kite-stack direction="row">
+                      <kite-badge size="sm" variant="default" icon="check" [css]="{background:'$gray200'}">
+                      </kite-badge>
+                      <kite-list-content>
+                        <h2 listTitle>
+                          <kite-text as="span" size="sm"
+                            [css]="{fontWeight: '500', color: '$gray900'}">Vigente</kite-text>
+                        </h2>
+                      </kite-list-content>
+                    </kite-stack>
+                  </kite-card-content>
+                </kite-stack>
+              </kite-card>
+            </kite-card-group>
+          </kite-skeleton>
+
+          <kite-skeleton [isLoading]="!solicitud" [css]="{ height: '15rem', mb: '$md' }">
+            <kite-card-group [css]="{ mt: '$ssm', '@md': { mt: '$lg' } }">
+              <kite-card-header align="center" [css]="{ mb: '$xs' }">
+                <kite-text size="sm" [css]="{ fontWeight: '700', color: '$gray700' }">Detalle</kite-text>
+                <kite-button variant="secondary" size="sm" icon="chevron-right" (onClick)="modalOpen(true)">Más información</kite-button>
+              </kite-card-header>
+              <app-solicitud-resumen-vehiculo [solicitud]="solicitud"></app-solicitud-resumen-vehiculo>
+            </kite-card-group>
+          </kite-skeleton>
+
+          <kite-skeleton [isLoading]="!solicitud" [css]="{ height: '20rem', mb: '$md' }">
+            <kite-card-group [css]="{ mt: '$ssm', '@md': { mt: '$lg' } }">
+              <app-solicitud-resumen-financiero [solicitud]="solicitud"></app-solicitud-resumen-financiero>
+            </kite-card-group>
+          </kite-skeleton>
+
+          <kite-modal [isOpen]="openDetalle" (onClose)="modalOpen(false)" type="drawer" [css]="{ gap: '$sm' }">
+            <kite-modal-header title="Más información"></kite-modal-header>
+            <kite-modal-content [css]="{ gap: '$xxs', padding: '$xxs' }">
+              <app-solicitud-info-modal-content [solicitud]="solicitud" montoInscripcionSource="vehiculo"></app-solicitud-info-modal-content>
+            </kite-modal-content>
+          </kite-modal>
+</app-prestamo-page-layout>

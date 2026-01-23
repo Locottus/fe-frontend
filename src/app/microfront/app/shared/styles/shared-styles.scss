@@ -1,0 +1,232 @@
+
+
+.header-contenido-pagina {
+    text-align: center;
+}
+
+.parrafo {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.modal-pagina-prestamos {
+    display: flex;
+    flex-direction: column;
+    min-width: 375px;
+    min-height: 100vh;
+    background-color: "white";
+    overflow-x: hidden;
+    &__content {
+        width: 430px;
+        margin: 0 auto;
+        padding: 0 10px;
+        .step-icon {
+            width: 38px;
+            height: 38px;
+            margin: 18px auto;
+            border-radius: 50%;
+            .icon {
+                width: 38px;
+                height: 38px;
+            }
+        }
+        .app-mensaje-error {
+            display: block;
+            margin-bottom: 40px;
+            margin-top: 40px;
+        }
+        .app-boton {
+            display: block;
+            text-align: center;
+        }
+    }
+    .progress-bar-container {
+        margin: 45px auto 0;
+    }
+    .header-contenido-pagina {
+        text-align: center;
+    }
+    .parrafo {
+        text-align: center;
+        margin-top: 2rem;
+    }
+}
+.title-subtitle-text {
+    color: #707070;
+}
+.custom-text {
+    color: #333333;
+}
+.div-to-button {
+    cursor: pointer;
+}
+.center-form-controls {
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-more-info-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px 0;
+    color: $gris-oscuro;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.1px;
+
+    &.mobile {
+        display: none;
+    }
+
+    .icon {
+        width: 17px;
+        height: 17px;
+        padding: 10px 0;
+    }
+}
+
+.btn-close {
+    margin-left: auto;
+    .icon {
+        margin-left: 5px;
+    }
+}
+
+.col-13 {
+    margin-bottom: 0.1rem;
+}
+.col-2 {
+    margin-top: 0.4rem;
+    flex: 0 0 40% !important;
+    max-width: 40% !important;
+}
+
+.col-titulo-principal {
+    text-align: center;
+}
+
+.two-p-one-p {
+    display: inline;
+}
+.header-columnas {
+    flex-grow: 0;
+    padding: 0;
+}
+.header-pagina-cuotificacion {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 60px;
+    background-color: #ffffff;
+    border-bottom: solid 1px #c7c7c7;
+}
+
+.texto-botones-header {
+    margin: 0;
+}
+.col-titulo-principal {
+    text-align: center;
+}
+.base-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.base-tooltip .tooltip-text {
+    visibility: hidden;
+    width: 240px;
+    background-color: #ffeffd;
+    border: 1px solid #e1e1eb;
+    color: #a81d9a;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    left: 125%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    padding-left: 10px;
+    top: 100%;
+}
+
+.base-tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    background-color: #f9f8ff;
+
+    left: 10%;
+    bottom: 100%;
+    transform: rotate(180deg);
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #f9f8ff transparent transparent transparent;
+}
+
+.base-tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip-text,
+.tooltip-text-resumen {
+    left: -230% !important;
+}
+
+.tooltip-text,
+.tooltip-text-resumen .ctna {
+    left: 121% !important;
+    margin-top: 2px;
+}
+.header-columnas {
+    flex-grow: 0;
+    padding: 0;
+}
+.texto-botones-header {
+    margin: 0;
+}
+
+.paragraph--bolder{
+    font-weight: bold;
+}
+.container-header-cards-group {
+    padding: 20px 0px 0px 13px;
+    text-align: left;
+    margin: 0;
+
+    .container-header-header {
+        line-height: 1.3;
+        margin: 0;
+    }
+}
+@media (min-width: 30rem) {
+    .container-header-cards-group {
+        text-align: center;
+        padding: 20px 0px 0px 0px;
+        margin: 0;
+    }
+
+    .container-header-header {
+        line-height: 1.3;
+    }
+}
+
+@media screen and (min-width: 60rem) {
+    .header-columnas {
+        flex-grow: 0;
+        width: 12rem;
+    }
+}
+@media screen and (max-width: 60rem) {
+    .texto-botones-header {
+        display: none;
+    }
+}

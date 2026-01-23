@@ -1,0 +1,76 @@
+<kite-layout>
+    <kite-layout-main>
+        <kite-layout-header *ngIf="!isMobile">
+            <kite-header type="internal" [title]="'Prestamos prendarios'" [hasOptions]="false"
+                (backAction)="backAction()"></kite-header>
+        </kite-layout-header>
+        <kite-container type="fixed" [css]="{'@md': { padding: '$lg $md', gap: '$lg' }}">
+            <kite-row>
+                <kite-column>
+                    <!-- tiulos -->
+                    <kite-stack direction="column" [css]="{ gap: '$xxs' }">
+                        <kite-feedback [image]="'stateWait'" title='¡Recibimos tu solicitud!'
+                            description='Te contactamos los próximos pasos:' btnPrimary='Salir'
+                            (btnPrimaryAction)="salir()">
+                            <kite-feedback-content>
+                                <kite-list>
+                                    <kite-list-avatar [css]="{display:'none', '@md':{display: 'block'}}">
+                                        <kite-avatar size="sm" text="1" shape="circle" variant="neutral"></kite-avatar>
+                                    </kite-list-avatar>
+                                    <kite-list-content [css]="{ gap: '$sm' }">
+                                        <h2 listTitle>
+                                            <kite-text as="span" size="sm"
+                                                [css]="{fontWeight: '500', color: '$gray900'}">Firmá la
+                                                documentación</kite-text>
+                                        </h2>
+                                        <h5 listDescription>
+                                            <kite-text as="span" size="xs"
+                                                [css]="{fontWeight: '400', color: '$gray800'}">Coordiná con la
+                                                concesionaria para firmar los documentos y avanzar con tu
+                                                solicitud.</kite-text>
+                                        </h5>
+                                    </kite-list-content>
+                                </kite-list>
+                                <kite-list>
+                                    <kite-list-avatar [css]="{display:'none', '@md':{display: 'block'}}">
+                                        <kite-avatar size="sm" text="2" shape="circle" variant="neutral"></kite-avatar>
+                                    </kite-list-avatar>
+                                    <kite-list-content [css]="{ gap: '$sm' }">
+                                        <h2 listTitle>
+                                            <kite-text as="span" size="sm"
+                                                [css]="{fontWeight: '500', color: '$gray900'}">Esperá la aprobación de
+                                                tu préstamo</kite-text>
+                                        </h2>
+                                        <h5 listDescription>
+                                            <kite-text as="span" size="xs"
+                                                [css]="{fontWeight: '400', color: '$gray800'}">Esto puede tardar hasta
+                                                15 días hábiles. Te enviaremos la confirmación a tu correo
+                                                {{email}}</kite-text>
+                                        </h5>
+                                    </kite-list-content>
+                                </kite-list>
+                                <kite-list>
+                                    <kite-list-avatar [css]="{display:'none', '@md':{display: 'block'}}">
+                                        <kite-avatar size="sm" text="3" shape="circle" variant="neutral"></kite-avatar>
+                                    </kite-list-avatar>
+                                    <kite-list-content [css]="{ gap: '$sm' }">
+                                        <h2 listTitle>
+                                            <kite-text as="span" size="sm"
+                                                [css]="{fontWeight: '500', color: '$gray900'}">¡Retirá tu
+                                                auto!</kite-text>
+                                        </h2>
+                                        <h5 listDescription>
+                                            <kite-text as="span" size="xs"
+                                                [css]="{fontWeight: '400', color: '$gray800'}">Una vez aprobado el
+                                                préstamo, coordiná con la concesionaria para retirarlo.</kite-text>
+                                        </h5>
+                                    </kite-list-content>
+                                </kite-list>
+                            </kite-feedback-content>
+                        </kite-feedback>
+                    </kite-stack>
+                </kite-column>
+            </kite-row>
+        </kite-container>
+    </kite-layout-main>
+</kite-layout>

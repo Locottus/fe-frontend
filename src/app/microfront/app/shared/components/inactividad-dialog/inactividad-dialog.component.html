@@ -1,0 +1,17 @@
+<div mat-dialog-content>
+  <div class="dialog">
+    <div class="dialog__content">
+      <h4 class="dialog__title">¿Seguís ahí?</h4>
+      <p class="dialog__subtitle">Tu sesión se cerrará en:</p>
+      <div class="logout-counter">
+        {{ countDown | number: '2.0-0' }}
+      </div>
+    </div>
+
+    <div class="dialog__actions">
+      <button mat-flat-button class="mat-button-lg" color="primary" (click)="continuar()">Continuar</button>
+      <button mat-button class="mat-button-sm button--logout" (click)="finalizarSesion()">Finalizar sesión <mat-icon svgIcon="flecha-derecha"></mat-icon></button>
+    </div>
+  </div>
+</div>
+

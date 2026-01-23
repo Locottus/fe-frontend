@@ -1,0 +1,33 @@
+<!-- <header #header class="header" (window:resize)="onResize($event)">
+    <kite-stack>
+        <kite-button [css]="{mr: 0}" [css]="{flexFlow: 'row-reverse'}" *ngIf="linkPasoAtras" (onClick)="navegar()" size="sm"
+            variant="tertiary" icon="arrow-left">
+            {{mostrarLogo ? 'Atrás' : ''}}
+        </kite-button>
+        <kite-button [css]="{mr: 0}" [css]="{flexFlow: 'row-reverse'}" *ngIf="botonPasoAtras" (onClick)="clickAtras()" size="xs"
+            variant="tertiary" icon="arrow-left">
+            {{mostrarLogo ? 'Atrás' : ''}}
+        </kite-button>
+    </kite-stack>
+
+    <kite-stack [css]="{mr: (linkPasoAtras || botonPasoAtras) || !mostrarLogo ? 0 : '-5rem'}">
+        <kite-title as="h3" size="sm" [css]="{fontWeight: 'bold', m: 0 }">
+            Solicitud de préstamo
+        </kite-title>
+    </kite-stack>
+
+    <kite-stack>
+        <kite-button *ngIf="true" (onClick)="cerrar()" size="sm" variant="tertiary" icon="close">
+            {{mostrarLogo ? 'Cerrar' : ''}}
+        </kite-button>
+    </kite-stack>
+</header> -->
+
+<kite-header
+  type="internal"
+  [title]="title"
+  [hasOptions]="true"
+  [extraIcon]=""
+  (backAction)="clickAtras()"
+  (extraIconAction)="extraIconAction()"
+></kite-header>

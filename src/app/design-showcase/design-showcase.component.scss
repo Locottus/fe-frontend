@@ -1,0 +1,22 @@
+.textTitle {
+  font-weight: 600;
+  color: #333;
+}
+
+.textSubtitle {
+  font-size: 0.875rem;
+  color: #666;
+  font-weight: 400;
+}
+
+// Override default kite card styles for better visibility
+::ng-deep {
+  kite-card-group-heading {
+    padding: 12px 16px;
+    background-color: #f5f5f5;
+  }
+  
+  kite-option-list:hover {
+    background-color: #fafafa;
+  }
+}

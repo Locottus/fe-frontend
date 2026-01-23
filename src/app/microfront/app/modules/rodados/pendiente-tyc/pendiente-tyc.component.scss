@@ -1,0 +1,15 @@
+.avatar-wrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f5f6f8; // tono neutral 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-wrapper mat-icon {
+  font-size: 22px;
+  width: 22px;
+  height: 22px;
+}

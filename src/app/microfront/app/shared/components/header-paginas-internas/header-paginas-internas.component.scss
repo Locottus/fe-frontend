@@ -1,0 +1,44 @@
+@import url("../../../shared/styles/shared-styles.scss");
+@import "../../../../assets/variables";
+
+.header {
+  position: sticky;   
+  top: 0; 
+  width: 100%;
+  min-height: 60px;
+  padding: 0 5px;
+  background: #ffffff;
+  box-shadow: 0px 0px 2px 0px rgba(150, 150, 150, 0.504);
+  z-index: 999;
+
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  
+}
+
+.texto-volver {
+    width: 9rem;
+}
+
+.titulo-header {
+    margin: 0;
+}
+
+.container-central-header {
+    padding: 0;
+    width: 14.38rem;
+}
+
+
+
+@media (min-width: map_get($grid-breakpoints, 'md')) {
+  .btn-back::after{
+    content: "Atrás";
+  }
+
+  .btn-close::before{
+    content: "Cerrar";
+  }
+}

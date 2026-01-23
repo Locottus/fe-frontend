@@ -1,0 +1,22 @@
+<kite-layout>
+  <kite-layout-main>
+    <kite-layout-header *ngIf="!isMobile">
+      <kite-header type="internal" [title]="'Prestamos prendarios'" [hasOptions]="false"
+        (backAction)="navegar(true)"></kite-header>
+    </kite-layout-header>
+    <kite-container type="fixed" [css]="{'@md': { padding: '$lg $md', gap: '$lg' }}">
+      <kite-row>
+        <kite-column>
+          <!-- tiulos -->
+          <kite-stack direction="column" [css]="{ gap: '$xxs' }">
+            <kite-feedback image='systemError' title='Tuvimos un inconveniente al confirmar la solicitud'
+              description='Estamos trabajando para resolverlo. Por favor, volvé a intentar más tarde.'
+              btnPrimary='Volver a Préstamos Prendarios' (btnPrimaryAction)="navegar(true)" btnSecondary='Ir al Inicio'
+              (btnSecondaryAction)="navegar(false)">
+            </kite-feedback>
+          </kite-stack>
+        </kite-column>
+      </kite-row>
+    </kite-container>
+  </kite-layout-main>
+</kite-layout>

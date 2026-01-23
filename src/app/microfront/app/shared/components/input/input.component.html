@@ -1,0 +1,23 @@
+<div class="input-container">
+  <mat-form-field *ngIf="!parentForm" [ngClass]="{ 'has-value': value?.length }">
+    <input matInput class="input" [type]="type"
+      [placeholder]="placeholder"
+      [(ngModel)]="value" (keyup)="onKeyUp(value)"
+      [disabled]='disabled'
+      [ngClass]="{ 'disabled': disabled }"
+      autocomplete="off" />
+    <em *ngIf="icon" class="icon {{ icon }}" [ngClass]="{ 'disabled': disabled }"></em>
+  </mat-form-field>
+  <mat-form-field *ngIf="parentForm" [ngClass]="{ 'has-value': !!control?.value, 'has-error': control.errors && control.dirty }" [formGroup]="parentForm">
+    <input matInput class="input" [type]="type"
+      [placeholder]="placeholder"
+      (keyup)="onKeyUp(value)"
+      [ngClass]="{ 'disabled': disabled }"
+      autocomplete="off"
+      [name]="controlName"
+      [formControlName]="controlName"
+      [maxlength]="maxlength" />
+    <em *ngIf="icon" class="icon {{ icon }}" [ngClass]="{ 'disabled': disabled }"></em>
+    <span class="mensaje-error" *ngIf="control.errors && control.dirty">{{ mensajeError }}</span>
+  </mat-form-field>
+</div>

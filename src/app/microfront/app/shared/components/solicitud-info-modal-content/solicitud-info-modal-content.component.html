@@ -1,0 +1,242 @@
+<kite-stack direction="column" [css]="{ gap: '$xxs' }">
+  <kite-list>
+    <kite-list-content>
+      <h5 listSubtitle>
+        <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Categoría</kite-text>
+      </h5>
+      <h2 listTitle>
+        <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">
+          {{ solicitud?.vehiculo?.categoriaAutomovil }}
+        </kite-text>
+      </h2>
+    </kite-list-content>
+    <kite-list-side>
+      <kite-badge size="lg" variant="default" [label]="solicitud?.vehiculo?.ceroKm === true ? 'Nuevo' : 'Usado'"></kite-badge>
+    </kite-list-side>
+  </kite-list>
+
+  <!-- Chasis / Motor -->
+  <kite-stack direction="row" justify="space-between">
+    <kite-stack [css]="{ width: '55%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">N° de Chasis</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">{{ solicitud?.vehiculo?.numeroChasis }}</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+    <kite-stack [css]="{ width: '45%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">N° de Motor</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">{{ solicitud?.vehiculo?.numeroMotor }}</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+  </kite-stack>
+
+  <!-- Uso / Tipo -->
+  <kite-stack direction="row" justify="space-between">
+    <kite-stack [css]="{ width: '45%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Uso</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">{{ solicitud?.vehiculo?.uso }}</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+    <kite-stack [css]="{ width: '45%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Tipo</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">{{ solicitud?.vehiculo?.tipoAutomotor }}</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+  </kite-stack>
+
+  <!-- % Financiacion -->
+  <kite-stack direction="row" justify="space-between">
+    <kite-stack [css]="{ width: '55%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">% de financiación</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">{{ solicitud?.solicitud?.ltv }}%</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+  </kite-stack>
+
+  <kite-divider></kite-divider>
+
+  <!-- Precio total / Moneda -->
+  <kite-stack direction="row" justify="space-between">
+    <kite-stack [css]="{ width: '55%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Precio total financiado</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">${{ solicitud?.solicitud?.precioTotalFinanciado | numberFormat }}</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+    <kite-stack [css]="{ width: '45%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Moneda</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">{{ solicitud?.solicitud?.moneda }}</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+  </kite-stack>
+
+  <!-- Periodicidad / Primera cuota -->
+  <kite-stack direction="row" justify="space-between">
+    <kite-stack [css]="{ width: '55%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Periodicidad</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">{{ solicitud?.solicitud?.periodicidad }}</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+    <kite-stack [css]="{ width: '45%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Primera cuota*</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">${{ solicitud?.solicitud?.primeraCuota | numberFormat }}</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+  </kite-stack>
+
+  <!-- Último vencimiento / Última cuota -->
+  <kite-stack direction="row" justify="space-between">
+    <kite-stack [css]="{ width: '55%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Último vencimiento</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">{{ solicitud?.solicitud?.ultimoVencimiento | date : 'dd/MM/yy' }}</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+    <kite-stack [css]="{ width: '45%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Última cuota*</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">${{ solicitud?.solicitud?.ultimaCuota | numberFormat }}</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+  </kite-stack>
+
+  <!-- Monto inscripcion / Cuota pura -->
+  <kite-stack direction="row" justify="space-between">
+    <kite-stack [css]="{ width: '55%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Monto Insc. Prenda</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">${{ getMontoInscripcion() | numberFormat }}</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+    <kite-stack [css]="{ width: '45%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Cuota Pura</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">${{ solicitud?.solicitud?.cuotaPura | numberFormat }}</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+  </kite-stack>
+
+  <!-- Sistema amortizacion / Tipo prendario -->
+  <kite-stack direction="row" justify="space-between">
+    <kite-stack [css]="{ width: '55%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Sistema de amortización</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">{{ solicitud?.solicitud?.sistemaAmortizacion }}</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+    <kite-stack [css]="{ width: '45%' }">
+      <kite-list>
+        <kite-list-content>
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Tipo de prendario</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">Tradicional</kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-list>
+    </kite-stack>
+  </kite-stack>
+  <kite-divider></kite-divider>
+
+  <kite-stack direction="row" justify="space-between">
+    <kite-list>
+      <kite-list-content>
+        <h5 listSubtitle>
+          <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">*Valor de cuota aproximado</kite-text>
+        </h5>
+      </kite-list-content>
+    </kite-list>
+  </kite-stack>
+</kite-stack>

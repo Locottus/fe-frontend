@@ -1,0 +1,135 @@
+<kite-card>
+  <kite-card-content [css]="{ gap: '$xs' }">
+    <kite-stack 
+      [direction]="{ '@initial': 'column', '@md': 'row' }" 
+      [justify]="{ '@initial': 'start', '@md': 'space-between' }"
+      [align]="{ '@initial': 'stretch', '@md': 'center' }"
+      [css]="{ gap: '$md', '@md': { gap: '$lg' } }">
+      
+      <!-- Monto solicitado -->
+      <kite-stack [css]="{ flex: '1', minWidth: '0' }">
+        <kite-list-content [css]="{ gap: '$sm', padding: '0' }">
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Monto solicitado</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '700', color: '$gray900' }">
+              ${{ solicitud?.solicitud?.capital | numberFormat }}
+              <kite-text *ngIf="solicitud?.solicitud?.esUva" as="span" size="sm" [css]="{ fontWeight: '700', color: '$gray900' }">
+                <b>*</b> ({{ solicitud?.solicitud?.ultimaCuotaEnUvas }} UVAs)
+              </kite-text>
+            </kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-stack>
+
+      <!-- Cantidad de cuotas -->
+        <kite-stack [css]="{ flex: '0.7', minWidth: '0' }">
+        <kite-list-content [css]="{ gap: '$sm', padding: '0' }">
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Cantidad de cuotas</kite-text>
+          </h5>
+          <h2 listTitle>
+            <kite-text as="span" size="sm" [css]="{ fontWeight: '700', color: '$gray900' }">
+              {{ solicitud?.solicitud?.plazo }}
+            </kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-stack>
+
+      <!-- Cuenta de acreditación y débito -->
+        <kite-stack *ngIf="cuentasParaMostrar.length > 1" [css]="{ flex: '1.5', minWidth: '0' }">
+        <kite-list-content [css]="{ gap: '$sm', padding: '0' }">
+          <h5 listSubtitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Cuenta de acreditación y débito</kite-text>
+          </h5>
+          <h2 listTitle>
+              <kite-text as="span" size="sm" [css]="{ fontWeight: '700', color: '$gray900', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', display: 'block' }">
+                {{ cuentaSeleccionada?.tipo?.codigo }} {{ mapMonedaDescripcion(cuentaSeleccionada?.moneda?.descripcion) }} {{ cuentaSeleccionada?.cuenta }}
+              </kite-text>
+          </h2>
+        </kite-list-content>
+      </kite-stack>
+
+      <!-- Botón Modificar cuenta -->
+        <kite-stack *ngIf="cuentasParaMostrar.length > 1" [css]="{ flex: '0.8', minWidth: '0', '@md': { justifyContent: 'flex-end' } }" [align]="{ '@initial': 'stretch', '@md': 'center' }">
+        <kite-button variant="secondary" size="sm" (onClick)="onModificarCuenta()" [css]="{ '@initial': { width: '100%' }, '@md': { width: 'auto' } }">Modificar cuenta</kite-button>
+      </kite-stack>
+      
+    </kite-stack>
+
+    <kite-divider></kite-divider>
+
+    <kite-stack direction="column" [css]="{ gap: '$xxs' }">
+      <kite-list [css]="{ padding: '0' }">
+        <kite-list-content>
+          <h2 listTitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Tasa Efectiva Anual (TEA)</kite-text>
+          </h2>
+        </kite-list-content>
+        <kite-list-side>
+          <h6 listTitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">{{ solicitud?.solicitud?.tea }}%</kite-text>
+          </h6>
+        </kite-list-side>
+      </kite-list>
+      <kite-list [css]="{ padding: '0' }">
+        <kite-list-content>
+          <h2 listTitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Tasa Nominal Anual (TNA)</kite-text>
+          </h2>
+        </kite-list-content>
+        <kite-list-side>
+          <h6 listTitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">{{ solicitud?.solicitud?.tna }}%</kite-text>
+          </h6>
+        </kite-list-side>
+      </kite-list>
+      <kite-list [css]="{ padding: '0' }">
+        <kite-list-content>
+          <h2 listTitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Costo Financiero Total Efectivo Anual con IVA <b>(CFTEA)</b></kite-text>
+          </h2>
+        </kite-list-content>
+        <kite-list-side>
+          <h6 listTitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">{{ solicitud?.solicitud?.cftea }}%</kite-text>
+          </h6>
+        </kite-list-side>
+      </kite-list>
+      <kite-list [css]="{ padding: '0' }">
+        <kite-list-content>
+          <h2 listTitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Seguro {{ solicitud?.seguro?.aseguradora }} * incluído en la cuota</kite-text>
+          </h2>
+        </kite-list-content>
+        <kite-list-side>
+          <h6 listTitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">${{ solicitud?.seguro?.costoMensual }}</kite-text>
+          </h6>
+        </kite-list-side>
+      </kite-list>
+      <kite-list *ngIf="solicitud?.solicitud?.esUva" [css]="{ padding: '0' }">
+        <kite-list-content>
+          <h2 listTitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Valor UVA (hoy)</kite-text>
+          </h2>
+        </kite-list-content>
+        <kite-list-side>
+          <h6 listTitle>
+            <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">${{ solicitud?.solicitud?.ultimaCuotaEnUvas }}</kite-text>
+          </h6>
+        </kite-list-side>
+      </kite-list>
+    </kite-stack>
+  </kite-card-content>
+</kite-card>
+
+<!-- Drawer para seleccionar cuenta -->
+<app-seleccionar-cuenta-drawer
+  [isOpen]="isDrawerOpen"
+  [cuentas]="cuentasParaMostrar"
+  [cuentaSeleccionadaId]="cuentaSeleccionadaId"
+  (close)="onDrawerClose()"
+  (cuentaModificada)="onCuentaModificada($event)">
+</app-seleccionar-cuenta-drawer>

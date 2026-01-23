@@ -1,0 +1,69 @@
+﻿<nav class="obi-menu custom-scroll">
+  <div class="obi-menu-header">
+    <button
+      type="button"
+      id="sideMenuClose"
+      class="btn-link btn-close-menu"
+      (click)="close()"
+    >
+      <em class="icon icon-cross"></em> Cerrar Menú
+    </button>
+  </div>
+
+  <ul id="mainMenu" class="obi-menu-list">
+
+    <ng-container *ngFor="let menuItem of menuItems; let index;">
+      <ng-container *ngIf="menuItem.visible === undefined || menuItem.visible">
+        <li class="obi-menu-list__item">
+          <a
+            [attr.id]="menuItem.id"
+            class="obi-menu-list__link {{ menuItem.linkClass }}"
+            role="link"
+            (click)="menuItem.action()"
+            (keydown.enter)="menuItem.action()"
+            tabindex="0"
+          >
+            <em class="icon icon-menu {{menuItem.iconClass}}"></em>
+            <span>{{menuItem.title}}</span>
+          </a>
+        </li>
+     </ng-container>
+    </ng-container>
+
+  </ul>
+
+  <div class="obi-menu__separator"></div>
+
+  <ul id="secondaryMenu" class="obi-menu-list">
+
+    <ng-container *ngFor="let menuItem of secundaryMenuItems; let index">
+      <ng-container *ngIf="menuItem.visible === undefined || menuItem.visible">
+        <li class="obi-menu-list__item">
+          <a
+            [attr.id]="menuItem.id"
+            class="obi-menu-list__link {{ menuItem.linkClass }}"
+            role="link"
+            (click)="menuItem.action()"
+            (keydown.enter)="menuItem.action()"
+            tabindex="0"
+          >
+            <em class="icon icon-menu {{menuItem.iconClass}}"></em>
+            <span>{{menuItem.title}}</span>
+          </a>
+        </li>
+      </ng-container>
+    </ng-container>
+
+  </ul>
+
+  <div class="obi-menu-footer">
+    <a
+      class="link link-go-back"
+      role="link"
+      (click)="goBack()"
+      (keydown.enter)="goBack()"
+      tabindex="0"
+    >Ir a la vista de inicio anterior</a>
+    <span class="last-connection">Última conexión: {{ lastLoginDate | date: 'dd/MM/yyyy HH:mm' }}</span>
+  </div>
+</nav>

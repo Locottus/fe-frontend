@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "titulo": "Seguro de Auto",
+    "tipo": "auto",
+    "descripcion": "Salí tranquilo, tu auto está en buenas manos.",
+    "url": "/autos/seleccion-de-marca"
+  },
+  {
+    "id": 2,
+    "titulo": "Tecnología Protegida",
+    "tipo": "tecnologia",
+    "descripcion": "Protección frente a robo y daño accidental.",
+    "url": "/"
+  },
+  {
+    "id": 3,
+    "titulo": "Seguro de Bolso protegido",
+    "tipo": "bolso",
+    "descripcion": "¡Que tu única preocupación sea disfrutar del paseo!",
+    "url": "/Pages/Insurances/BuyConfigureInsurance.aspx?Insurance=sadhdgsdfseew"
+  },
+  {
+    "id": 4,
+    "titulo": "Seguro de Contenido en el auto",
+    "tipo": "contenido-auto",
+    "descripcion": "Bajá del auto sólo lo que necesitas, lo demás, lo cuidamos nosotros.",
+    "url": "/Pages/Insurances/BuyConfigureInsurance.aspx?Insurance=sadhdgsdfseew"
+  },
+  {
+    "id": 5,
+    "titulo": "Seguro de Extracción en cajeros",
+    "tipo": "extraccion",
+    "descripcion": "Retirá dinero en efectivo y regresá tranquilo a tu casa.",
+    "url": "/Pages/Insurances/BuyConfigureInsurance.aspx?Insurance=sadhdgsdfseew"
+  }
+]

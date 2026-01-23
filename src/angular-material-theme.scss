@@ -1,0 +1,122 @@
+@use '~@angular/material' as mat;
+@use '~@angular/cdk' as cdk;
+@import '~@angular/material/theming';
+@import './environments/globalVars';
+
+$supervielle-red: (
+  50: #fde5e5,
+  100: #fcd4d4,
+  200: #f8a0a1,
+  300: #f25e5f,
+  400: #f04143,
+  500: #ee2527,
+  600: #e31214,
+  700: #c60f11,
+  800: #aa0d0f,
+  900: #8e0b0c,
+  A100: #ffffff,
+  A200: #ffadae,
+  A400: #ff4749,
+  A700: #f53739,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $dark-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+// Theme Variables Overrides
+$cdk-overlay-dark-backdrop-background: rgba(0, 0, 0, 0.2);
+$mat-light-theme-background: map-merge($mat-light-theme-background, (
+  background: rgba(245, 245, 245, .7),
+));
+
+// Palettes
+$obi-primary-palette: mat.define-palette($supervielle-red);
+$obi-accent-palette:  mat.define-palette(mat.$grey-palette);
+
+$obi-app-theme: mat.define-light-theme($obi-primary-palette, $obi-accent-palette);
+
+// Typography config
+$obi-typography: mat.define-typography-config(
+  $font-family: '"Heebo", sans-serif',
+  $button:      mat.define-typography-level(16px, 14px, 400),
+);
+
+@include mat.core($obi-typography);
+@include mat.all-component-themes($obi-app-theme);
+
+.mat-custom-theme {
+  .mat-card {
+    border: 1px solid #cccccc;
+  }
+
+  .mat-button,
+  .mat-icon-button,
+  .mat-stroked-button,
+  .mat-flat-button {
+    border-radius: 6px;
+  }
+
+  .mat-dialog-container {
+    padding: 40px 30px;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  .mat-dialog-content {
+    margin: 0 -30px;
+    padding: 0 30px;
+  }
+
+  .mat-dialog-actions {
+    margin-bottom: -40px;
+  }
+
+  .mat-expansion-panel {
+    &:not([class*=mat-elevation-z]) {
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+    }
+
+    .mat-expansion-panel-header {
+      padding: 0 16px;
+    }
+
+    .mat-expansion-panel-body {
+      padding: 0;
+    }
+
+    .mat-expansion-indicator {
+      display: flex;
+      align-items: center;
+      margin-right: -6px;
+
+      &::after {
+        content:url($publicPath + 'assets/icons/icon-arrow-down.svg');
+        padding: 0;
+        transform: none;
+        border: none;
+        height: 30px;
+        transition: transform 200ms;
+      }
+    }
+
+    &.mat-expanded {
+      .mat-expansion-indicator {
+        &::after {
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}

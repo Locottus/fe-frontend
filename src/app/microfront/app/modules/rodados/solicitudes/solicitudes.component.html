@@ -1,0 +1,80 @@
+<kite-layout>
+  <kite-layout-header *ngIf="!isMobile">
+    <kite-header type="internal" [title]="'Prestamos prendarios'" [hasOptions]="false"
+      (backAction)="backAction()"></kite-header>
+  </kite-layout-header>
+  <kite-layout-main>
+    <kite-container type="fixed" [css]="{ '@md': { padding: '$lg $md', gap: '$lg' } }">
+      <kite-row>
+        <kite-column>
+          <!-- listado de prestamos -->
+          <kite-card-group>
+            <kite-card [css]="loading ? { background: 'transparent', boxShadow: 'none', border:'none'} : {}">
+              <kite-card-group-heading *ngIf="solicitudes?.length && !loading"
+                      title="Tus solicitudes"></kite-card-group-heading>
+              <kite-card-content *ngIf="loading">
+                <div
+                  style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px;">
+                  <kite-spinner size="xs"></kite-spinner>
+                  <kite-text as="p" [css]="{ margin: '12px 0 0 0', 'text-align': 'center' }">
+                    Buscando información sobre Préstamos prendarios
+                  </kite-text>
+                </div>
+              </kite-card-content>
+              <kite-card-content>
+                <div *ngIf="!loading">
+                  <div *ngIf="!tienePrestamos; else listaPrestamos" align="center">
+                    <kite-empty-state title="Aún no tenés préstamos vigentes"
+                      description="Acá vas a encontrar detalles sobre tus solicitudes de préstamos." icon="empty">
+                    </kite-empty-state>
+                    <kite-button variant="secondary" size="sm" (onClick)="abrirLanding()"> Conocer más </kite-button>
+                  </div>
+
+                  <ng-template #listaPrestamos>
+                    <kite-option-list-group variant="card" type="radio">
+                      <kite-option-list *ngFor="let solicitud of solicitudes" [css]="{ border: '1px solid $gray200' }"
+                        (onToggle)="navegar(solicitud)">
+                        <kite-list-content>
+                          <h2 listTitle class="textTitle">N° {{ solicitud?.idSolicitudSinOrigen }}</h2>
+                          <h5 listDescription class="textSubtitle">
+                            <kite-text as="span">{{ solicitud.cantCuotas }} cuotas totales</kite-text>
+                          </h5>
+                        </kite-list-content>
+                        <kite-list-side>
+                          <kite-badge size="md" [variant]="getVariant(solicitud.estado)"
+                            [label]="solicitud.estado"></kite-badge>
+                        </kite-list-side>
+                      </kite-option-list>
+                    </kite-option-list-group>
+
+                    <kite-card-group-heading *ngIf="prestamos.length" title="Tus prestamos"></kite-card-group-heading>
+                    <kite-option-list-group variant="card" type="radio">
+                      <kite-option-list *ngFor="let prestamo of prestamos" [css]="{ border: '1px solid $gray200' }"
+                        (onToggle)="navegar(prestamo)">
+                        <kite-list-content>
+                          <h2 listTitle class="textTitle">N° {{ prestamo.nroOrden }}</h2>
+                          <h5 listDescription class="textSubtitle">
+                            <kite-text as="span">{{ prestamo.cantCuotas }} cuotas totales</kite-text>
+                          </h5>
+                        </kite-list-content>
+                        <kite-list-side>
+                          <kite-badge size="md" [variant]="getVariant(prestamo.estado)"
+                            [label]="prestamo.estado"></kite-badge>
+                        </kite-list-side>
+                      </kite-option-list>
+                    </kite-option-list-group>
+                  </ng-template>
+                </div>
+              </kite-card-content>
+            </kite-card>
+          </kite-card-group>
+        </kite-column>
+      </kite-row>
+      <kite-row *ngIf="!loading">
+        <kite-column>
+          <app-preguntas-frecuentes-link (select)="navegar()"></app-preguntas-frecuentes-link>
+        </kite-column>
+      </kite-row>
+    </kite-container>
+  </kite-layout-main>
+</kite-layout>

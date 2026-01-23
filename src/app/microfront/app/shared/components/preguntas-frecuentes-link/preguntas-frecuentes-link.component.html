@@ -1,0 +1,16 @@
+<kite-card-group [css]="{ gap: '0px' }">
+  <kite-card-group-heading title="¿Tenés dudas?" [css]="{ mt: '$sm' }"></kite-card-group-heading>
+  <kite-option-list-group variant="card" type="radio">
+    <kite-option-list (onToggle)="onToggle()" (isChecked)="false">
+      <kite-list-avatar>
+        <kite-avatar icon="question" variant="neutral"></kite-avatar>
+      </kite-list-avatar>
+      <kite-list-content>
+        <h2 listTitle>Preguntas frecuentes</h2>
+      </kite-list-content>
+      <kite-list-side>
+        <kite-avatar type="icon" icon="chevron-right" variant="neutral"></kite-avatar>
+      </kite-list-side>
+    </kite-option-list>
+  </kite-option-list-group>
+</kite-card-group>

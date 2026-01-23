@@ -1,0 +1,155 @@
+@use "sass:math";
+@import "../../variables";
+@import "../../../environments/globalVars";
+
+$alert-min-width:                   auto !default;
+$alert-padding-y:                   16px;
+$alert-padding-x:                   16px;
+$alert-margin-bottom:               16px;
+$alert-border-radius:               5px;
+$alert-link-font-weight:            500;
+
+$alert-bg-level:                    -10;
+$alert-border-level:                -9;
+$alert-color-level:                 6;
+$close-font-size:                   27px;
+$close-line-height:                 16px;
+
+$alert-default: (
+  color: #ffffff,
+  icon-url: url($publicPath + 'assets/icons/icon-lampara-prendida.svg'),
+);
+
+$alert-types: (
+  'accionable': (
+    color: #c0efe8,
+    icon-url: url($publicPath + 'assets/icons/icon-guaranteed-green.svg'),
+  ),
+  'info': (
+    color: #cfe4fe,
+    icon-url: url($publicPath + 'assets/icons/icon-warning-circle-grey.svg'),
+  ),
+  'advertencia': (
+    color: #ffe6e6,
+    icon-url: url($publicPath + 'assets/icons/icon-warning-circle.svg'),
+  )
+);
+
+.alert {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: $alert-padding-y $alert-padding-x;
+
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.29;
+  letter-spacing: normal;
+  color: #3e3d40;
+
+  background-color: map_get($alert-default, 'color');
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+
+  &__contenido {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__texto {
+    margin-bottom: 2px;
+  }
+
+  &__link {
+    align-self: flex-start;
+    font-weight: $alert-link-font-weight;
+  }
+}
+
+.alert-heading {
+  color: inherit;
+}
+
+.alert-dismissible {
+  padding-right: $close-font-size + $alert-padding-x + 2;
+
+  .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: $close-font-size;
+    line-height: $close-line-height;
+    font-weight: 300;
+    padding: $alert-padding-y 18px;
+    color: #333333;
+    background-color: transparent;
+    border: none;
+  }
+}
+
+@each $color, $value in $alert-types {
+  .alert-#{$color} {
+    background-color: map_get($value, 'color');
+    box-shadow: none;
+  }
+}
+
+@media (min-width: map_get($grid-breakpoints, 'md')) {
+  $alert-min-height:                  50px;
+  $alert-padding-y:                   10px;
+  $close-font-size:                   22px;
+  $close-line-height:                 8px;
+
+  .alert {
+    min-height: $alert-min-height;
+    flex-direction: row;
+    align-items: center;
+    padding: $alert-padding-y $alert-padding-x;
+
+    &::before {
+      content: '';
+      background-image: map_get($alert-default, 'icon-url');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    &__contenido {
+      display: initial;
+    }
+
+    &__titulo {
+      margin: 0 3px 0 0;
+    }
+
+    &__texto {
+      margin: 0;
+    }
+
+    &__link {
+      margin-left: 4px;
+      align-self: inherit;
+    }
+  }
+
+  .alert-dismissible {
+    padding-right: 50px;
+
+    .close {
+      padding: math.div($alert-min-height - $close-line-height, 2);
+      font-size: $close-font-size;
+      line-height: $close-line-height;
+    }
+  }
+
+  @each $color, $value in $alert-types {
+    .alert-#{$color} {
+      &::before {
+        background-image: map_get($value, 'icon-url');
+      }
+    }
+  }
+}

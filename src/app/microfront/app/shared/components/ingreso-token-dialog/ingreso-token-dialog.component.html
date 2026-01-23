@@ -1,0 +1,131 @@
+<div class="ingreso-token">
+  <div mat-dialog-content class="ingreso-token__container">
+    <div class="ingreso-token__close">
+      <button mat-button [mat-dialog-close]="false">
+        <kite-icon name="close" size="md"></kite-icon>
+      </button>
+    </div>
+
+    <!--Token asociado  y no esta bloqueado-->
+    <div class="ingreso-token__titulo" *ngIf="asociadoAToken  && !tokenIsBlock">
+      <mat-icon class="icon icon-supervielle"></mat-icon>
+      <kite-title [css]="{m: 0, fontWeight: 'bold'}" as="h3" size="xl" align="center"> Ingresá tu Token Supervielle para
+        completar la
+        operación</kite-title>
+    </div>
+
+    <div *ngIf="asociadoAToken && !tokenIsBlock">
+      <div class="ingreso-token__body" [ngClass]="{
+        'ingreso-token__body--valido': esCodigoValido,
+        'ingreso-token__body--invalido': esCodigoInvalido,
+        'ingreso-token__body--predeterminado': esCodigoPredeterminado
+      }">
+        <form [formGroup]="codigoSms">
+          <input class="ingreso-token__digito" type="text" maxlength="1" formControlName="caracter1" autocomplete="off"
+            (keypress)="soloNumeros($event)" moveNextByMaxLength appAutofocus #caracter1 inputmode="numeric" />
+          <input class="ingreso-token__digito" type="text" maxlength="1" formControlName="caracter2" autocomplete="off"
+            (keypress)="soloNumeros($event)" moveNextByMaxLength (keydown.backspace)="caracter1.focus()" #caracter2
+            inputmode="numeric" />
+          <input class="ingreso-token__digito" type="text" maxlength="1" formControlName="caracter3" autocomplete="off"
+            (keypress)="soloNumeros($event)" moveNextByMaxLength (keydown.backspace)="caracter2.focus()" #caracter3
+            inputmode="numeric" />
+          <input class="ingreso-token__digito" type="text" maxlength="1" formControlName="caracter4" autocomplete="off"
+            (keypress)="soloNumeros($event)" moveNextByMaxLength (keydown.backspace)="caracter3.focus()" #caracter4
+            inputmode="numeric" />
+          <input class="ingreso-token__digito" type="text" maxlength="1" formControlName="caracter5" autocomplete="off"
+            (keypress)="soloNumeros($event)" moveNextByMaxLength (keydown.backspace)="caracter4.focus()" #caracter5
+            inputmode="numeric" />
+          <input class="ingreso-token__digito" type="text" maxlength="1" formControlName="caracter6" autocomplete="off"
+            (keypress)="soloNumeros($event)" moveNextByMaxLength (keydown.backspace)="caracter5.focus()" #caracter6
+            inputmode="numeric" />
+        </form>
+      </div>
+
+      <div class="ingreso-token__spinnerTransferencia" *ngIf="loading"></div>
+
+      <div class="ingreso-token__error-servidor" *ngIf="error">
+        <div class="background-red">
+          <div class="icono">
+            <em class="icon icon-warning-white"></em>
+          </div>
+        </div>
+        <div class="mensaje-error-servidor">
+          <kite-text [css]="{m: 0}" as="span" size="xs" variant="description">
+            Ocurrió un error y no pudimos validar el Token. Por favor, intentá de nuevo.
+          </kite-text>
+        </div>
+      </div>
+
+      <div class="ingreso-token__footer">
+        <div class="ingreso-token__predeterminado" *ngIf="esCodigoPredeterminado || esCodigoValido"
+          [ngClass]="{ 'ingreso-token__predeterminado--error' : error}">
+          <div class="ingreso-token__telefono">
+            <div>
+              <div class="base-tooltip">
+                <div class="tooltip-title">
+                  <em class="icon icon-info"></em> ¿Qué es Token Supervielle?
+                </div>
+                <br>
+                <p class="tooltip-text">
+                  Es un código que refuerza la seguridad de tus operaciones.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="ingreso-token__error" *ngIf="esCodigoInvalido && !tokenIsBlock">
+          <div [innerHTML]="validTokenMsg"></div>
+          <div class="ingreso-token__container-button" [ngClass]="{ 'ingreso-token__container-button--error' : error}">
+            <kite-button (onClick)="solicitarNuevoCodigo()" [isDisabled]="loading">
+              Reintentar
+            </kite-button>
+            <kite-spinner *ngIf="loading" size="xs"></kite-spinner>
+            <div class="ingreso-token__spinner" *ngIf="loading"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--No tienen token asociado -->
+    <div class="ingreso-token__titulo" *ngIf="!asociadoAToken">
+      <mat-icon class="icon icon-padlock-fill"></mat-icon>
+      <kite-title [css]="{m: 0, fontWeight: 'bold'}" as="h3" size="xl" align="center">Activá tu Token Supervielle para
+        continuar</kite-title>
+    </div>
+    <div *ngIf="!asociadoAToken">
+      <kite-text align="center" [css]="{m: 0}" as="p" size="xs" variant="description">
+        Este Token es un metodo de seguridad que nos permite validar tus operaciones.
+      </kite-text>
+      <kite-text align="center" [css]="{m: 8}" as="p" size="xs" variant="description">
+        Para activarlo, ingresá a la <strong>App</strong>, tocá la opción "Token" dentro del menú y seguí los pasos
+      </kite-text>
+    </div>
+    <div *ngIf="!asociadoAToken">
+      <kite-button  [css]="{mt: 8}" (onClick)="conocerMas()" >
+        Conocer más
+      </kite-button>
+      <br>
+      <kite-button  [css]="{mt: 8}" (onClick)="cerrarDialogo(0)" variant="secondary">
+        Cancelar
+      </kite-button>
+    </div>
+
+    <!--Token asociado  y Token Bloqueado-->
+    <div class="ingreso-token__titulo" *ngIf="asociadoAToken && tokenIsBlock">
+      <mat-icon class="icon icon-padlock-fill"></mat-icon>
+      <kite-title [css]="{m: 0, fontWeight: 'bold'}" as="h3" size="xl" align="center">Tu token está
+        bloqueado</kite-title>
+    </div>
+    <div *ngIf="asociadoAToken && tokenIsBlock">
+      <kite-text [css]="{m: 0}" as="p" size="xs" variant="description">
+        Ingresá a la App y desbloquealo desde la opción "Token" del menú.
+      </kite-text>
+      <kite-button  [css]="{mt: 8}" (onClick)="cerrarDialogo(0)">
+        Cerrar
+      </kite-button>
+    </div>
+
+  </div>
+</div>
