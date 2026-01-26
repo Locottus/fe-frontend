@@ -12,6 +12,7 @@ export class PendienteTycComponent implements OnInit {
   openAyuda = false;
   openCancelarSolicitud = false;
   openDatosIncorrectos = false;
+  openSoftToken = false;
   modal: string = '';
   isLoadingDetalle = false;
   isLoadingDocumentos = false;
@@ -80,14 +81,7 @@ export class PendienteTycComponent implements OnInit {
   confirmar(bloqueado: boolean): void {
     if (bloqueado) return;
     
-    this.isloadingConfirmar = true;
-    
-    // Simular confirmación
-    setTimeout(() => {
-      this.isloadingConfirmar = false;
-      alert('Solicitud confirmada exitosamente');
-      this.route.navigate(['/rodados/solicitudes']);
-    }, 2000);
+    this.openSoftToken = true;
   }
 
   modalOpen(modalName: string, open: boolean): void {
@@ -126,5 +120,19 @@ export class PendienteTycComponent implements OnInit {
 
   ocultarCallout(): void {
     this.mostrarCallout = false;
+  }
+
+  abrirSoftToken(): void {
+    this.openSoftToken = true;
+  }
+
+  cerrarSoftToken(): void {
+    this.openSoftToken = false;
+  }
+
+  onSoftTokenVerified(estado: any): void {
+    this.cerrarSoftToken();
+    alert('Solicitud confirmada exitosamente');
+    this.route.navigate(['/rodados/solicitudes']);
   }
 }

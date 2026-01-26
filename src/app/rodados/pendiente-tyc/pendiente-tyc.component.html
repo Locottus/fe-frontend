@@ -190,6 +190,13 @@
               <kite-button (onClick)="modalOpen('datosIncorrectos', false)"> Entendido </kite-button>
             </kite-modal-footer>
           </kite-modal>
+
+          <!-- Modal Soft Token -->
+          <app-soft-token-modal 
+            [isOpen]="openSoftToken" 
+            (close)="cerrarSoftToken()"
+            (verified)="onSoftTokenVerified($event)">
+          </app-soft-token-modal>
         </kite-column>
       </kite-row>
     </kite-container>
