@@ -12,8 +12,9 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import './soft-token-modal.component.scss';
+
 import { SoftTokenEstadoDTO } from '../rodados/interfaces/soft-token.dto';
+import { SoftTokenService } from '../rodados/services/soft-token.service';
 
 @Component({
   selector: 'app-soft-token-modal',
@@ -23,6 +24,25 @@ import { SoftTokenEstadoDTO } from '../rodados/interfaces/soft-token.dto';
 export class SoftTokenModalComponent
   implements OnInit, OnChanges, AfterViewInit, OnDestroy
 {
+  private readonly TOTAL_DIGITS = 6;
+  private readonly MOBILE_BREAKPOINT = 768;
+  private readonly DEFAULT_INTENTOS = 3;
+  private readonly resizeHandler = () => this.detectDeviceType();
+
+  estadoToken: SoftTokenEstadoDTO = {
+    intentosRestantes: this.DEFAULT_INTENTOS,
+    bloqueado: false,
+    activo: true,
+  };
+
+  // Métodos públicos para compatibilidad con tests
+  onInput(event: Event, fieldIndex: number): void {
+    this.handleInput(event, fieldIndex);
+  }
+
+  onKeydown(event: KeyboardEvent, fieldIndex: number): void {
+    this.handleKeydown(event, fieldIndex);
+  }
   @Input() isOpen: boolean = false;
   @Input() idPersona: number | null = null;
 
@@ -33,26 +53,21 @@ export class SoftTokenModalComponent
     ElementRef<HTMLInputElement>
   >;
 
-  digits: string[] = Array(6).fill('');
+  digits: string[] = Array(this.TOTAL_DIGITS).fill('');
   loading: boolean = false;
   errorMessage: string | null = null;
-  isBlocked: boolean = false;
-  isMobile: boolean = false;
-  isTokenVerified: boolean = false;
+  isMobile: boolean = true;
   isTokenCorrect: boolean = true; // Nueva bandera agregada
   bouncy: boolean = false; // Nueva bandera para animación
-  intentos: number = 3; //contador de intentos de verificación softoken
 
-  private readonly TOTAL_DIGITS = 6;
-  private readonly MOBILE_BREAKPOINT = 768;
-
-  constructor() {
+  constructor(private softTokenService: SoftTokenService) {
     this.detectDeviceType();
+    this.resetState();
   }
 
   ngOnInit(): void {
     // Escuchar cambios de tamaño de ventana
-    window.addEventListener('resize', () => this.detectDeviceType());
+    window.addEventListener('resize', this.resizeHandler);
   }
 
   ngAfterViewInit(): void {
@@ -67,7 +82,7 @@ export class SoftTokenModalComponent
   }
 
   ngOnDestroy(): void {
-    window.removeEventListener('resize', () => this.detectDeviceType());
+    window.removeEventListener('resize', this.resizeHandler);
     this.resetState();
   }
 
@@ -79,8 +94,23 @@ export class SoftTokenModalComponent
     return this.digits.join('');
   }
 
+  get intentosRestantes(): number {
+    return this.estadoToken.intentosRestantes ?? this.DEFAULT_INTENTOS;
+  }
+
+  get bloqueado(): boolean {
+    return Boolean(this.estadoToken.bloqueado);
+  }
+
+  get activo(): boolean {
+    if (this.estadoToken.activo === undefined) {
+      return true;
+    }
+    return Boolean(this.estadoToken.activo);
+  }
+
   private detectDeviceType(): void {
-    this.isMobile = window.innerWidth < this.MOBILE_BREAKPOINT;
+    this.isMobile = true;
   }
 
   handleInput(event: Event, fieldIndex: number): void {
@@ -159,21 +189,60 @@ export class SoftTokenModalComponent
   async onVerify(): Promise<void> {
     if (!this.isComplete || this.loading) return;
 
+    if (this.bloqueado) {
+      this.errorMessage =
+        'Token bloqueado. Ingresá a la App para desbloquearlo.';
+      return;
+    }
+
+    if (this.idPersona == null) {
+      this.errorMessage =
+        'Falta el identificador de persona para validar el token.';
+      return;
+    }
+
     this.loading = true;
     this.errorMessage = null;
 
-    // Incrementar contador de intentos
-    this.intentos--;
-
     try {
-      const estado = {};
-      // Marcar el token como verificado
-      //this.isTokenVerified = true;
-      this.verified.emit(estado);
-      this.isTokenCorrect = true;
+      const estado = await this.softTokenService.obtenerEstadoToken(
+        this.idPersona,
+      );
+      const intentosRestantes =
+        estado.intentosRestantes ?? this.DEFAULT_INTENTOS;
+      const bloqueado =
+        estado.bloqueado ?? estado.estado?.toUpperCase() === 'BLOQUEADO';
+
+      this.estadoToken = {
+        ...this.estadoToken,
+        ...estado,
+        bloqueado,
+        intentosRestantes,
+      };
+
+      this.isTokenCorrect = !this.bloqueado;
+
+      if (this.bloqueado) {
+        this.errorMessage =
+          'Token bloqueado. Ingresá a la App para desbloquearlo.';
+        return;
+      }
+
+      this.errorMessage = null;
+      this.verified.emit(this.estadoToken);
     } catch (error) {
-      this.errorMessage =
-        'No pudimos verificar el código. Intentalo nuevamente.';
+      const remainingAttempts = Math.max(this.intentosRestantes - 1, 0);
+      const bloqueado =
+        (this.estadoToken.bloqueado ?? false) || remainingAttempts <= 0;
+      this.estadoToken = {
+        ...this.estadoToken,
+        intentosRestantes: remainingAttempts,
+        bloqueado,
+      };
+
+      this.errorMessage = this.bloqueado
+        ? 'Token bloqueado. Ingresá a la App para desbloquearlo.'
+        : 'No pudimos verificar el código. Intentalo nuevamente.';
       this.isTokenCorrect = false;
       this.bouncy = false;
       setTimeout(() => {
@@ -201,14 +270,82 @@ export class SoftTokenModalComponent
     }
   }
 
+  getInputStyle(): Record<string, string> {
+    return {
+      width: '48px',
+      height: '60px',
+      border: 'none',
+      'border-bottom': '2px solid #cfd2df',
+      background: 'transparent',
+      'text-align': 'center',
+      'font-size': '30px',
+      'font-weight': '600',
+      color: this.isTokenCorrect ? '#2b2f3a' : '#b10a2e',
+      outline: 'none',
+    };
+  }
+
+  getModalStyle(): Record<string, any> {
+    return {
+      gap: '$sm',
+      maxWidth: 'auto',
+    };
+  }
+
+  getContentStyle(): Record<string, any> {
+    return {
+      gap: '16px',
+      padding: '0 16px',
+      '@md': { gap: '18px', padding: '0 24px' },
+    };
+  }
+
+  getStackStyle(): Record<string, any> {
+    return { gap: '14px' };
+  }
+
+  getInfoTextStyle(): Record<string, any> {
+    return {
+      color: '#7b8094',
+      lineHeight: '1.5',
+      textAlign: 'center',
+    };
+  }
+
+  getInputStackStyle(): Record<string, any> {
+    return {
+      gap: '12px',
+      width: '100%',
+      flexWrap: 'nowrap',
+    };
+  }
+
+  getFooterStyle(): Record<string, any> {
+    return {
+      flexDirection: 'column',
+      gap: '12px',
+      padding: '0 $sm',
+      alignItems: 'center',
+      '@md': {
+        flexDirection: 'column',
+        gap: '12px',
+        padding: '0 $sm',
+        alignItems: 'center',
+      },
+    };
+  }
+
   private resetState(): void {
     this.digits = Array(this.TOTAL_DIGITS).fill('');
     this.loading = false;
     this.errorMessage = null;
-    this.isBlocked = false;
-    this.isTokenVerified = false;
-    this.intentos = 3;
-    this.isTokenCorrect = false;
+    this.estadoToken = {
+      intentosRestantes: this.DEFAULT_INTENTOS,
+      bloqueado: false,
+      activo: true,
+    };
+    this.isTokenCorrect = true;
     this.bouncy = false; // Reiniciar la bandera bouncy
+    this.isMobile = true;
   }
 }

@@ -3,17 +3,15 @@ import { CommonModule } from '@angular/common';
 import { PendienteTycRoutingModule } from './pendiente-tyc-routing.module';
 import { PendienteTycComponent } from './pendiente-tyc.component';
 import { RodadosSharedModule } from '../shared/rodados-shared.module';
-import { SoftTokenModalComponent } from '../../soft-token-modal copy/soft-token-modal.component';
+import { SoftTokenModalModule } from '../../soft-token-modal/soft-token-modal.module';
 
 @NgModule({
-  declarations: [
-    PendienteTycComponent,
-    SoftTokenModalComponent
-  ],
+  declarations: [PendienteTycComponent],
   imports: [
     CommonModule,
     PendienteTycRoutingModule,
-    RodadosSharedModule
-  ]
+    RodadosSharedModule,
+    SoftTokenModalModule,
+  ],
 })
-export class PendienteTycModule { }
+export class PendienteTycModule {}

@@ -1,0 +1,131 @@
+<kite-modal
+  [isOpen]="isOpen"
+  (onClose)="onClose()"
+  [css]="getModalStyle()"
+  [ngClass]="{ bouncy: bouncy, 'hide-close-button': isMobile }"
+>
+  <kite-modal-header
+    title="Ingresá el código de verificación"
+  ></kite-modal-header>
+  {{ isMobile }}
+  <kite-modal-content [css]="getContentStyle()">
+    <ng-container *ngIf="!bloqueado; else blockedContent">
+      <kite-stack direction="column" [css]="getStackStyle()">
+        <kite-text size="sm" [css]="getInfoTextStyle()">
+          Lo encontrás dentro de la App Supervielle como
+          <kite-text as="span" [css]="{ fontWeight: '700' }"
+            >Token Supervielle.</kite-text
+          >
+        </kite-text>
+
+        <kite-stack
+          direction="row"
+          justify="center"
+          align="center"
+          [css]="getInputStackStyle()"
+        >
+          <input
+            *ngFor="let digit of digits; let i = index"
+            #codeInput
+            class="soft-token-input"
+            inputmode="numeric"
+            maxlength="1"
+            pattern="[0-9]*"
+            autocomplete="one-time-code"
+            [value]="digit"
+            (input)="handleInput($event, i)"
+            (keydown)="handleKeydown($event, i)"
+            [ngStyle]="getInputStyle()"
+          />
+        </kite-stack>
+
+        <div
+          *ngIf="!isTokenCorrect"
+          style="
+            color: #b10a2e;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 4px;
+          "
+        >
+          Código incorrecto
+        </div>
+
+        <kite-text size="sm" [css]="{ color: '#7b8094', lineHeight: '1.5' }">
+          Tenés
+          <kite-text as="span" [css]="{ fontWeight: '700' }"
+            >{{ intentosRestantes }} intentos</kite-text
+          >
+          para ingresar el código correctamente. De lo contrario se bloqueará y
+          no podrás realizar la operación.
+        </kite-text>
+
+        <kite-text
+          *ngIf="errorMessage"
+          size="sm"
+          [css]="{ color: '#b10a2e', fontWeight: 600 }"
+        >
+          {{ errorMessage }}
+        </kite-text>
+      </kite-stack>
+    </ng-container>
+
+    <ng-template #blockedContent>
+      <kite-stack direction="column" align="center" [css]="{ gap: '18px' }">
+        <!-- Icono de escudo con candado -->
+        <div [ngStyle]="{ width: '96px', height: '96px', margin: '6px auto' }">
+          <svg viewBox="0 0 128 128" width="100%" height="100%">
+            <defs>
+              <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#ff8a3d" />
+                <stop offset="100%" stop-color="#c14a16" />
+              </linearGradient>
+            </defs>
+            <path
+              d="M64 8 C64 8 26 16 26 32 v28 c0 28 20 44 38 52 c18-8 38-24 38-52 V32 C102 16 64 8 64 8z"
+              fill="url(#shieldGrad)"
+            />
+            <rect x="44" y="56" width="40" height="34" rx="6" fill="#ffffff" />
+            <path
+              d="M52 56v-6a12 12 0 0 1 24 0v6"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+            <circle cx="64" cy="73" r="4" fill="#c14a16" />
+          </svg>
+        </div>
+        <kite-text
+          [css]="{ fontSize: '17px', fontWeight: '750', color: '#1f2330' }"
+          >Token Bloqueado</kite-text
+        >
+        <kite-text
+          size="sm"
+          [css]="{ color: '#8a8fa3', lineHeight: '1.45', textAlign: 'center' }"
+        >
+          Ingresaste de forma incorrecta el token en 3 oportunidades.
+          <br /><br />
+          Para desbloquearlo ingresá a la App, Token Supervielle y seguí los
+          pasos.
+        </kite-text>
+      </kite-stack>
+    </ng-template>
+  </kite-modal-content>
+
+  <kite-modal-footer [css]="getFooterStyle()">
+    <kite-button
+      *ngIf="!bloqueado"
+      [variant]="!isComplete || loading ? 'secondary' : 'primary'"
+      [attr.disabled]="!isComplete || loading ? true : null"
+      (onClick)="onVerify()"
+    >
+      {{ loading ? "Verificando..." : "Verificar" }}
+    </kite-button>
+
+    <kite-button variant="secondary" *ngIf="isMobile" (onClick)="onClose()">
+      Cerrar
+    </kite-button>
+  </kite-modal-footer>
+</kite-modal>
