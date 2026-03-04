@@ -1,90 +1,55 @@
-@use '~@angular/material' as mat;
-@use '~@angular/cdk' as cdk;
-@import '~@angular/material/theming';
-@import './environments/globalVars';
+@use "@angular/material" as mat;
+@import "./environments/globalVars";
 
-$supervielle-red: (
-  50: #fde5e5,
-  100: #fcd4d4,
-  200: #f8a0a1,
-  300: #f25e5f,
-  400: #f04143,
-  500: #ee2527,
-  600: #e31214,
-  700: #c60f11,
-  800: #aa0d0f,
-  900: #8e0b0c,
-  A100: #ffffff,
-  A200: #ffadae,
-  A400: #ff4749,
-  A700: #f53739,
-  contrast: (
-    50: $dark-primary-text,
-    100: $dark-primary-text,
-    200: $dark-primary-text,
-    300: $dark-primary-text,
-    400: $dark-primary-text,
-    500: $light-primary-text,
-    600: $light-primary-text,
-    700: $light-primary-text,
-    800: $light-primary-text,
-    900: $light-primary-text,
-    A100: $dark-primary-text,
-    A200: $light-primary-text,
-    A400: $light-primary-text,
-    A700: $light-primary-text,
+// Define the application theme using Angular Material M2 theming API
+$obi-primary: mat.m2-define-palette(mat.$m2-red-palette, 600, 300, 900);
+$obi-accent: mat.m2-define-palette(mat.$m2-grey-palette);
+$obi-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$obi-app-theme: mat.m2-define-light-theme(
+  (
+    color: (
+      primary: $obi-primary,
+      accent: $obi-accent,
+      warn: $obi-warn,
+    ),
+    typography: mat.m2-define-typography-config(
+        $font-family: '"Heebo", sans-serif',
+      ),
+    density: 0,
   )
 );
 
-// Theme Variables Overrides
-$cdk-overlay-dark-backdrop-background: rgba(0, 0, 0, 0.2);
-$mat-light-theme-background: map-merge($mat-light-theme-background, (
-  background: rgba(245, 245, 245, .7),
-));
-
-// Palettes
-$obi-primary-palette: mat.define-palette($supervielle-red);
-$obi-accent-palette:  mat.define-palette(mat.$grey-palette);
-
-$obi-app-theme: mat.define-light-theme($obi-primary-palette, $obi-accent-palette);
-
-// Typography config
-$obi-typography: mat.define-typography-config(
-  $font-family: '"Heebo", sans-serif',
-  $button:      mat.define-typography-level(16px, 14px, 400),
-);
-
-@include mat.core($obi-typography);
 @include mat.all-component-themes($obi-app-theme);
 
 .mat-custom-theme {
-  .mat-card {
+  .mat-mdc-card {
     border: 1px solid #cccccc;
   }
 
-  .mat-button,
-  .mat-icon-button,
-  .mat-stroked-button,
-  .mat-flat-button {
+  .mat-mdc-button,
+  .mat-mdc-icon-button,
+  .mat-mdc-outlined-button,
+  .mat-mdc-unelevated-button {
     border-radius: 6px;
   }
 
-  .mat-dialog-container {
+  .mat-mdc-dialog-container {
     padding: 40px 30px;
     box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.15);
   }
 
-  .mat-dialog-content {
+  .mat-mdc-dialog-content {
     margin: 0 -30px;
     padding: 0 30px;
   }
 
-  .mat-dialog-actions {
+  .mat-mdc-dialog-actions {
     margin-bottom: -40px;
   }
 
   .mat-expansion-panel {
-    &:not([class*=mat-elevation-z]) {
+    &:not([class*="mat-elevation-z"]) {
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
     }
 
@@ -102,7 +67,7 @@ $obi-typography: mat.define-typography-config(
       margin-right: -6px;
 
       &::after {
-        content:url($publicPath + 'assets/icons/icon-arrow-down.svg');
+        content: url($publicPath + "assets/icons/icon-arrow-down.svg");
         padding: 0;
         transform: none;
         border: none;

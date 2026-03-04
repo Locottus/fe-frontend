@@ -18,6 +18,7 @@ import { SoftTokenService } from '../rodados/services/soft-token.service';
 
 @Component({
   selector: 'app-soft-token-modal',
+  standalone: false,
   templateUrl: './soft-token-modal.component.html',
   styleUrls: ['./soft-token-modal.component.scss'],
 })

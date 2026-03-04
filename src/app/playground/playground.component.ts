@@ -3,11 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-playground',
+  standalone: false,
   templateUrl: './playground.component.html',
-  styleUrls: ['./playground.component.scss']
+  styleUrls: ['./playground.component.scss'],
 })
 export class PlaygroundComponent implements OnInit {
-
   // Form
   reactiveForm: FormGroup;
 
@@ -15,7 +15,7 @@ export class PlaygroundComponent implements OnInit {
   selectOptions = [
     { label: 'Option 1', value: 'opt1' },
     { label: 'Option 2', value: 'opt2' },
-    { label: 'Option 3', value: 'opt3' }
+    { label: 'Option 3', value: 'opt3' },
   ];
 
   // Material demo
@@ -23,11 +23,20 @@ export class PlaygroundComponent implements OnInit {
     { label: 'Basic', type: '' },
     { label: 'Raised', type: 'raised' },
     { label: 'Stroked', type: 'stroked' },
-    { label: 'Flat', type: 'flat' }
+    { label: 'Flat', type: 'flat' },
   ];
 
   // Bootstrap demo
-  bootstrapColors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'];
+  bootstrapColors = [
+    'primary',
+    'secondary',
+    'success',
+    'danger',
+    'warning',
+    'info',
+    'light',
+    'dark',
+  ];
 
   constructor(private fb: FormBuilder) {
     this.reactiveForm = this.fb.group({
@@ -36,12 +45,11 @@ export class PlaygroundComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       country: ['', Validators.required],
       acceptTerms: [false, Validators.requiredTrue],
-      subscribe: [false]
+      subscribe: [false],
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   // Form methods
   get firstName() {

@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pendiente-tyc',
+  standalone: false,
   templateUrl: './pendiente-tyc.component.html',
-  styleUrls: ['./pendiente-tyc.component.scss']
+  styleUrls: ['./pendiente-tyc.component.scss'],
 })
 export class PendienteTycComponent implements OnInit {
   blockearConfirmacion = true;
@@ -22,7 +23,8 @@ export class PendienteTycComponent implements OnInit {
   isVencida = false;
   variantCallout = 'warning';
   titleCallout = 'Tu solicitud vence el 30/01/2026';
-  descriptionCallout = 'Si no la confirmás antes de esa fecha deberás solicitar una nueva.';
+  descriptionCallout =
+    'Si no la confirmás antes de esa fecha deberás solicitar una nueva.';
 
   // Datos estáticos de la solicitud
   solicitud = {
@@ -38,28 +40,28 @@ export class PendienteTycComponent implements OnInit {
       cftea: 52.3,
       esUva: false,
       ultimaCuotaEnUvas: null,
-      diasRestantesVigenciaAprobado: 7
+      diasRestantesVigenciaAprobado: 7,
     },
     vehiculo: {
       marca: 'Toyota',
       modelo: 'Corolla',
       anio: 2023,
-      ceroKm: true
+      ceroKm: true,
     },
     seguro: {
       aseguradora: 'Seguros Rivadavia',
-      cobertura: 'Todo Riesgo'
+      cobertura: 'Todo Riesgo',
     },
     concesionario: {
       razonSocial: 'Automóviles del Sur S.A.',
-      asesorComercial: 'Juan Pérez'
+      asesorComercial: 'Juan Pérez',
     },
     documentos: [
       { nombre: 'Resumen Productos Y Servicios', url: '#' },
       { nombre: 'Solicitud de Credito Prendario', url: '#' },
       { nombre: 'terminos y condiciones', url: '#' },
-      { nombre: 'Anexo seguros', url: '#' }
-    ]
+      { nombre: 'Anexo seguros', url: '#' },
+    ],
   };
 
   constructor(private route: Router) {}
@@ -80,7 +82,7 @@ export class PendienteTycComponent implements OnInit {
 
   confirmar(bloqueado: boolean): void {
     if (bloqueado) return;
-    
+
     this.openSoftToken = true;
   }
 
@@ -115,7 +117,9 @@ export class PendienteTycComponent implements OnInit {
 
   abrirDocumento(nombreDocumento: string): void {
     console.log('Abriendo documento:', nombreDocumento);
-    alert(`Documento "${nombreDocumento}" - Funcionalidad no implementada con datos estáticos`);
+    alert(
+      `Documento "${nombreDocumento}" - Funcionalidad no implementada con datos estáticos`,
+    );
   }
 
   ocultarCallout(): void {

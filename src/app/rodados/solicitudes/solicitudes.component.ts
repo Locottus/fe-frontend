@@ -3,8 +3,9 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-solicitudes',
+  standalone: false,
   templateUrl: './solicitudes.component.html',
-  styleUrls: ['./solicitudes.component.scss']
+  styleUrls: ['./solicitudes.component.scss'],
 })
 export class SolicitudesComponent implements OnInit {
   title = 'Prestamos Prendarios';
@@ -25,21 +26,21 @@ export class SolicitudesComponent implements OnInit {
         cftea: 22.1,
         fechaAlta: '2026-01-15',
         esUva: false,
-        ultimaCuotaEnUvas: null
+        ultimaCuotaEnUvas: null,
       },
       vehiculo: {
         modelo: 'Corolla 2024',
         ceroKm: true,
         anio: 2024,
-        marca: 'Toyota'
+        marca: 'Toyota',
       },
       seguro: {
         aseguradora: 'Zurich',
-        costoMensual: 15000
+        costoMensual: 15000,
       },
       estado: 'Pendiente',
       cantCuotas: 36,
-      nroOrden: null
+      nroOrden: null,
     },
     {
       idSolicitud: '002',
@@ -52,22 +53,22 @@ export class SolicitudesComponent implements OnInit {
         cftea: 23.5,
         fechaAlta: '2026-01-10',
         esUva: true,
-        ultimaCuotaEnUvas: 312.45
+        ultimaCuotaEnUvas: 312.45,
       },
       vehiculo: {
         modelo: 'Cronos 2023',
         ceroKm: false,
         anio: 2023,
-        marca: 'Fiat'
+        marca: 'Fiat',
       },
       seguro: {
         aseguradora: 'Galicia Seguros',
-        costoMensual: 12000
+        costoMensual: 12000,
       },
       estado: 'En Proceso',
       cantCuotas: 48,
-      nroOrden: null
-    }
+      nroOrden: null,
+    },
   ];
 
   // Datos estáticos de préstamos (Vigente o Finalizado)
@@ -79,15 +80,15 @@ export class SolicitudesComponent implements OnInit {
           capital: 5000000,
           fecha_vencimiento: '2027-01-15',
           cantidad_cuotas: 36,
-          cantidad_cuotas_impagas: 28
-        }
+          cantidad_cuotas_impagas: 28,
+        },
       },
       vehiculo: {
         modelo: 'Corolla',
         ceroKm: true,
-        anio: 2023
+        anio: 2023,
       },
-      estado: 'Vigente'
+      estado: 'Vigente',
     },
     {
       detallePrestamo: {
@@ -96,16 +97,16 @@ export class SolicitudesComponent implements OnInit {
           capital: 4200000,
           fecha_vencimiento: '2026-06-20',
           cantidad_cuotas: 24,
-          cantidad_cuotas_impagas: 0
-        }
+          cantidad_cuotas_impagas: 0,
+        },
       },
       vehiculo: {
         modelo: 'Civic',
         ceroKm: false,
-        anio: 2022
+        anio: 2022,
       },
-      estado: 'Finalizado'
-    }
+      estado: 'Finalizado',
+    },
   ];
 
   solicitudesDetalladas: any[] = [];
@@ -128,7 +129,10 @@ export class SolicitudesComponent implements OnInit {
     // Navegación según el estado
     if (prestamo.estado === 'Pendiente') {
       this.router.navigate(['rodados/pendiente-tyc']);
-    } else if (prestamo.estado === 'Finalizado' || prestamo.estado === 'Vigente') {
+    } else if (
+      prestamo.estado === 'Finalizado' ||
+      prestamo.estado === 'Vigente'
+    ) {
       this.router.navigate(['rodados/prestamo-en-curso']);
     } else if (prestamo.estado === 'En Proceso') {
       // Procesando solicitud
@@ -142,7 +146,9 @@ export class SolicitudesComponent implements OnInit {
     this.router.navigate(['./']);
   }
 
-  getVariant(estado: string): 'error' | 'info' | 'success' | 'warning' | 'default' {
+  getVariant(
+    estado: string,
+  ): 'error' | 'info' | 'success' | 'warning' | 'default' {
     switch (estado) {
       case 'Vigente':
       case 'Finalizado':
@@ -161,6 +167,10 @@ export class SolicitudesComponent implements OnInit {
   }
 
   abrirLanding() {
-    window.open('https://www.supervielle.com.ar/personas/prestamos/prendarios', '_blank', 'noopener');
+    window.open(
+      'https://www.supervielle.com.ar/personas/prestamos/prendarios',
+      '_blank',
+      'noopener',
+    );
   }
 }

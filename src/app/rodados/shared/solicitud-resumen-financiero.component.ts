@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 
 export interface Cuenta {
   id: string;
@@ -13,8 +21,9 @@ export interface Cuenta {
 
 @Component({
   selector: 'app-solicitud-resumen-financiero',
+  standalone: false,
   templateUrl: './solicitud-resumen-financiero.component.html',
-  styleUrls: ['./solicitud-resumen-financiero.component.scss']
+  styleUrls: ['./solicitud-resumen-financiero.component.scss'],
 })
 export class SolicitudResumenFinancieroComponent implements OnInit, OnChanges {
   @Input() solicitud: any;
@@ -45,7 +54,7 @@ export class SolicitudResumenFinancieroComponent implements OnInit, OnChanges {
           idCuentaVista: 'cc-pesos-12345',
           descripcion: 'Cuenta Corriente ARS 0001234567',
           moneda: { codigo: 'ARS', descripcion: 'Pesos Argentinos' },
-          tipo: { codigo: 'CC' }
+          tipo: { codigo: 'CC' },
         },
         {
           id: 'cc-usd-98765',
@@ -54,18 +63,24 @@ export class SolicitudResumenFinancieroComponent implements OnInit, OnChanges {
           idCuentaVista: 'cc-usd-98765',
           descripcion: 'Cuenta Corriente USD 0009876543',
           moneda: { codigo: 'USD', descripcion: 'Dólares' },
-          tipo: { codigo: 'CC' }
-        }
+          tipo: { codigo: 'CC' },
+        },
       ];
     }
     if (!this.cuentaSeleccionadaActual) {
-      const cuentaPreferida = this.cuentasDeSolicitud.find(c => c.preferida) || this.cuentasDeSolicitud[0];
+      const cuentaPreferida =
+        this.cuentasDeSolicitud.find((c) => c.preferida) ||
+        this.cuentasDeSolicitud[0];
       this.cuentaSeleccionadaActual = cuentaPreferida;
     }
   }
 
   get cuentaSeleccionadaId(): string | null {
-    return this.cuentaSeleccionadaActual?.id || this.cuentasParaMostrar[0]?.id || null;
+    return (
+      this.cuentaSeleccionadaActual?.id ||
+      this.cuentasParaMostrar[0]?.id ||
+      null
+    );
   }
 
   get cuentasParaMostrar(): Cuenta[] {

@@ -2,38 +2,74 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-solicitud-resumen-vehiculo',
+  standalone: false,
   template: `
     <kite-card>
       <kite-card-content [css]="{ gap: '$xs' }">
-        <kite-stack [direction]="{ '@initial': 'column', '@md': 'row' }" justify="space-between">
+        <kite-stack
+          [direction]="{ '@initial': 'column', '@md': 'row' }"
+          justify="space-between"
+        >
           <kite-stack [css]="{ '@md': { width: '50%' } }">
             <kite-list [css]="{ padding: '0' }">
-              <kite-list-avatar [css]="{ display: 'none', '@md': { display: 'block' } }">
-                <kite-avatar type="icon" icon="car" variant="neutral"></kite-avatar>
+              <kite-list-avatar
+                [css]="{ display: 'none', '@md': { display: 'block' } }"
+              >
+                <kite-avatar
+                  type="icon"
+                  icon="car"
+                  variant="neutral"
+                ></kite-avatar>
               </kite-list-avatar>
               <kite-list-content [css]="{ gap: '$sm' }">
                 <h5 listSubtitle>
-                  <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Modelo</kite-text>
+                  <kite-text
+                    as="span"
+                    size="xs"
+                    [css]="{ fontWeight: '400', color: '$gray800' }"
+                    >Modelo</kite-text
+                  >
                 </h5>
                 <h2 listTitle>
-                  <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900', textAlign: 'left' }">
-                    {{ solicitud?.vehiculo?.marca }} {{ solicitud?.vehiculo?.modelo }}
+                  <kite-text
+                    as="span"
+                    size="sm"
+                    [css]="{
+                      fontWeight: '500',
+                      color: '$gray900',
+                      textAlign: 'left',
+                    }"
+                  >
+                    {{ solicitud?.vehiculo?.marca }}
+                    {{ solicitud?.vehiculo?.modelo }}
                   </kite-text>
                 </h2>
               </kite-list-content>
             </kite-list>
           </kite-stack>
-          <kite-divider orientation="vertical" variant="secondary"></kite-divider>
+          <kite-divider
+            orientation="vertical"
+            variant="secondary"
+          ></kite-divider>
           <kite-stack [css]="{ '@md': { width: '50%' } }">
             <kite-list [css]="{ padding: '0' }">
               <kite-list-content [css]="{ gap: '$sm' }">
                 <h5 listSubtitle>
-                  <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">
-                    Cía. de seguros elegida: {{solicitud?.seguro?.aseguradora }}
+                  <kite-text
+                    as="span"
+                    size="xs"
+                    [css]="{ fontWeight: '400', color: '$gray800' }"
+                  >
+                    Cía. de seguros elegida:
+                    {{ solicitud?.seguro?.aseguradora }}
                   </kite-text>
                 </h5>
                 <h2 listTitle>
-                  <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">
+                  <kite-text
+                    as="span"
+                    size="sm"
+                    [css]="{ fontWeight: '500', color: '$gray900' }"
+                  >
                     {{ solicitud?.seguro?.cobertura }}
                   </kite-text>
                 </h2>
@@ -42,35 +78,71 @@ import { Component, Input } from '@angular/core';
           </kite-stack>
         </kite-stack>
 
-        <kite-divider [css]="{ display: 'none', '@md': { display: 'block' } }"></kite-divider>
+        <kite-divider
+          [css]="{ display: 'none', '@md': { display: 'block' } }"
+        ></kite-divider>
 
-        <kite-stack [direction]="{ '@initial': 'column', '@md': 'row' }" justify="space-between">
+        <kite-stack
+          [direction]="{ '@initial': 'column', '@md': 'row' }"
+          justify="space-between"
+        >
           <kite-stack [css]="{ '@md': { width: '50%' } }">
             <kite-list [css]="{ padding: '0' }">
-              <kite-list-avatar [css]="{ display: 'none', '@md': { display: 'block' } }">
-                <kite-avatar type="icon" icon="business" variant="neutral"></kite-avatar>
+              <kite-list-avatar
+                [css]="{ display: 'none', '@md': { display: 'block' } }"
+              >
+                <kite-avatar
+                  type="icon"
+                  icon="business"
+                  variant="neutral"
+                ></kite-avatar>
               </kite-list-avatar>
               <kite-list-content [css]="{ gap: '$sm' }">
                 <h5 listSubtitle>
-                  <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Concesionaria</kite-text>
+                  <kite-text
+                    as="span"
+                    size="xs"
+                    [css]="{ fontWeight: '400', color: '$gray800' }"
+                    >Concesionaria</kite-text
+                  >
                 </h5>
                 <h2 listTitle>
-                  <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900', textAlign: 'left' }">
+                  <kite-text
+                    as="span"
+                    size="sm"
+                    [css]="{
+                      fontWeight: '500',
+                      color: '$gray900',
+                      textAlign: 'left',
+                    }"
+                  >
                     {{ solicitud?.concesionario?.razonSocial }}
                   </kite-text>
                 </h2>
               </kite-list-content>
             </kite-list>
           </kite-stack>
-          <kite-divider orientation="vertical" variant="secondary"></kite-divider>
+          <kite-divider
+            orientation="vertical"
+            variant="secondary"
+          ></kite-divider>
           <kite-stack [css]="{ '@md': { width: '50%' } }">
             <kite-list [css]="{ padding: '0' }">
               <kite-list-content [css]="{ gap: '$sm' }">
                 <h5 listSubtitle>
-                  <kite-text as="span" size="xs" [css]="{ fontWeight: '400', color: '$gray800' }">Asistente comercial</kite-text>
+                  <kite-text
+                    as="span"
+                    size="xs"
+                    [css]="{ fontWeight: '400', color: '$gray800' }"
+                    >Asistente comercial</kite-text
+                  >
                 </h5>
                 <h2 listTitle>
-                  <kite-text as="span" size="sm" [css]="{ fontWeight: '500', color: '$gray900' }">
+                  <kite-text
+                    as="span"
+                    size="sm"
+                    [css]="{ fontWeight: '500', color: '$gray900' }"
+                  >
                     {{ solicitud?.concesionario?.asesorComercial }}
                   </kite-text>
                 </h2>
@@ -81,7 +153,7 @@ import { Component, Input } from '@angular/core';
       </kite-card-content>
     </kite-card>
   `,
-  styles: []
+  styles: [],
 })
 export class SolicitudResumenVehiculoComponent {
   @Input() solicitud: any;

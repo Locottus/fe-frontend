@@ -30,6 +30,7 @@ export interface CuotaDetalleMock {
 
 @Component({
   selector: 'app-detalle-cuota-drawer',
+  standalone: false,
   templateUrl: './detalle-cuota-drawer.component.html',
   styleUrls: ['./detalle-cuota-drawer.component.scss'],
 })
@@ -100,7 +101,10 @@ export class DetalleCuotaDrawerComponent implements OnInit {
 
   // Verifica si la cuota está próxima a vencer (dentro de 7 días)
   isProximaAVencer(): boolean {
-    if (this.cuota?.estado_descripcion === 'Pagada' || this.cuota?.estado_descripcion === 'Vencida') {
+    if (
+      this.cuota?.estado_descripcion === 'Pagada' ||
+      this.cuota?.estado_descripcion === 'Vencida'
+    ) {
       return false;
     }
     if (this.cuota?.fecha_vencimiento) {
@@ -112,7 +116,10 @@ export class DetalleCuotaDrawerComponent implements OnInit {
 
   // Verifica si la cuota está pendiente (más de 7 días para vencer)
   isPendiente(): boolean {
-    if (this.cuota?.estado_descripcion === 'Pagada' || this.cuota?.estado_descripcion === 'Vencida') {
+    if (
+      this.cuota?.estado_descripcion === 'Pagada' ||
+      this.cuota?.estado_descripcion === 'Vencida'
+    ) {
       return false;
     }
     if (this.cuota?.fecha_vencimiento) {
