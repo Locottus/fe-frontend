@@ -1,4 +1,13 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter, Input, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+  Output,
+  EventEmitter,
+  Input,
+  ElementRef,
+} from '@angular/core';
 
 export interface CuotaDetalleMock {
   nro_cuota: number;
@@ -56,7 +65,9 @@ export class DetalleCuotaDrawerComponent implements OnInit, OnChanges {
 
   private forceFullScreenDrawer(): void {
     const host = this.el.nativeElement as HTMLElement;
-    const targets = host.querySelectorAll<HTMLElement>('.modal-container, .modal-backdrop');
+    const targets = host.querySelectorAll<HTMLElement>(
+      '.modal-container, .modal-backdrop',
+    );
     targets.forEach((el) => {
       el.style.setProperty('top', '0', 'important');
       el.style.setProperty('height', '100vh', 'important');

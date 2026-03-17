@@ -9,18 +9,15 @@ import { KiteSharedModule } from './kite-shared.module';
   declarations: [
     SolicitudResumenVehiculoComponent,
     SolicitudResumenFinancieroComponent,
-    DetalleCuotaDrawerComponent
+    DetalleCuotaDrawerComponent,
   ],
-  imports: [
-    CommonModule,
-    KiteSharedModule
-  ],
+  imports: [CommonModule, KiteSharedModule],
   exports: [
     SolicitudResumenVehiculoComponent,
     SolicitudResumenFinancieroComponent,
     DetalleCuotaDrawerComponent,
-    KiteSharedModule
+    KiteSharedModule,
   ],
-  schemas: [NO_ERRORS_SCHEMA]
+  schemas: [NO_ERRORS_SCHEMA],
 })
-export class RodadosSharedModule { }
+export class RodadosSharedModule {}
