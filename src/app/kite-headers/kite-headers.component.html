@@ -1,0 +1,1236 @@
+<div class="kite-headers-container">
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║                    TABLA DE CONTENIDOS                      ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="toc section">
+    <h1>Kite Headers — Guía Completa</h1>
+    <p class="description">
+      Este componente documenta
+      <strong>todas las variantes y configuraciones</strong>
+      disponibles para los componentes de header en el framework Kite:
+      <code>kite-header</code>, <code>kite-layout-header</code>,
+      <code>kite-header-options</code> y <code>kite-header-notif-profile</code>.
+    </p>
+    <nav class="toc-nav">
+      <h3>Índice</h3>
+      <ol>
+        <li><a href="#section-internal">Header type="internal"</a></li>
+        <li><a href="#section-section">Header type="section"</a></li>
+        <li><a href="#section-task-focused">Header type="taskFocused"</a></li>
+        <li><a href="#section-public">Header type="public"</a></li>
+        <li>
+          <a href="#section-layout-header">Dentro de kite-layout-header</a>
+        </li>
+        <li>
+          <a href="#section-layout-full"
+            >Layout completo con Header + Secondary</a
+          >
+        </li>
+        <li><a href="#section-options">kite-header-options</a></li>
+        <li><a href="#section-notif-profile">kite-header-notif-profile</a></li>
+        <li><a href="#section-combinations">Combinaciones avanzadas</a></li>
+        <li><a href="#section-api-reference">Referencia completa de API</a></li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  1. HEADER TYPE="INTERNAL"                                  ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="section" id="section-internal">
+    <h2>1. Header type="internal"</h2>
+    <p class="description">
+      Es el tipo más utilizado en la aplicación. Muestra una barra de navegación
+      interna con título, flecha de retroceso (backAction) y opcionalmente menú
+      hamburguesa (hasOptions).
+    </p>
+
+    <!-- 1a. Básico -->
+    <div class="subsection">
+      <h3>1a. Básico — solo título</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="internal"
+  title="Título de la página"
+  [hasOptions]="false"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="internal"
+          title="Título de la página"
+          [hasOptions]="false"
+        ></kite-header>
+      </div>
+    </div>
+
+    <!-- 1b. Con backAction -->
+    <div class="subsection">
+      <h3>1b. Con backAction (flecha atrás)</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="internal"
+  title="Préstamos prendarios"
+  [hasOptions]="false"
+  (backAction)="onBackAction('internal')"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="internal"
+          title="Préstamos prendarios"
+          [hasOptions]="false"
+          (backAction)="onBackAction('internal')"
+        ></kite-header>
+      </div>
+    </div>
+
+    <!-- 1c. Con hasOptions=true -->
+    <div class="subsection">
+      <h3>1c. Con menú hamburguesa (hasOptions=true)</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="internal"
+  title="Mi Cuenta"
+  [hasOptions]="true"
+  (backAction)="onBackAction('internal-options')"
+  (menuAction)="onMenuAction('internal-options')"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="internal"
+          title="Mi Cuenta"
+          [hasOptions]="true"
+          (backAction)="onBackAction('internal-options')"
+          (menuAction)="onMenuAction('internal-options')"
+        ></kite-header>
+      </div>
+    </div>
+
+    <!-- 1d. Con extraIcon -->
+    <div class="subsection">
+      <h3>1d. Con extraIcon</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="internal"
+  title="Descargar documento"
+  [hasOptions]="false"
+  extraIcon="download"
+  (backAction)="onBackAction('internal-extra')"
+  (extraIconAction)="onExtraIconAction('internal-extra')"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="internal"
+          title="Descargar documento"
+          [hasOptions]="false"
+          extraIcon="download"
+          (backAction)="onBackAction('internal-extra')"
+          (extraIconAction)="onExtraIconAction('internal-extra')"
+        ></kite-header>
+      </div>
+    </div>
+
+    <!-- 1e. Con CSS override -->
+    <div class="subsection">
+      <h3>1e. Con CSS personalizado</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="internal"
+  title="Header personalizado"
+  [hasOptions]="false"
+  [css]="&#123; backgroundColor: '#1a1a2e', color: 'white' &#125;"
+  (backAction)="onBackAction('internal-css')"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="internal"
+          title="Header personalizado"
+          [hasOptions]="false"
+          [css]="{ backgroundColor: '#1a1a2e', color: 'white' }"
+          (backAction)="onBackAction('internal-css')"
+        ></kite-header>
+      </div>
+    </div>
+
+    <!-- 1f. Con link -->
+    <div class="subsection">
+      <h3>1f. Con link</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="internal"
+  title="Documentación"
+  [hasOptions]="false"
+  link="https://kite.supervielle.com"
+  (backAction)="onBackAction('internal-link')"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="internal"
+          title="Documentación"
+          [hasOptions]="false"
+          link="https://kite.supervielle.com"
+          (backAction)="onBackAction('internal-link')"
+        ></kite-header>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  2. HEADER TYPE="SECTION"                                   ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="section" id="section-section">
+    <h2>2. Header type="section"</h2>
+    <p class="description">
+      Header para secciones principales de la aplicación. Muestra un estilo
+      diferente al <code>internal</code>, pensado para páginas de nivel
+      superior.
+    </p>
+
+    <!-- 2a. Básico -->
+    <div class="subsection">
+      <h3>2a. Básico</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="section"
+  title="Inicio"
+  [hasOptions]="false"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="section"
+          title="Inicio"
+          [hasOptions]="false"
+        ></kite-header>
+      </div>
+    </div>
+
+    <!-- 2b. Con menú -->
+    <div class="subsection">
+      <h3>2b. Con menú hamburguesa</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="section"
+  title="Productos"
+  [hasOptions]="true"
+  (menuAction)="onMenuAction('section')"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="section"
+          title="Productos"
+          [hasOptions]="true"
+          (menuAction)="onMenuAction('section')"
+        ></kite-header>
+      </div>
+    </div>
+
+    <!-- 2c. Con back y extra icon -->
+    <div class="subsection">
+      <h3>2c. Con backAction y extraIcon</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="section"
+  title="Inversiones"
+  [hasOptions]="false"
+  extraIcon="settings"
+  (backAction)="onBackAction('section-extra')"
+  (extraIconAction)="onExtraIconAction('section-extra')"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="section"
+          title="Inversiones"
+          [hasOptions]="false"
+          extraIcon="settings"
+          (backAction)="onBackAction('section-extra')"
+          (extraIconAction)="onExtraIconAction('section-extra')"
+        ></kite-header>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  3. HEADER TYPE="TASKFOCUSED"                               ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="section" id="section-task-focused">
+    <h2>3. Header type="taskFocused"</h2>
+    <p class="description">
+      Header diseñado para flujos de tarea enfocados (wizards, formularios
+      multi-paso). Muestra un botón de cierre (<code>closeAction</code>) en
+      lugar del menú, ideal para modales de pantalla completa o procesos paso a
+      paso.
+    </p>
+
+    <!-- 3a. Básico -->
+    <div class="subsection">
+      <h3>3a. Básico — con closeAction</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="taskFocused"
+  title="Solicitar préstamo"
+  (closeAction)="onCloseAction('taskFocused')"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="taskFocused"
+          title="Solicitar préstamo"
+          (closeAction)="onCloseAction('taskFocused')"
+        ></kite-header>
+      </div>
+    </div>
+
+    <!-- 3b. Con backAction -->
+    <div class="subsection">
+      <h3>3b. Con backAction y closeAction</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="taskFocused"
+  title="Paso 2 de 4 — Datos personales"
+  (backAction)="onBackAction('taskFocused-back')"
+  (closeAction)="onCloseAction('taskFocused-back')"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="taskFocused"
+          title="Paso 2 de 4 — Datos personales"
+          (backAction)="onBackAction('taskFocused-back')"
+          (closeAction)="onCloseAction('taskFocused-back')"
+        ></kite-header>
+      </div>
+    </div>
+
+    <!-- 3c. Con extraIcon -->
+    <div class="subsection">
+      <h3>3c. Con extraIcon</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="taskFocused"
+  title="Confirmar operación"
+  extraIcon="info"
+  (closeAction)="onCloseAction('taskFocused-extra')"
+  (extraIconAction)="onExtraIconAction('taskFocused-extra')"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="taskFocused"
+          title="Confirmar operación"
+          extraIcon="info"
+          (closeAction)="onCloseAction('taskFocused-extra')"
+          (extraIconAction)="onExtraIconAction('taskFocused-extra')"
+        ></kite-header>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  4. HEADER TYPE="PUBLIC"                                    ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="section" id="section-public">
+    <h2>4. Header type="public"</h2>
+    <p class="description">
+      Header para páginas públicas (landing, marketing, pre-login). Soporta
+      iconos especiales (<code>phoneAction</code>, <code>locationAction</code>,
+      <code>searchAction</code>) y dos botones visibles (<code>mainButton</code>
+      rojo y <code>extraButton</code> blanco).
+    </p>
+
+    <!-- 4a. Básico -->
+    <div class="subsection">
+      <h3>4a. Básico</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="public"
+  title="Banco Supervielle"
+  [hasOptions]="false"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="public"
+          title="Banco Supervielle"
+          [hasOptions]="false"
+        ></kite-header>
+      </div>
+    </div>
+
+    <!-- 4b. Con botones -->
+    <div class="subsection">
+      <h3>4b. Con mainButton y extraButton</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="public"
+  title="Banco Supervielle"
+  mainButton="Abrir cuenta"
+  extraButton="Iniciar sesión"
+  (mainButtonAction)="onMainButtonAction('public')"
+  (extraButtonAction)="onExtraButtonAction('public')"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="public"
+          title="Banco Supervielle"
+          mainButton="Abrir cuenta"
+          extraButton="Iniciar sesión"
+          (mainButtonAction)="onMainButtonAction('public')"
+          (extraButtonAction)="onExtraButtonAction('public')"
+        ></kite-header>
+      </div>
+    </div>
+
+    <!-- 4c. Con iconos de contacto -->
+    <div class="subsection">
+      <h3>4c. Con iconos de contacto (phone, location, search)</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="public"
+  title="Sucursales"
+  (phoneAction)="onPhoneAction('public')"
+  (locationAction)="onLocationAction('public')"
+  (searchAction)="onSearchAction('public')"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="public"
+          title="Sucursales"
+          (phoneAction)="onPhoneAction('public')"
+          (locationAction)="onLocationAction('public')"
+          (searchAction)="onSearchAction('public')"
+        ></kite-header>
+      </div>
+    </div>
+
+    <!-- 4d. Completo -->
+    <div class="subsection">
+      <h3>4d. Completo — todos los features</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header
+  type="public"
+  title="Banco Supervielle"
+  [hasOptions]="true"
+  mainButton="Abrir cuenta"
+  extraButton="Iniciar sesión"
+  (menuAction)="onMenuAction('public-full')"
+  (phoneAction)="onPhoneAction('public-full')"
+  (locationAction)="onLocationAction('public-full')"
+  (searchAction)="onSearchAction('public-full')"
+  (mainButtonAction)="onMainButtonAction('public-full')"
+  (extraButtonAction)="onExtraButtonAction('public-full')"
+&gt;&lt;/kite-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header
+          type="public"
+          title="Banco Supervielle"
+          [hasOptions]="true"
+          mainButton="Abrir cuenta"
+          extraButton="Iniciar sesión"
+          (menuAction)="onMenuAction('public-full')"
+          (phoneAction)="onPhoneAction('public-full')"
+          (locationAction)="onLocationAction('public-full')"
+          (searchAction)="onSearchAction('public-full')"
+          (mainButtonAction)="onMainButtonAction('public-full')"
+          (extraButtonAction)="onExtraButtonAction('public-full')"
+        ></kite-header>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  5. DENTRO DE KITE-LAYOUT-HEADER                           ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="section" id="section-layout-header">
+    <h2>5. Dentro de kite-layout-header</h2>
+    <p class="description">
+      <code>kite-layout-header</code> es un componente estructural del
+      <code>kite-layout</code>. Funciona como un slot de proyección de
+      contenido: envuelve un <code>kite-header</code> para posicionarlo
+      correctamente dentro del layout. Solo acepta un input <code>[css]</code>.
+    </p>
+
+    <!-- 5a. kite-layout-header standalone -->
+    <div class="subsection">
+      <h3>5a. kite-layout-header standalone (sin kite-layout)</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-layout-header&gt;
+  &lt;kite-header
+    type="internal"
+    title="Header en layout-header (standalone)"
+    [hasOptions]="false"
+    (backAction)="onBackAction('layout-standalone')"
+  &gt;&lt;/kite-header&gt;
+&lt;/kite-layout-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-layout-header>
+          <kite-header
+            type="internal"
+            title="Header en layout-header (standalone)"
+            [hasOptions]="false"
+            (backAction)="onBackAction('layout-standalone')"
+          ></kite-header>
+        </kite-layout-header>
+      </div>
+    </div>
+
+    <!-- 5b. con CSS personalizado -->
+    <div class="subsection">
+      <h3>5b. kite-layout-header con CSS personalizado</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-layout-header [css]="&#123; borderBottom: '3px solid #ee2527' &#125;"&gt;
+  &lt;kite-header
+    type="internal"
+    title="Header con borde rojo"
+    [hasOptions]="false"
+    (backAction)="onBackAction('layout-css')"
+  &gt;&lt;/kite-header&gt;
+&lt;/kite-layout-header&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-layout-header [css]="{ borderBottom: '3px solid #ee2527' }">
+          <kite-header
+            type="internal"
+            title="Header con borde rojo"
+            [hasOptions]="false"
+            (backAction)="onBackAction('layout-css')"
+          ></kite-header>
+        </kite-layout-header>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  6. LAYOUT COMPLETO CON HEADER + SECONDARY                 ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="section" id="section-layout-full">
+    <h2>6. Layout completo con Header + Secondary</h2>
+    <p class="description">
+      Ejemplo del patrón más completo: <code>kite-layout</code> con
+      <code>kite-layout-header</code>, <code>kite-layout-main</code> y
+      <code>kite-layout-secondary</code>. Este es el patrón canónico usado en la
+      aplicación (ej: prestamo-page-layout).
+    </p>
+
+    <!-- 6a. Layout con header y main -->
+    <div class="subsection">
+      <h3>6a. kite-layout + kite-layout-header + kite-layout-main</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-layout&gt;
+  &lt;kite-layout-header&gt;
+    &lt;kite-header
+      type="internal"
+      title="Página con layout"
+      [hasOptions]="false"
+      (backAction)="onBackAction('layout-full')"
+    &gt;&lt;/kite-header&gt;
+  &lt;/kite-layout-header&gt;
+  &lt;kite-layout-main
+    [css]="&#123; backgroundColor: '$gray_transparent_lighter', padding: '$md' &#125;"
+  &gt;
+    &lt;p&gt;Contenido principal del layout.&lt;/p&gt;
+  &lt;/kite-layout-main&gt;
+&lt;/kite-layout&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box example-box--tall">
+        <kite-layout>
+          <kite-layout-header>
+            <kite-header
+              type="internal"
+              title="Página con layout"
+              [hasOptions]="false"
+              (backAction)="onBackAction('layout-full')"
+            ></kite-header>
+          </kite-layout-header>
+          <kite-layout-main
+            [css]="{
+              backgroundColor: '$gray_transparent_lighter',
+              padding: '$md',
+            }"
+          >
+            <p style="padding: 16px; color: #3a3a3a">
+              Contenido principal del layout.
+            </p>
+          </kite-layout-main>
+        </kite-layout>
+      </div>
+    </div>
+
+    <!-- 6b. Layout completo con secondary -->
+    <div class="subsection">
+      <h3>6b. kite-layout con secondary="left"</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-layout secondary="left"&gt;
+  &lt;kite-layout-header&gt;
+    &lt;kite-header
+      type="internal"
+      title="Dashboard"
+      [hasOptions]="false"
+      (backAction)="onBackAction('layout-secondary')"
+    &gt;&lt;/kite-header&gt;
+  &lt;/kite-layout-header&gt;
+  &lt;kite-layout-secondary [css]="&#123; backgroundColor: '$gray_transparent_lighter', padding: '$md' &#125;"&gt;
+    &lt;p&gt;Sidebar izquierdo&lt;/p&gt;
+  &lt;/kite-layout-secondary&gt;
+  &lt;kite-layout-main [css]="&#123; padding: '$md' &#125;"&gt;
+    &lt;p&gt;Contenido principal&lt;/p&gt;
+  &lt;/kite-layout-main&gt;
+&lt;/kite-layout&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box example-box--tall">
+        <kite-layout secondary="left">
+          <kite-layout-header>
+            <kite-header
+              type="internal"
+              title="Dashboard"
+              [hasOptions]="false"
+              (backAction)="onBackAction('layout-secondary')"
+            ></kite-header>
+          </kite-layout-header>
+          <kite-layout-secondary
+            [css]="{
+              backgroundColor: '$gray_transparent_lighter',
+              padding: '$md',
+            }"
+          >
+            <p style="padding: 16px; color: #3a3a3a">Sidebar izquierdo</p>
+          </kite-layout-secondary>
+          <kite-layout-main [css]="{ padding: '$md' }">
+            <p style="padding: 16px; color: #3a3a3a">Contenido principal</p>
+          </kite-layout-main>
+        </kite-layout>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  7. KITE-HEADER-OPTIONS                                     ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="section" id="section-options">
+    <h2>7. kite-header-options</h2>
+    <p class="description">
+      Componente complementario para renderizar un menú desplegable de opciones.
+      Se usa junto a un <code>kite-header</code> con
+      <code>hasOptions=true</code>. Acepta un array de opciones (máx. 5) con
+      <code>title</code> y <code>action</code>.
+    </p>
+
+    <!-- 7a. Con título de sección -->
+    <div class="subsection">
+      <h3>7a. Con título de opciones</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header-options
+  [options]="headerOptions"
+  optionsTitle="Menú principal"
+  [hasOptionsTitle]="true"
+&gt;&lt;/kite-header-options&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header-options
+          [options]="headerOptions"
+          optionsTitle="Menú principal"
+          [hasOptionsTitle]="true"
+        ></kite-header-options>
+      </div>
+    </div>
+
+    <!-- 7b. Sin título de sección -->
+    <div class="subsection">
+      <h3>7b. Sin título de opciones</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header-options
+  [options]="headerOptions"
+  [hasOptionsTitle]="false"
+&gt;&lt;/kite-header-options&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header-options
+          [options]="headerOptions"
+          [hasOptionsTitle]="false"
+        ></kite-header-options>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  8. KITE-HEADER-NOTIF-PROFILE                              ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="section" id="section-notif-profile">
+    <h2>8. kite-header-notif-profile</h2>
+    <p class="description">
+      Componente para mostrar avatar del usuario, notificaciones y accesos
+      rápidos a perfil, configuración y seguridad. Ideal para dashboards y áreas
+      autenticadas.
+    </p>
+
+    <!-- 8a. Con username (iniciales) -->
+    <div class="subsection">
+      <h3>8a. Con username (muestra iniciales)</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header-notif-profile
+  [username]="'Juan Pérez'"
+  [hasNotifications]="true"
+  [notificationsList]="notificationsList"
+  (moreNotificationsAction)="onMoreNotifications()"
+  (perfilAction)="onPerfilAction()"
+  (settingsAction)="onSettingsAction()"
+  (securityAction)="onSecurityAction()"
+&gt;&lt;/kite-header-notif-profile&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header-notif-profile
+          [username]="username"
+          [hasNotifications]="hasNotifications"
+          [notificationsList]="notificationsList"
+          (moreNotificationsAction)="onMoreNotifications()"
+          (perfilAction)="onPerfilAction()"
+          (settingsAction)="onSettingsAction()"
+          (securityAction)="onSecurityAction()"
+        ></kite-header-notif-profile>
+      </div>
+    </div>
+
+    <!-- 8b. Sin notificaciones -->
+    <div class="subsection">
+      <h3>8b. Sin notificaciones</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-header-notif-profile
+  [username]="'María García'"
+  [hasNotifications]="false"
+  (perfilAction)="onPerfilAction()"
+  (settingsAction)="onSettingsAction()"
+  (securityAction)="onSecurityAction()"
+&gt;&lt;/kite-header-notif-profile&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box">
+        <kite-header-notif-profile
+          username="María García"
+          [hasNotifications]="false"
+          (perfilAction)="onPerfilAction()"
+          (settingsAction)="onSettingsAction()"
+          (securityAction)="onSecurityAction()"
+        ></kite-header-notif-profile>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  9. COMBINACIONES AVANZADAS                                 ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="section" id="section-combinations">
+    <h2>9. Combinaciones avanzadas</h2>
+    <p class="description">
+      Ejemplos de combinaciones más complejas entre los componentes de header y
+      layout.
+    </p>
+
+    <!-- 9a. Layout completo con section header -->
+    <div class="subsection">
+      <h3>9a. Layout con header type="section" + menú + main</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-layout&gt;
+  &lt;kite-layout-header&gt;
+    &lt;kite-header
+      type="section"
+      title="Panel principal"
+      [hasOptions]="true"
+      (menuAction)="onMenuAction('combo-section')"
+    &gt;&lt;/kite-header&gt;
+  &lt;/kite-layout-header&gt;
+  &lt;kite-layout-main [css]="&#123; padding: '$md' &#125;"&gt;
+    &lt;p&gt;Contenido de la sección.&lt;/p&gt;
+  &lt;/kite-layout-main&gt;
+&lt;/kite-layout&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box example-box--tall">
+        <kite-layout>
+          <kite-layout-header>
+            <kite-header
+              type="section"
+              title="Panel principal"
+              [hasOptions]="true"
+              (menuAction)="onMenuAction('combo-section')"
+            ></kite-header>
+          </kite-layout-header>
+          <kite-layout-main [css]="{ padding: '$md' }">
+            <p style="padding: 16px; color: #3a3a3a">
+              Contenido de la sección.
+            </p>
+          </kite-layout-main>
+        </kite-layout>
+      </div>
+    </div>
+
+    <!-- 9b. Layout con taskFocused header -->
+    <div class="subsection">
+      <h3>9b. Layout con header type="taskFocused"</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-layout&gt;
+  &lt;kite-layout-header&gt;
+    &lt;kite-header
+      type="taskFocused"
+      title="Paso 1 — Verificar identidad"
+      (backAction)="onBackAction('combo-task')"
+      (closeAction)="onCloseAction('combo-task')"
+    &gt;&lt;/kite-header&gt;
+  &lt;/kite-layout-header&gt;
+  &lt;kite-layout-main [css]="&#123; padding: '$lg' &#125;"&gt;
+    &lt;p&gt;Formulario de verificación aquí.&lt;/p&gt;
+  &lt;/kite-layout-main&gt;
+&lt;/kite-layout&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box example-box--tall">
+        <kite-layout>
+          <kite-layout-header>
+            <kite-header
+              type="taskFocused"
+              title="Paso 1 — Verificar identidad"
+              (backAction)="onBackAction('combo-task')"
+              (closeAction)="onCloseAction('combo-task')"
+            ></kite-header>
+          </kite-layout-header>
+          <kite-layout-main [css]="{ padding: '$lg' }">
+            <p style="padding: 16px; color: #3a3a3a">
+              Formulario de verificación aquí.
+            </p>
+          </kite-layout-main>
+        </kite-layout>
+      </div>
+    </div>
+
+    <!-- 9c. Public header en layout -->
+    <div class="subsection">
+      <h3>9c. Layout con header type="public" completo</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-layout&gt;
+  &lt;kite-layout-header&gt;
+    &lt;kite-header
+      type="public"
+      title="Banco Supervielle"
+      mainButton="Hazte cliente"
+      extraButton="Login"
+      (mainButtonAction)="onMainButtonAction('combo-public')"
+      (extraButtonAction)="onExtraButtonAction('combo-public')"
+      (phoneAction)="onPhoneAction('combo-public')"
+      (searchAction)="onSearchAction('combo-public')"
+    &gt;&lt;/kite-header&gt;
+  &lt;/kite-layout-header&gt;
+  &lt;kite-layout-main [css]="&#123; padding: '$lg' &#125;"&gt;
+    &lt;p&gt;Landing page content.&lt;/p&gt;
+  &lt;/kite-layout-main&gt;
+&lt;/kite-layout&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box example-box--tall">
+        <kite-layout>
+          <kite-layout-header>
+            <kite-header
+              type="public"
+              title="Banco Supervielle"
+              mainButton="Hazte cliente"
+              extraButton="Login"
+              (mainButtonAction)="onMainButtonAction('combo-public')"
+              (extraButtonAction)="onExtraButtonAction('combo-public')"
+              (phoneAction)="onPhoneAction('combo-public')"
+              (searchAction)="onSearchAction('combo-public')"
+            ></kite-header>
+          </kite-layout-header>
+          <kite-layout-main [css]="{ padding: '$lg' }">
+            <p style="padding: 16px; color: #3a3a3a">Landing page content.</p>
+          </kite-layout-main>
+        </kite-layout>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  10. REFERENCIA COMPLETA DE API                             ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="section" id="section-api-reference">
+    <h2>10. Referencia completa de API</h2>
+
+    <!-- kite-header -->
+    <div class="subsection">
+      <h3>kite-header</h3>
+      <table class="api-table">
+        <thead>
+          <tr>
+            <th>Propiedad / Evento</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="3" class="table-group">Inputs</td>
+          </tr>
+          <tr>
+            <td><code>type</code></td>
+            <td>
+              <code>'section' | 'internal' | 'taskFocused' | 'public'</code>
+            </td>
+            <td><strong>Requerido.</strong> Variante visual del header.</td>
+          </tr>
+          <tr>
+            <td><code>title</code></td>
+            <td><code>string | undefined</code></td>
+            <td>Texto del título.</td>
+          </tr>
+          <tr>
+            <td><code>hasOptions</code></td>
+            <td><code>boolean</code></td>
+            <td>Muestra/oculta el ícono de menú hamburguesa.</td>
+          </tr>
+          <tr>
+            <td><code>extraIcon</code></td>
+            <td><code>any</code></td>
+            <td>
+              Nombre del ícono adicional (ej: "help-circle", "info",
+              "settings").
+            </td>
+          </tr>
+          <tr>
+            <td><code>mainButton</code></td>
+            <td><code>string | null</code></td>
+            <td>Texto del botón rojo (solo <code>type="public"</code>).</td>
+          </tr>
+          <tr>
+            <td><code>extraButton</code></td>
+            <td><code>string | null</code></td>
+            <td>Texto del botón blanco (solo <code>type="public"</code>).</td>
+          </tr>
+          <tr>
+            <td><code>link</code></td>
+            <td><code>string</code></td>
+            <td>URL de enlace.</td>
+          </tr>
+          <tr>
+            <td><code>css</code></td>
+            <td><code>any</code></td>
+            <td>Overrides de estilos (Stitches-style tokens).</td>
+          </tr>
+          <tr>
+            <td colspan="3" class="table-group">Outputs (Eventos)</td>
+          </tr>
+          <tr>
+            <td><code>(backAction)</code></td>
+            <td><code>EventEmitter</code></td>
+            <td>Click en la flecha de retroceso.</td>
+          </tr>
+          <tr>
+            <td><code>(menuAction)</code></td>
+            <td><code>EventEmitter</code></td>
+            <td>Click en el ícono hamburguesa.</td>
+          </tr>
+          <tr>
+            <td><code>(closeAction)</code></td>
+            <td><code>EventEmitter</code></td>
+            <td>
+              Click en el ícono de cerrar (<code>type="taskFocused"</code>).
+            </td>
+          </tr>
+          <tr>
+            <td><code>(extraIconAction)</code></td>
+            <td><code>EventEmitter</code></td>
+            <td>Click en el <code>extraIcon</code>.</td>
+          </tr>
+          <tr>
+            <td><code>(phoneAction)</code></td>
+            <td><code>EventEmitter</code></td>
+            <td>Click en el ícono de teléfono (<code>type="public"</code>).</td>
+          </tr>
+          <tr>
+            <td><code>(locationAction)</code></td>
+            <td><code>EventEmitter</code></td>
+            <td>
+              Click en el ícono de ubicación (<code>type="public"</code>).
+            </td>
+          </tr>
+          <tr>
+            <td><code>(searchAction)</code></td>
+            <td><code>EventEmitter</code></td>
+            <td>Click en el ícono de búsqueda (<code>type="public"</code>).</td>
+          </tr>
+          <tr>
+            <td><code>(mainButtonAction)</code></td>
+            <td><code>EventEmitter</code></td>
+            <td>
+              Click en el <code>mainButton</code> (<code>type="public"</code>).
+            </td>
+          </tr>
+          <tr>
+            <td><code>(extraButtonAction)</code></td>
+            <td><code>EventEmitter</code></td>
+            <td>
+              Click en el <code>extraButton</code> (<code>type="public"</code>).
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- kite-layout-header -->
+    <div class="subsection">
+      <h3>kite-layout-header</h3>
+      <table class="api-table">
+        <thead>
+          <tr>
+            <th>Propiedad</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>css</code></td>
+            <td><code>any</code></td>
+            <td>
+              Overrides de estilos. Wrapper de proyección para
+              <code>kite-header</code>.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- kite-header-options -->
+    <div class="subsection">
+      <h3>kite-header-options</h3>
+      <table class="api-table">
+        <thead>
+          <tr>
+            <th>Propiedad</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>options</code></td>
+            <td>
+              <code
+                >Array&lt;&#123; title: string, action: Function
+                &#125;&gt;</code
+              >
+            </td>
+            <td>
+              Array de opciones (máx. 5). Cada item tiene <code>title</code> y
+              <code>action</code>.
+            </td>
+          </tr>
+          <tr>
+            <td><code>optionsTitle</code></td>
+            <td><code>string | null</code></td>
+            <td>Título de la sección de opciones.</td>
+          </tr>
+          <tr>
+            <td><code>hasOptionsTitle</code></td>
+            <td><code>boolean</code></td>
+            <td>Mostrar/ocultar el título de opciones.</td>
+          </tr>
+          <tr>
+            <td><code>css</code></td>
+            <td><code>any</code></td>
+            <td>Overrides de estilos.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- kite-header-notif-profile -->
+    <div class="subsection">
+      <h3>kite-header-notif-profile</h3>
+      <table class="api-table">
+        <thead>
+          <tr>
+            <th>Propiedad / Evento</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="3" class="table-group">Inputs</td>
+          </tr>
+          <tr>
+            <td><code>username</code></td>
+            <td><code>string | null</code></td>
+            <td>Nombre del usuario. Muestra las iniciales en un avatar.</td>
+          </tr>
+          <tr>
+            <td><code>userImage</code></td>
+            <td><code>string | null</code></td>
+            <td>URL de la imagen del usuario para el avatar.</td>
+          </tr>
+          <tr>
+            <td><code>hasNotifications</code></td>
+            <td><code>boolean</code></td>
+            <td>Muestra/oculta el badge de notificaciones (punto rojo).</td>
+          </tr>
+          <tr>
+            <td><code>notificationsList</code></td>
+            <td>
+              <code>Array&lt;&#123; title, description, action &#125;&gt;</code>
+            </td>
+            <td>Lista de notificaciones con acciones.</td>
+          </tr>
+          <tr>
+            <td><code>css</code></td>
+            <td><code>any</code></td>
+            <td>Overrides de estilos.</td>
+          </tr>
+          <tr>
+            <td colspan="3" class="table-group">Outputs (Eventos)</td>
+          </tr>
+          <tr>
+            <td><code>(moreNotificationsAction)</code></td>
+            <td><code>EventEmitter</code></td>
+            <td>Click en "Ver más notificaciones".</td>
+          </tr>
+          <tr>
+            <td><code>(perfilAction)</code></td>
+            <td><code>EventEmitter</code></td>
+            <td>Click en "Perfil".</td>
+          </tr>
+          <tr>
+            <td><code>(settingsAction)</code></td>
+            <td><code>EventEmitter</code></td>
+            <td>Click en "Configuración".</td>
+          </tr>
+          <tr>
+            <td><code>(securityAction)</code></td>
+            <td><code>EventEmitter</code></td>
+            <td>Click en "Seguridad".</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- kite-layout -->
+    <div class="subsection">
+      <h3>kite-layout (componente padre)</h3>
+      <table class="api-table">
+        <thead>
+          <tr>
+            <th>Propiedad</th>
+            <th>Tipo</th>
+            <th>Descripción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>secondary</code></td>
+            <td><code>'left' | 'right'</code></td>
+            <td>Posición del panel secundario.</td>
+          </tr>
+          <tr>
+            <td><code>bg</code></td>
+            <td><code>string</code></td>
+            <td>Color de fondo del layout.</td>
+          </tr>
+          <tr>
+            <td><code>css</code></td>
+            <td><code>any</code></td>
+            <td>Overrides de estilos.</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="info-box">
+        <strong>Slots de contenido (orden de proyección):</strong>
+        <code>kite-layout-sidebar</code> → <code>kite-layout-header</code> →
+        <code>kite-layout-main</code> →
+        <code>kite-layout-secondary</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  EVENT LOG                                                  ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="section event-log-section">
+    <h2>Event Log</h2>
+    <p class="description">
+      Todos los eventos disparados por los headers de arriba se registran aquí.
+      Interactúa con los headers para ver los eventos.
+    </p>
+    <div class="event-log-actions">
+      <button class="clear-btn" (click)="clearLogs()">Limpiar log</button>
+      <span class="event-count">{{ eventLogs.length }} evento(s)</span>
+    </div>
+    <div class="event-log" *ngIf="eventLogs.length > 0">
+      <div class="event-entry" *ngFor="let log of eventLogs">
+        {{ log }}
+      </div>
+    </div>
+    <div class="event-log event-log--empty" *ngIf="eventLogs.length === 0">
+      <p>
+        No hay eventos registrados. Hacé click en los headers para generar
+        eventos.
+      </p>
+    </div>
+  </div>
+</div>

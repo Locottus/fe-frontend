@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SolicitudResumenVehiculoComponent } from './solicitud-resumen-vehiculo.component';
 import { SolicitudResumenFinancieroComponent } from './solicitud-resumen-financiero.component';
@@ -20,6 +20,7 @@ import { KiteSharedModule } from './kite-shared.module';
     SolicitudResumenFinancieroComponent,
     DetalleCuotaDrawerComponent,
     KiteSharedModule
-  ]
+  ],
+  schemas: [NO_ERRORS_SCHEMA]
 })
 export class RodadosSharedModule { }

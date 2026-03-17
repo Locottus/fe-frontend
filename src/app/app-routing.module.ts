@@ -6,29 +6,40 @@ import { DesignShowcaseComponent } from './design-showcase/design-showcase.compo
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'rodados',
-    pathMatch: 'full'
+    redirectTo: 'kite-headers',
+    pathMatch: 'full',
+  },
+  {
+    path: 'kite-headers',
+    loadChildren: () =>
+      import('./kite-headers/kite-headers.module').then(
+        (m) => m.KiteHeadersModule,
+      ),
   },
   {
     path: 'playground',
-    component: PlaygroundComponent
+    component: PlaygroundComponent,
   },
   {
     path: 'design-showcase',
-    component: DesignShowcaseComponent
+    component: DesignShowcaseComponent,
   },
   {
     path: 'kite-examples',
-    loadChildren: () => import('./kite-examples/kite-examples.module').then(m => m.KiteExamplesModule)
+    loadChildren: () =>
+      import('./kite-examples/kite-examples.module').then(
+        (m) => m.KiteExamplesModule,
+      ),
   },
   {
     path: 'rodados',
-    loadChildren: () => import('./rodados/rodados.module').then(m => m.RodadosModule)
-  }
+    loadChildren: () =>
+      import('./rodados/rodados.module').then((m) => m.RodadosModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

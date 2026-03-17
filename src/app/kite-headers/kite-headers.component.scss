@@ -1,0 +1,300 @@
+// Kite Headers Showcase Styles
+
+$blanco: #ffffff;
+$negro: #3a3a3a;
+$rojo: #ee2527;
+$gris-fondo: #f5f5f5;
+$gris-blanco: #ededed;
+$gris: #3e3d40;
+$gris-metal: #999;
+$border-color: #eaeaea;
+
+$font-family: "Heebo", sans-serif;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+.kite-headers-container {
+  font-family: $font-family;
+  background-color: $gris-fondo;
+  min-height: 100vh;
+  padding: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h1 {
+    color: $negro;
+    font-weight: $font-weight-bold;
+    font-size: 28px;
+    margin: 0 0 12px 0;
+  }
+
+  .description {
+    color: $gris;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0 0 20px 0;
+
+    code {
+      background: $gris-blanco;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: $rojo;
+    }
+
+    strong {
+      color: $negro;
+    }
+  }
+
+  // ── TOC ──
+  .toc {
+    .toc-nav {
+      h3 {
+        font-size: 16px;
+        color: $negro;
+        margin: 0 0 12px 0;
+      }
+
+      ol {
+        margin: 0;
+        padding-left: 20px;
+
+        li {
+          margin-bottom: 6px;
+
+          a {
+            color: $rojo;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: $font-weight-medium;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ── Section ──
+  .section {
+    background: $blanco;
+    border-radius: 8px;
+    padding: 28px;
+    margin-bottom: 28px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      color: $negro;
+      font-weight: $font-weight-bold;
+      font-size: 22px;
+      margin: 0 0 8px 0;
+      border-bottom: 3px solid $rojo;
+      padding-bottom: 12px;
+    }
+
+    .subsection {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid $border-color;
+
+      &:first-of-type {
+        border-top: none;
+        padding-top: 0;
+      }
+
+      h3 {
+        color: $gris;
+        font-weight: $font-weight-bold;
+        font-size: 16px;
+        margin: 0 0 16px 0;
+      }
+    }
+  }
+
+  // ── Code ──
+  .code-label,
+  .example-label {
+    font-size: 12px;
+    font-weight: $font-weight-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $gris-metal;
+    margin-bottom: 8px;
+  }
+
+  .code-block {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 16px;
+    border-radius: 6px;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 13px;
+    line-height: 1.5;
+    overflow-x: auto;
+    margin-bottom: 16px;
+    white-space: pre;
+    tab-size: 2;
+  }
+
+  .example-label {
+    margin-top: 12px;
+  }
+
+  // ── Example box ──
+  .example-box {
+    border: 2px solid $border-color;
+    border-radius: 6px;
+    overflow: hidden;
+    background: $gris-fondo;
+    // Creates a new CSS containing block so that kite-header's
+    // position:fixed children are scoped to this box, not the viewport.
+    transform: translateZ(0);
+    position: relative;
+    min-height: 72px;
+
+    &--tall {
+      min-height: 240px;
+    }
+  }
+
+  // ── API tables ──
+  .api-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-bottom: 16px;
+
+    thead {
+      th {
+        background: $gris-fondo;
+        color: $negro;
+        font-weight: $font-weight-bold;
+        padding: 10px 14px;
+        text-align: left;
+        border-bottom: 2px solid $border-color;
+        font-size: 13px;
+      }
+    }
+
+    tbody {
+      td {
+        padding: 10px 14px;
+        border-bottom: 1px solid $border-color;
+        color: $gris;
+        vertical-align: top;
+
+        code {
+          background: $gris-blanco;
+          padding: 2px 6px;
+          border-radius: 3px;
+          font-size: 12px;
+          color: $rojo;
+          white-space: nowrap;
+        }
+
+        strong {
+          color: $negro;
+        }
+      }
+
+      .table-group {
+        background: lighten($rojo, 38%);
+        color: $negro;
+        font-weight: $font-weight-bold;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+
+  // ── Info box ──
+  .info-box {
+    background: lighten($rojo, 40%);
+    border-left: 4px solid $rojo;
+    padding: 12px 16px;
+    border-radius: 0 6px 6px 0;
+    margin-top: 12px;
+    font-size: 14px;
+    color: $negro;
+
+    code {
+      background: $blanco;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 12px;
+      color: $rojo;
+    }
+  }
+
+  // ── Event Log ──
+  .event-log-section {
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+
+    .event-log-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .clear-btn {
+      background: $rojo;
+      color: $blanco;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-family: $font-family;
+      font-size: 13px;
+      font-weight: $font-weight-medium;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover {
+        background: darken($rojo, 10%);
+      }
+    }
+
+    .event-count {
+      color: $gris-metal;
+      font-size: 13px;
+    }
+
+    .event-log {
+      background: #1e1e2e;
+      border-radius: 6px;
+      padding: 12px 16px;
+      max-height: 200px;
+      overflow-y: auto;
+
+      .event-entry {
+        color: #a6e3a1;
+        font-family: "Consolas", "Courier New", monospace;
+        font-size: 13px;
+        padding: 4px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+
+      &--empty {
+        p {
+          color: $gris-metal;
+          font-size: 14px;
+          text-align: center;
+          margin: 0;
+          padding: 16px;
+        }
+      }
+    }
+  }
+}

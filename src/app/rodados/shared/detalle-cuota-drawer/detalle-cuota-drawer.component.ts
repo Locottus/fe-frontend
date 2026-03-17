@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter, Input, ElementRef } from '@angular/core';
 
 export interface CuotaDetalleMock {
   nro_cuota: number;
@@ -34,14 +34,34 @@ export interface CuotaDetalleMock {
   templateUrl: './detalle-cuota-drawer.component.html',
   styleUrls: ['./detalle-cuota-drawer.component.scss'],
 })
-export class DetalleCuotaDrawerComponent implements OnInit {
+export class DetalleCuotaDrawerComponent implements OnInit, OnChanges {
   @Output() close = new EventEmitter<void>();
   @Input() cuota: CuotaDetalleMock | null = null;
   @Input() isOpen: boolean = false;
 
+  constructor(private el: ElementRef) {}
+
   ngOnInit() {
     console.log('Detalle cuota drawer initialized');
     console.log(this.cuota);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isOpen'] && this.isOpen) {
+      // kite-modal aplica top/height con setTimeout(100ms);
+      // sobreescribimos con !important después de que lo haga
+      setTimeout(() => this.forceFullScreenDrawer(), 150);
+    }
+  }
+
+  private forceFullScreenDrawer(): void {
+    const host = this.el.nativeElement as HTMLElement;
+    const targets = host.querySelectorAll<HTMLElement>('.modal-container, .modal-backdrop');
+    targets.forEach((el) => {
+      el.style.setProperty('top', '0', 'important');
+      el.style.setProperty('height', '100vh', 'important');
+      el.style.setProperty('z-index', '1100', 'important');
+    });
   }
 
   onClose(): void {

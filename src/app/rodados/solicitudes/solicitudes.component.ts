@@ -124,7 +124,7 @@ export class SolicitudesComponent implements OnInit {
       return;
     }
 
-    this.loading = true;
+    this.loading = false;
 
     // Navegación según el estado
     if (prestamo.estado === 'Pendiente') {
@@ -136,7 +136,7 @@ export class SolicitudesComponent implements OnInit {
       this.router.navigate(['rodados/prestamo-en-curso']);
     } else if (prestamo.estado === 'En Proceso') {
       // Procesando solicitud
-      this.loading = false;
+      this.loading = true;
     } else {
       this.router.navigate(['/']);
     }
