@@ -160,6 +160,140 @@ $font-weight-bold: 700;
     &--tall {
       min-height: 240px;
     }
+
+    &--padded {
+      padding: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    // Simulates the real header background so notif-profile icons are visible
+    &--header-bg {
+      background: #ee2527;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 16px;
+      min-height: 72px;
+    }
+  }
+
+  .button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+  }
+
+  // ── Drawer ──
+  .drawer-demo {
+    min-height: 350px;
+  }
+
+  .drawer-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    pointer-events: none;
+    z-index: 10;
+    transition: background 0.3s ease;
+    border-radius: 6px;
+
+    &--visible {
+      background: rgba(0, 0, 0, 0.35);
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    &--cover {
+      z-index: 5001;
+    }
+  }
+
+  .drawer-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 240px;
+    background: $blanco;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 11;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0 6px 6px 0;
+
+    &--left {
+      right: auto;
+      left: 0;
+      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.18);
+      transform: translateX(-100%);
+      z-index: 5002;
+      border-radius: 0 6px 6px 0;
+
+      &.drawer-panel--open {
+        transform: translateX(0);
+      }
+    }
+
+    // Right-side variant that covers the header (z-index above kite-header's 5000)
+    &--cover {
+      z-index: 5002;
+    }
+
+    &--open {
+      transform: translateX(0);
+    }
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 8px 12px 16px;
+      border-bottom: 1px solid $border-color;
+      min-height: 56px;
+    }
+
+    &__title {
+      font-weight: $font-weight-bold;
+      color: $negro;
+      font-size: 15px;
+    }
+
+    &__content {
+      padding: 8px 0;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    &__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        padding: 14px 20px;
+        color: $gris;
+        font-size: 14px;
+        cursor: pointer;
+        border-bottom: 1px solid $border-color;
+        transition: background 0.15s;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &:hover {
+          background: $gris-fondo;
+          color: $rojo;
+        }
+      }
+    }
   }
 
   // ── API tables ──

@@ -5,6 +5,7 @@ import {
   HeaderOptionsModule,
   HeaderNotifProfileModule,
   LayoutModule,
+  ButtonModule,
 } from '@kite/angular';
 import { KiteHeadersComponent } from './kite-headers.component';
 import { KiteHeadersRoutingModule } from './kite-headers-routing.module';
@@ -18,6 +19,7 @@ import { KiteHeadersRoutingModule } from './kite-headers-routing.module';
     HeaderOptionsModule,
     HeaderNotifProfileModule,
     LayoutModule,
+    ButtonModule,
   ],
   schemas: [NO_ERRORS_SCHEMA],
 })

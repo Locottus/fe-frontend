@@ -62,6 +62,32 @@ export class KiteHeadersComponent {
     this.eventLogs = [];
   }
 
+  // ── Drawer ──
+  showDrawer = false;
+
+  toggleDrawer(): void {
+    this.showDrawer = !this.showDrawer;
+    this.logEvent(`Drawer → ${this.showDrawer ? 'abierto' : 'cerrado'}`);
+  }
+
+  showDrawerCover = false;
+
+  toggleDrawerCover(): void {
+    this.showDrawerCover = !this.showDrawerCover;
+    this.logEvent(
+      `Drawer cover → ${this.showDrawerCover ? 'abierto' : 'cerrado'}`,
+    );
+  }
+
+  showDrawerRight = false;
+
+  toggleDrawerRight(): void {
+    this.showDrawerRight = !this.showDrawerRight;
+    this.logEvent(
+      `Drawer derecho → ${this.showDrawerRight ? 'abierto' : 'cerrado'}`,
+    );
+  }
+
   onBackAction(context: string): void {
     this.logEvent(`${context} → backAction`);
   }

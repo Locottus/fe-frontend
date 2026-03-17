@@ -29,6 +29,8 @@
         <li><a href="#section-options">kite-header-options</a></li>
         <li><a href="#section-notif-profile">kite-header-notif-profile</a></li>
         <li><a href="#section-combinations">Combinaciones avanzadas</a></li>
+        <li><a href="#section-drawer">Drawer deslizante</a></li>
+        <li><a href="#section-buttons">Botones con ícono</a></li>
         <li><a href="#section-api-reference">Referencia completa de API</a></li>
       </ol>
     </nav>
@@ -721,29 +723,42 @@
     <!-- 8a. Con username (iniciales) -->
     <div class="subsection">
       <h3>8a. Con username (muestra iniciales)</h3>
+      <p class="description">
+        <code>kite-header-notif-profile</code> se proyecta como hijo directo de
+        <code>kite-header</code> mediante <code>ng-content</code>. La barra roja
+        viene del propio componente de header de Kite.
+      </p>
       <div class="code-label">Código:</div>
       <pre class="code-block">
-&lt;kite-header-notif-profile
-  [username]="'Juan Pérez'"
-  [hasNotifications]="true"
-  [notificationsList]="notificationsList"
-  (moreNotificationsAction)="onMoreNotifications()"
-  (perfilAction)="onPerfilAction()"
-  (settingsAction)="onSettingsAction()"
-  (securityAction)="onSecurityAction()"
-&gt;&lt;/kite-header-notif-profile&gt;</pre
+&lt;kite-header type="internal" title="Mi aplicación"&gt;
+  &lt;kite-header-notif-profile
+    [username]="'Juan Pérez'"
+    [hasNotifications]="true"
+    [notificationsList]="notificationsList"
+    (moreNotificationsAction)="onMoreNotifications()"
+    (perfilAction)="onPerfilAction()"
+    (settingsAction)="onSettingsAction()"
+    (securityAction)="onSecurityAction()"
+  &gt;&lt;/kite-header-notif-profile&gt;
+&lt;/kite-header&gt;</pre
       >
       <div class="example-label">Resultado:</div>
-      <div class="example-box">
-        <kite-header-notif-profile
-          [username]="username"
-          [hasNotifications]="hasNotifications"
-          [notificationsList]="notificationsList"
-          (moreNotificationsAction)="onMoreNotifications()"
-          (perfilAction)="onPerfilAction()"
-          (settingsAction)="onSettingsAction()"
-          (securityAction)="onSecurityAction()"
-        ></kite-header-notif-profile>
+      <div class="example-box example-box--tall">
+        <kite-layout>
+          <kite-layout-header>
+            <kite-header type="internal" title="Mi aplicación">
+              <kite-header-notif-profile
+                [username]="username"
+                [hasNotifications]="hasNotifications"
+                [notificationsList]="notificationsList"
+                (moreNotificationsAction)="onMoreNotifications()"
+                (perfilAction)="onPerfilAction()"
+                (settingsAction)="onSettingsAction()"
+                (securityAction)="onSecurityAction()"
+              ></kite-header-notif-profile>
+            </kite-header>
+          </kite-layout-header>
+        </kite-layout>
       </div>
     </div>
 
@@ -752,23 +767,31 @@
       <h3>8b. Sin notificaciones</h3>
       <div class="code-label">Código:</div>
       <pre class="code-block">
-&lt;kite-header-notif-profile
-  [username]="'María García'"
-  [hasNotifications]="false"
-  (perfilAction)="onPerfilAction()"
-  (settingsAction)="onSettingsAction()"
-  (securityAction)="onSecurityAction()"
-&gt;&lt;/kite-header-notif-profile&gt;</pre
+&lt;kite-header type="internal" title="Mi aplicación"&gt;
+  &lt;kite-header-notif-profile
+    [username]="'María García'"
+    [hasNotifications]="false"
+    (perfilAction)="onPerfilAction()"
+    (settingsAction)="onSettingsAction()"
+    (securityAction)="onSecurityAction()"
+  &gt;&lt;/kite-header-notif-profile&gt;
+&lt;/kite-header&gt;</pre
       >
       <div class="example-label">Resultado:</div>
-      <div class="example-box">
-        <kite-header-notif-profile
-          username="María García"
-          [hasNotifications]="false"
-          (perfilAction)="onPerfilAction()"
-          (settingsAction)="onSettingsAction()"
-          (securityAction)="onSecurityAction()"
-        ></kite-header-notif-profile>
+      <div class="example-box example-box--tall">
+        <kite-layout>
+          <kite-layout-header>
+            <kite-header type="internal" title="Mi aplicación">
+              <kite-header-notif-profile
+                username="María García"
+                [hasNotifications]="false"
+                (perfilAction)="onPerfilAction()"
+                (settingsAction)="onSettingsAction()"
+                (securityAction)="onSecurityAction()"
+              ></kite-header-notif-profile>
+            </kite-header>
+          </kite-layout-header>
+        </kite-layout>
       </div>
     </div>
   </div>
@@ -905,13 +928,641 @@
         </kite-layout>
       </div>
     </div>
+
+    <!-- 9d. Layout con drawer derecho -->
+    <div class="subsection">
+      <h3>9d. Layout con header + drawer deslizante desde la derecha</h3>
+      <p class="description">
+        El ícono hamburguesa del header (<code>menuAction</code>) y un botón en
+        el contenido principal activan un panel lateral que se desliza desde la
+        derecha. El overlay semitransparente cierra el drawer al hacer click
+        fuera.
+      </p>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;!-- En el componente TS --&gt;
+showDrawer = false;
+toggleDrawer(): void &#123; this.showDrawer = !this.showDrawer; &#125;
+
+&lt;!-- Template --&gt;
+&lt;div class="drawer-demo"&gt;
+  &lt;kite-layout&gt;
+    &lt;kite-layout-header&gt;
+      &lt;kite-header
+        type="section"
+        title="Panel con Drawer"
+        [hasOptions]="true"
+        (menuAction)="toggleDrawer()"
+      &gt;&lt;/kite-header&gt;
+    &lt;/kite-layout-header&gt;
+    &lt;kite-layout-main [css]="&#123; padding: '$md' &#125;"&gt;
+      &lt;kite-button variant="secondary" icon="menu" (onClick)="toggleDrawer()"&gt;
+        Abrir panel
+      &lt;/kite-button&gt;
+    &lt;/kite-layout-main&gt;
+  &lt;/kite-layout&gt;
+
+  &lt;!-- Overlay: click cierra el drawer --&gt;
+  &lt;div class="drawer-overlay"
+       [class.drawer-overlay--visible]="showDrawer"
+       (click)="toggleDrawer()"&gt;&lt;/div&gt;
+
+  &lt;!-- Panel lateral --&gt;
+  &lt;div class="drawer-panel" [class.drawer-panel--open]="showDrawer"&gt;
+    &lt;div class="drawer-panel__header"&gt;
+      &lt;span&gt;Opciones&lt;/span&gt;
+      &lt;kite-button variant="tertiary" icon="close" (onClick)="toggleDrawer()"&gt;
+      &lt;/kite-button&gt;
+    &lt;/div&gt;
+    &lt;div class="drawer-panel__content"&gt;
+      &lt;!-- contenido del panel --&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box example-box--tall drawer-demo">
+        <kite-layout>
+          <kite-layout-header>
+            <kite-header
+              type="section"
+              title="Panel con Drawer"
+              [hasOptions]="true"
+              (menuAction)="toggleDrawer()"
+            ></kite-header>
+          </kite-layout-header>
+          <kite-layout-main [css]="{ padding: '$md' }">
+            <div
+              style="
+                padding: 80px 16px 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+              "
+            >
+              <p style="color: #3a3a3a; margin: 0; font-size: 14px">
+                Hacé click en el ícono ☰ del header o en el botón de abajo para
+                abrir el panel lateral.
+              </p>
+              <div>
+                <kite-button
+                  variant="secondary"
+                  icon="menu"
+                  (onClick)="toggleDrawer()"
+                >
+                  Abrir panel
+                </kite-button>
+              </div>
+            </div>
+          </kite-layout-main>
+        </kite-layout>
+
+        <!-- Overlay: click fuera cierra el drawer -->
+        <div
+          class="drawer-overlay"
+          [class.drawer-overlay--visible]="showDrawer"
+          (click)="toggleDrawer()"
+        ></div>
+
+        <!-- Panel lateral deslizante -->
+        <div class="drawer-panel" [class.drawer-panel--open]="showDrawer">
+          <div class="drawer-panel__header">
+            <span class="drawer-panel__title">Opciones</span>
+            <kite-button
+              variant="tertiary"
+              icon="close"
+              (onClick)="toggleDrawer()"
+            ></kite-button>
+          </div>
+          <div class="drawer-panel__content">
+            <ul class="drawer-panel__list">
+              <li (click)="logEvent('Drawer: Mi perfil'); toggleDrawer()">
+                Mi perfil
+              </li>
+              <li (click)="logEvent('Drawer: Configuración'); toggleDrawer()">
+                Configuración
+              </li>
+              <li (click)="logEvent('Drawer: Notificaciones'); toggleDrawer()">
+                Notificaciones
+              </li>
+              <li (click)="logEvent('Drawer: Seguridad'); toggleDrawer()">
+                Seguridad
+              </li>
+              <li (click)="logEvent('Drawer: Cerrar sesión'); toggleDrawer()">
+                Cerrar sesión
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ╔══════════════════════════════════════════════════════════════╗ -->
-  <!-- ║  10. REFERENCIA COMPLETA DE API                             ║ -->
+  <!-- ║  9e. Drawer que cubre el header (izquierda)                 ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="subsection" id="section-drawer-cover">
+    <h3>9e. Drawer desde la izquierda que cubre el header</h3>
+    <p class="description">
+      El drawer se desliza desde la izquierda con un <code>z-index</code> mayor
+      al del <code>kite-header</code> (<code>5000</code>), de modo que el panel
+      lateral queda <strong>por encima del header</strong> y cubre toda la
+      franja izquierda de la pantalla. Al cerrar el drawer (click en el overlay
+      o en el botón ✕) todo vuelve al estado original.
+    </p>
+    <p class="description">
+      <strong>Clave técnica:</strong> el <code>.example-box</code> tiene
+      <code>transform: translateZ(0)</code>, lo que crea un nuevo contexto de
+      apilamiento. Dentro de ese contexto, el header usa
+      <code>z-index: 5000</code> (valor interno de Kite). Al asignarle
+      <code>z-index: 5002</code> al drawer y <code>z-index: 5001</code> al
+      overlay, ambos quedan por encima del header dentro del mismo contexto.
+    </p>
+    <div class="code-label">Código:</div>
+    <pre class="code-block">
+&lt;!-- TS --&gt;
+showDrawerCover = false;
+toggleDrawerCover(): void &#123; this.showDrawerCover = !this.showDrawerCover; &#125;
+
+&lt;!-- SCSS --&gt;
+.drawer-overlay--cover &#123; z-index: 5001; &#125;
+.drawer-panel--left &#123;
+  left: 0; right: auto;
+  z-index: 5002;
+  transform: translateX(-100%);
+  &amp;.drawer-panel--open &#123; transform: translateX(0); &#125;
+&#125;
+
+&lt;!-- Template --&gt;
+&lt;div class="example-box drawer-demo"&gt;  &lt;!-- transform:translateZ(0) crea el contexto --&gt;
+  &lt;kite-layout&gt;
+    &lt;kite-layout-header&gt;
+      &lt;kite-header type="internal" title="Mi aplicación"
+        [hasOptions]="true" (menuAction)="toggleDrawerCover()"&gt;
+      &lt;/kite-header&gt;
+    &lt;/kite-layout-header&gt;
+    ...
+  &lt;/kite-layout&gt;
+
+  &lt;!-- Overlay por encima del header --&gt;
+  &lt;div class="drawer-overlay drawer-overlay--cover"
+       [class.drawer-overlay--visible]="showDrawerCover"
+       (click)="toggleDrawerCover()"&gt;&lt;/div&gt;
+
+  &lt;!-- Panel izquierdo por encima del header --&gt;
+  &lt;div class="drawer-panel drawer-panel--left"
+       [class.drawer-panel--open]="showDrawerCover"&gt;
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;</pre
+    >
+    <div class="example-label">Resultado:</div>
+    <div class="example-box example-box--tall drawer-demo">
+      <kite-layout>
+        <kite-layout-header>
+          <kite-header
+            type="internal"
+            title="Mi aplicación"
+            [hasOptions]="true"
+            (menuAction)="toggleDrawerCover()"
+          ></kite-header>
+        </kite-layout-header>
+        <kite-layout-main [css]="{ padding: '$md' }">
+          <div
+            style="
+              padding: 80px 16px 16px;
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+            "
+          >
+            <p style="color: #3a3a3a; margin: 0; font-size: 14px">
+              El ícono ☰ del header abre un panel lateral que cubre el header
+              por completo. Al cerrarlo, el header vuelve a estar visible.
+            </p>
+            <div>
+              <kite-button
+                variant="secondary"
+                icon="menu"
+                (onClick)="toggleDrawerCover()"
+              >
+                Abrir panel lateral
+              </kite-button>
+            </div>
+          </div>
+        </kite-layout-main>
+      </kite-layout>
+
+      <!-- Overlay por encima del header (z-index: 5001) -->
+      <div
+        class="drawer-overlay drawer-overlay--cover"
+        [class.drawer-overlay--visible]="showDrawerCover"
+        (click)="toggleDrawerCover()"
+      ></div>
+
+      <!-- Panel lateral izquierdo (z-index: 5002, cubre el header) -->
+      <div
+        class="drawer-panel drawer-panel--left"
+        [class.drawer-panel--open]="showDrawerCover"
+      >
+        <div class="drawer-panel__header">
+          <span class="drawer-panel__title">Menú principal</span>
+          <kite-button
+            variant="tertiary"
+            icon="close"
+            (onClick)="toggleDrawerCover()"
+          ></kite-button>
+        </div>
+        <div class="drawer-panel__content">
+          <ul class="drawer-panel__list">
+            <li (click)="logEvent('Cover Drawer: Inicio'); toggleDrawerCover()">
+              Inicio
+            </li>
+            <li
+              (click)="logEvent('Cover Drawer: Mi cuenta'); toggleDrawerCover()"
+            >
+              Mi cuenta
+            </li>
+            <li
+              (click)="logEvent('Cover Drawer: Productos'); toggleDrawerCover()"
+            >
+              Productos
+            </li>
+            <li
+              (click)="
+                logEvent('Cover Drawer: Transferencias'); toggleDrawerCover()
+              "
+            >
+              Transferencias
+            </li>
+            <li (click)="logEvent('Cover Drawer: Salir'); toggleDrawerCover()">
+              Salir
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  9f. Drawer que cubre el header (derecha)                   ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="subsection" id="section-drawer-right-cover">
+    <h3>9f. Drawer desde la derecha que cubre el header</h3>
+    <p class="description">
+      Igual que el ejemplo 9e pero deslizando desde la <strong>derecha</strong>.
+      El panel usa <code>z-index: 5002</code> y el overlay
+      <code>z-index: 5001</code>, ambos por encima del header interno de Kite
+      (<code>z-index: 5000</code>). Al cerrar, todo vuelve al estado original.
+    </p>
+    <div class="code-label">Código:</div>
+    <pre class="code-block">
+&lt;!-- TS --&gt;
+showDrawerRight = false;
+toggleDrawerRight(): void &#123; this.showDrawerRight = !this.showDrawerRight; &#125;
+
+&lt;!-- SCSS --&gt;
+.drawer-overlay--cover &#123; z-index: 5001; &#125;
+.drawer-panel--cover   &#123; z-index: 5002; &#125;  /* right side, same as base .drawer-panel */
+
+&lt;!-- Template --&gt;
+&lt;div class="example-box drawer-demo"&gt;
+  &lt;kite-layout&gt;
+    &lt;kite-layout-header&gt;
+      &lt;kite-header type="section" title="Notificaciones"
+        [hasOptions]="true" (menuAction)="toggleDrawerRight()"&gt;
+      &lt;/kite-header&gt;
+    &lt;/kite-layout-header&gt;
+    ...
+  &lt;/kite-layout&gt;
+
+  &lt;!-- Overlay por encima del header --&gt;
+  &lt;div class="drawer-overlay drawer-overlay--cover"
+       [class.drawer-overlay--visible]="showDrawerRight"
+       (click)="toggleDrawerRight()"&gt;&lt;/div&gt;
+
+  &lt;!-- Panel derecho por encima del header --&gt;
+  &lt;div class="drawer-panel drawer-panel--cover"
+       [class.drawer-panel--open]="showDrawerRight"&gt;
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;</pre
+    >
+    <div class="example-label">Resultado:</div>
+    <div class="example-box example-box--tall drawer-demo">
+      <kite-layout>
+        <kite-layout-header>
+          <kite-header
+            type="section"
+            title="Notificaciones"
+            [hasOptions]="true"
+            (menuAction)="toggleDrawerRight()"
+          ></kite-header>
+        </kite-layout-header>
+        <kite-layout-main [css]="{ padding: '$md' }">
+          <div
+            style="
+              padding: 80px 16px 16px;
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+            "
+          >
+            <p style="color: #3a3a3a; margin: 0; font-size: 14px">
+              El ícono ☰ del header abre un panel lateral desde la derecha que
+              cubre el header por completo. Al cerrarlo, el header vuelve a
+              estar visible.
+            </p>
+            <div>
+              <kite-button
+                variant="secondary"
+                icon="menu"
+                (onClick)="toggleDrawerRight()"
+              >
+                Abrir panel derecho
+              </kite-button>
+            </div>
+          </div>
+        </kite-layout-main>
+      </kite-layout>
+
+      <!-- Overlay por encima del header (z-index: 5001) -->
+      <div
+        class="drawer-overlay drawer-overlay--cover"
+        [class.drawer-overlay--visible]="showDrawerRight"
+        (click)="toggleDrawerRight()"
+      ></div>
+
+      <!-- Panel lateral derecho (z-index: 5002, cubre el header) -->
+      <div
+        class="drawer-panel drawer-panel--cover"
+        [class.drawer-panel--open]="showDrawerRight"
+      >
+        <div class="drawer-panel__header">
+          <span class="drawer-panel__title">Notificaciones</span>
+          <kite-button
+            variant="tertiary"
+            icon="close"
+            (onClick)="toggleDrawerRight()"
+          ></kite-button>
+        </div>
+        <div class="drawer-panel__content">
+          <ul class="drawer-panel__list">
+            <li
+              (click)="
+                logEvent('Right Drawer: Transferencia acreditada');
+                toggleDrawerRight()
+              "
+            >
+              Transferencia acreditada
+            </li>
+            <li
+              (click)="
+                logEvent('Right Drawer: Resumen disponible');
+                toggleDrawerRight()
+              "
+            >
+              Nuevo resumen disponible
+            </li>
+            <li
+              (click)="
+                logEvent('Right Drawer: Pago confirmado'); toggleDrawerRight()
+              "
+            >
+              Pago de servicio confirmado
+            </li>
+            <li
+              (click)="
+                logEvent('Right Drawer: Préstamo aprobado'); toggleDrawerRight()
+              "
+            >
+              Préstamo aprobado
+            </li>
+            <li
+              (click)="logEvent('Right Drawer: Ver todas'); toggleDrawerRight()"
+            >
+              Ver todas las notificaciones
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  10. BOTONES CON ÍCONO                                      ║ -->
+  <!-- ╚══════════════════════════════════════════════════════════════╝ -->
+  <div class="section" id="section-buttons">
+    <h2>10. Botones con ícono</h2>
+    <p class="description">
+      <code>kite-button</code> soporta el atributo <code>icon</code> para
+      mostrar un ícono junto al texto. El ícono se renderiza usando los mismos
+      nombres del set de íconos de Kite. Se puede combinar con cualquier
+      <code>variant</code> (<code>primary</code>, <code>secondary</code>,
+      <code>tertiary</code>, <code>ghost</code>).
+    </p>
+
+    <!-- 10a. Descargar documento -->
+    <div class="subsection">
+      <h3>10a. Descargar documento</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-button variant="secondary" icon="download"&gt;
+  Descargar documento
+&lt;/kite-button&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box example-box--padded">
+        <kite-button
+          variant="secondary"
+          icon="download"
+          (onClick)="logEvent('Button: Descargar documento')"
+        >
+          Descargar documento
+        </kite-button>
+      </div>
+    </div>
+
+    <!-- 10b. Variantes del botón con ícono -->
+    <div class="subsection">
+      <h3>10b. Variantes con el mismo ícono</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-button variant="primary"    icon="download"&gt;Descargar documento&lt;/kite-button&gt;
+&lt;kite-button variant="secondary"  icon="download"&gt;Descargar documento&lt;/kite-button&gt;
+&lt;kite-button variant="tertiary"   icon="download"&gt;Descargar documento&lt;/kite-button&gt;
+&lt;kite-button variant="ghost"      icon="download"&gt;Descargar documento&lt;/kite-button&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box example-box--padded">
+        <div class="button-row">
+          <kite-button
+            variant="primary"
+            icon="download"
+            (onClick)="logEvent('Button primary: Descargar documento')"
+          >
+            Descargar documento
+          </kite-button>
+          <kite-button
+            variant="secondary"
+            icon="download"
+            (onClick)="logEvent('Button secondary: Descargar documento')"
+          >
+            Descargar documento
+          </kite-button>
+          <kite-button
+            variant="tertiary"
+            icon="download"
+            (onClick)="logEvent('Button tertiary: Descargar documento')"
+          >
+            Descargar documento
+          </kite-button>
+          <kite-button
+            variant="ghost"
+            icon="download"
+            (onClick)="logEvent('Button ghost: Descargar documento')"
+          >
+            Descargar documento
+          </kite-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10c. Tamaños -->
+    <div class="subsection">
+      <h3>10c. Tamaños</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-button variant="secondary" icon="download" size="sm"&gt;Descargar documento&lt;/kite-button&gt;
+&lt;kite-button variant="secondary" icon="download" size="md"&gt;Descargar documento&lt;/kite-button&gt;
+&lt;kite-button variant="secondary" icon="download" size="lg"&gt;Descargar documento&lt;/kite-button&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box example-box--padded">
+        <div class="button-row">
+          <kite-button
+            variant="secondary"
+            icon="download"
+            size="sm"
+            (onClick)="logEvent('Button sm: Descargar documento')"
+          >
+            Descargar documento
+          </kite-button>
+          <kite-button
+            variant="secondary"
+            icon="download"
+            size="md"
+            (onClick)="logEvent('Button md: Descargar documento')"
+          >
+            Descargar documento
+          </kite-button>
+          <kite-button
+            variant="secondary"
+            icon="download"
+            size="lg"
+            (onClick)="logEvent('Button lg: Descargar documento')"
+          >
+            Descargar documento
+          </kite-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10d. Solo ícono (sin texto) -->
+    <div class="subsection">
+      <h3>10d. Solo ícono (sin texto)</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-button variant="secondary" icon="download"&gt;&lt;/kite-button&gt;
+&lt;kite-button variant="tertiary"  icon="share"&gt;&lt;/kite-button&gt;
+&lt;kite-button variant="ghost"     icon="document"&gt;&lt;/kite-button&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box example-box--padded">
+        <div class="button-row">
+          <kite-button
+            variant="secondary"
+            icon="download"
+            (onClick)="logEvent('Icon-only: download')"
+          ></kite-button>
+          <kite-button
+            variant="tertiary"
+            icon="share"
+            (onClick)="logEvent('Icon-only: share')"
+          ></kite-button>
+          <kite-button
+            variant="ghost"
+            icon="document"
+            (onClick)="logEvent('Icon-only: document')"
+          ></kite-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10e. Icono en layout con header -->
+    <div class="subsection">
+      <h3>10e. En contexto: layout con header + botón de descarga</h3>
+      <div class="code-label">Código:</div>
+      <pre class="code-block">
+&lt;kite-layout&gt;
+  &lt;kite-layout-header&gt;
+    &lt;kite-header
+      type="internal"
+      title="Comprobante de operación"
+      [hasOptions]="false"
+      (backAction)="onBackAction('btn-context')"
+    &gt;&lt;/kite-header&gt;
+  &lt;/kite-layout-header&gt;
+  &lt;kite-layout-main [css]="&#123; padding: '$lg' &#125;"&gt;
+    &lt;p&gt;Comprobante listo para descargar.&lt;/p&gt;
+    &lt;kite-button variant="secondary" icon="download"&gt;
+      Descargar documento
+    &lt;/kite-button&gt;
+  &lt;/kite-layout-main&gt;
+&lt;/kite-layout&gt;</pre
+      >
+      <div class="example-label">Resultado:</div>
+      <div class="example-box example-box--tall">
+        <kite-layout>
+          <kite-layout-header>
+            <kite-header
+              type="internal"
+              title="Comprobante de operación"
+              [hasOptions]="false"
+              (backAction)="onBackAction('btn-context')"
+            ></kite-header>
+          </kite-layout-header>
+          <kite-layout-main [css]="{ padding: '$lg' }">
+            <div
+              style="
+                padding: 80px 24px 24px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+              "
+            >
+              <p style="color: #3a3a3a; margin: 0">
+                Comprobante listo para descargar.
+              </p>
+              <kite-button
+                variant="secondary"
+                icon="download"
+                (onClick)="logEvent('Context btn: Descargar documento')"
+              >
+                Descargar documento
+              </kite-button>
+            </div>
+          </kite-layout-main>
+        </kite-layout>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══════════════════════════════════════════════════════════════╗ -->
+  <!-- ║  11. REFERENCIA COMPLETA DE API                             ║ -->
   <!-- ╚══════════════════════════════════════════════════════════════╝ -->
   <div class="section" id="section-api-reference">
-    <h2>10. Referencia completa de API</h2>
+    <h2>11. Referencia completa de API</h2>
 
     <!-- kite-header -->
     <div class="subsection">
